@@ -1,0 +1,66 @@
+# Get FASTQ and Reference Data
+mkdir /media/jianie/DATA/run_count_20210716_L2
+cd /media/jianie/DATA/run_count_20210716_L2
+
+
+# References - 2020-A (July 7, 2020)
+cd /home/jianie/yard/refdata/refdata-cellranger-GRCh38-3.0.0
+cd /home/jianie/yard/refdata/refdata-gex-mm10-2020-A
+cd /home/jianie/yard/refdata/refdata-gex-GRCh38-and-mm10-2020-A
+cd /home/jianie/yard/refdata/Cjacchus_012021
+
+
+# Setup the Command for cellranger count
+cd /media/jianie/DATA/run_count_20210716_L2
+cellranger count --help
+
+
+# Run cellranger count
+cellranger count --id=STARR049 \
+--fastqs=/media/jianie/DATA/run_mkfastq_20210716/20210716_L2_fastq/outs/fastq_path/HGK5TDSX2/STARR049\
+--sample=STARR049 \
+--transcriptome=/home/jianie/yard/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+
+# Explore the Output of cellranger count
+ls -1 STARR049/outs
+
+# Total time
+2021-09-10 16:38:56 [runtime] (ready) 
+
+
+cellranger count --id=76632-V5 \
+--fastqs=/media/jianie/DATA/run_mkfastq_20210716/20210716_L2_fastq/outs/fastq_path/HGK5TDSX2/76632-V5 \
+--sample=76632-V5 \
+--transcriptome=/home/jianie/yard/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns \
+--expect-cells=10000 \
+
+# Explore the Output of cellranger count
+ls -1 76632-V5/outs
+
+
+cellranger count --id=STARR_041 \
+--fastqs=/media/jianie/DATA/run_mkfastq_20210716/20210716_L2_fastq/outs/fastq_path/HGK5TDSX2/STARR_041\
+--sample=STARR_041 \
+--transcriptome=/home/jianie/yard/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns \
+--expect-cells=10000 \
+
+# Explore the Output of cellranger count
+ls -1 STARR_041/outs
+
+
+cellranger count --id=STARR024 \
+--fastqs=/media/jianie/DATA/run_mkfastq_20210716/20210716_L2_fastq/outs/fastq_path/HGK5TDSX2/STARR024 \
+--sample=STARR024 \
+--transcriptome=/home/jianie/yard/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns \
+--expect-cells=10000 \
+
+# Explore the Output of cellranger count
+ls -1 STARR024/outs
+
+
+

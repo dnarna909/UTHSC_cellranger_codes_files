@@ -1,0 +1,18 @@
+# Overview of cellranger aggr
+cellranger aggr --help
+
+# Get Data
+mkdir ~/yard/run_cellranger_aggr
+cd ~/yard/run_cellranger_aggr
+
+
+# Setup the Command for cellranger aggr
+cellranger aggr --id=10s_STARR_aggr --csv=/media/jianie/Seagate_SequencingFiles_2/All_SampleSheet/cellranger/aggregation.STARR.csv
+# Run cellranger aggr
+2021-11-02 14:30:23 [runtime] Reattaching in local mode.
+2021-11-02 14:54:38 Shutting down.
+
+
+# Setup the Command for cellranger aggr
+cellranger aggr --id=9s_STARR_aggr --csv=/media/jianie/Seagate_SequencingFiles_2/All_SampleSheet/cellranger/aggregation.STARR_2.csv
+

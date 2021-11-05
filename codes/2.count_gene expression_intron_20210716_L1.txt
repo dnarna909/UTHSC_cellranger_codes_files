@@ -1,0 +1,92 @@
+# Get FASTQ and Reference Data
+mkdir /media/jianie/DATA/run_count_20210716_L1
+cd /media/jianie/DATA/run_count_20210716_L1
+
+# References - 2020-A (July 7, 2020)
+cd /home/jianie/yard/refdata/refdata-cellranger-GRCh38-3.0.0
+cd /home/jianie/yard/refdata/refdata-gex-mm10-2020-A
+cd /home/jianie/yard/refdata/refdata-gex-GRCh38-and-mm10-2020-A
+
+# Setup the Command for cellranger count
+cd /media/jianie/DATA/run_count_20210716_L1
+cellranger count --help
+
+
+
+# Sample 1
+# Run cellranger count
+cd /media/jianie/DATA/run_count_20210716_L1
+cellranger count --id=Con-R1 \
+--fastqs=/media/jianie/DATA/run_mkfastq_20210716/20210716_L1_fastq/outs/fastq_path/HGK5TDSX2/Con-R1 \
+--sample=Con-R1 \
+--transcriptome=/home/jianie/yard/refdata/refdata-gex-mm10-2020-A \
+--include-introns=TRUE \
+--expect-cells=10000 
+
+# Explore the Output of cellranger count
+ls -1 Con-R1/outs
+
+# Total time 6hr
+2021-09-14 08:16:54 [runtime] (ready) 
+2021-09-14 14:20:00 Shutting down.
+
+
+
+# Sample 2
+# Run cellranger count
+cd /media/jianie/DATA/run_count_20210716_L1
+cellranger count --id=Amei-R1 \
+--fastqs=/media/jianie/DATA/run_mkfastq_20210716/20210716_L1_fastq/outs/fastq_path/HGK5TDSX2/Amei-R1 \
+--sample=Amei-R1 \
+--transcriptome=/home/jianie/yard/refdata/refdata-gex-mm10-2020-A \
+--include-introns=TRUE \
+--expect-cells=10000 
+
+# Total time 6hr
+2021-09-14 17:40:48 [runtime] (ready) 
+2021-09-14 23:08:06 Shutting down.
+
+# Explore the Output of cellranger count
+ls -1 Amei-R1/outs
+
+
+
+# Sample 3
+# Run cellranger count
+mkdir /home/jianie/yard/run_count_20210716_L1
+cd /home/jianie/yard/run_count_20210716_L1
+cellranger count --id=Con-R2 \
+--fastqs=/media/jianie/DATA/run_mkfastq_20210716/20210716_L1_fastq/outs/fastq_path/HGK5TDSX2/Con-R2 \
+--sample=Con-R2 \
+--transcriptome=/home/jianie/yard/refdata/refdata-gex-mm10-2020-A \
+--include-introns=TRUE \
+--expect-cells=10000
+
+# Explore the Output of cellranger count
+ls -1 Con-R2/outs
+
+# Total time 3 hr
+2021-09-15 11:28:31 [runtime] (ready)  
+2021-09-15 14:32:48 Shutting down.
+
+
+
+# Sample 4
+# Run cellranger count
+cd /home/jianie/yard/run_count_20210716_L1
+cellranger count --id=Amei-R2 \
+--fastqs=/media/jianie/DATA/run_mkfastq_20210716/20210716_L1_fastq/outs/fastq_path/HGK5TDSX2/Amei-R2 \
+--sample=Amei-R2 \
+--transcriptome=/home/jianie/yard/refdata/refdata-gex-mm10-2020-A \
+--include-introns=TRUE \
+--expect-cells=10000 
+
+# Explore the Output of cellranger count
+ls -1 Amei-R2/outs
+
+# Total time 6 hr
+2021-09-15 14:37:02 [runtime] (ready)  
+2021-09-15 21:51:51 Shutting down.
+
+
+

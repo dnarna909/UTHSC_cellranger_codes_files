@@ -1,0 +1,29 @@
+# Setup the Command for cellranger mkfastq
+## First make a directory in the yard to run the analysis.
+mkdir /home/jianie/yard/run_cellranger_mkfastq
+cd /home/jianie/yard/run_cellranger_mkfastq
+cellranger mkfastq --help
+
+## check files
+cd /home/jianie/yard/data/cellranger mkfastq example data/
+cat cellranger-tiny-bcl-simple-1.2.0.csv
+
+sudo snap install tree  # version 1.8.0+pkg-3fd6
+tree -L 2 cellranger-tiny-bcl-1.2.0/
+ls -altR cellranger-tiny-bcl-1.2.0/
+
+
+pwd
+export PATH=/home/jianie/yard/apps/usr/local/bin/bcl2fastq:$PATH
+# Run cellranger mkfastq
+cellranger mkfastq --id=tutorial_walk_through \
+--run=/home/jianie/yard/data/cellranger mkfastq example data/cellranger-tiny-bcl-1.2.0 \
+--csv=/home/jianie/yard/data/cellranger mkfastq example data/cellranger-tiny-bcl-simple-1.2.0.csv
+
+
+# Explore the Output of cellranger mkfastq
+cd /home/jianie/yard/run_cellranger_mkfastq/tutorial_walk_through/outs/fastq_path
+ls -1
+ls -1 H35KCBCXY/test_sample
+
+

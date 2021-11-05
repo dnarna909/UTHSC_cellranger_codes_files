@@ -1,0 +1,27 @@
+# Overview of cellranger aggr
+cellranger aggr --help
+
+# Get Data
+mkdir ~/yard/run_cellranger_aggr
+cd ~/yard/run_cellranger_aggr
+
+wget https://cf.10xgenomics.com/samples/cell-exp/3.0.0/pbmc_1k_v3/pbmc_1k_v3_molecule_info.h5
+wget https://cf.10xgenomics.com/samples/cell-exp/3.0.0/pbmc_10k_v3/pbmc_10k_v3_molecule_info.h5
+
+pwd 
+
+nano pbmc_aggr.csv
+library_id,molecule_h5
+1k_pbmcs,/mnt/home/user.name/yard/run_cellranger_aggr/pbmc_1k_v3_molecule_info.h5
+10k_pbmcs,/mnt/home/user.name/yard/run_cellranger_aggr/pbmc_10k_v3_molecule_info.h5
+Ctrl-x
+Y
+Enter
+
+# Setup the Command for cellranger aggr
+cellranger aggr --id=1k_10K_pbmc_aggr --csv=pbmc_aggr.csv
+
+# Run cellranger aggr
+
+# Explore the Output of cellranger aggr
+ls -1 1k_10K_pbmc_aggr/outs/

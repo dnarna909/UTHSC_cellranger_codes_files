@@ -1,0 +1,56 @@
+# Setup the Command for cellranger mkfastq
+## First make a directory in the yard to run the analysis.
+
+mkdir /media/jianie/DATA/run_mkfastq_20210716
+cd /media/jianie/DATA/run_mkfastq_20210716
+cellranger mkfastq --help
+
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+export PATH=/home/jianie/yard/apps/usr/local/bin/bcl2fastq:$PATH
+
+
+## check files
+cat Nie1-2_07162021_L1.simple.csv
+cat Nie1-2_07162021_L2.simple.csv
+tree -L 2 /media/jianie/DATA/run_mkfastq_20210716/20210716/
+ls -altR /media/jianie/DATA/run_mkfastq_20210716
+
+
+# Run cellranger mkfastq_L1
+pwd
+cellranger mkfastq --id=20210716_L1_fastq \
+--run=/home/jianie/yard/data/20210716 \
+--csv=/media/jianie/DATA/run_mkfastq_20210716/Nie1-2_07162021_L1.simple.csv
+
+# Explore the Output of cellranger mkfastq
+cd /media/jianie/DATA/run_mkfastq_20210716/20210716_L1_fastq/outs/fastq_path
+ls -1
+ls -1 HGK5TDSX2/
+
+# Total time: 
+
+
+# Run cellranger mkfastq_L2_single
+cd /home/jianie/yard/run_mkfastq_20210716
+cellranger mkfastq --id=20210716_L2_fastq_single \
+--run=/media/jianie/DATA/run_mkfastq_20210716/20210716 \
+--csv=/media/jianie/DATA/run_mkfastq_20210716/Nie1-2_07162021_L2.simple.csv \
+--filter-single-index
+
+# Explore the Output of cellranger mkfastq
+cd /media/jianie/DATA/run_mkfastq_20210716/20210716_L2_fastq/outs/fastq_path
+ls -1
+ls -1 HGK5TDSX2/test_sample
+
+# Total time: 11 hr
+2021-09-13 10:58:42 [runtime] (ready)  
+2021-09-13 21:58:36 Shutting down.
+
+
+# Run cellranger mkfastq_L2_dual
+cd /home/jianie/yard/run_mkfastq_20210716
+cellranger mkfastq --id=20210716_L2_fastq_dual \
+--run=/media/jianie/DATA/run_mkfastq_20210716/20210716 \
+--csv=/media/jianie/DATA/run_mkfastq_20210716/Nie1-2_07162021_L2.simple.csv \
+--filter-dual-index
+

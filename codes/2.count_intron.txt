@@ -1,0 +1,22 @@
+# Get FASTQ 
+mkdir /home/jianie/yard/run_cellranger_count
+cd /home/jianie/yard/run_cellranger_count
+
+# Get Reference Data
+
+
+# Setup the Command for cellranger count
+cd /home/jianie/yard/run_cellranger_count
+cellranger count --help
+
+
+# Run cellranger count
+cellranger count --id=run_count_1kpbmcs \
+--fastqs=/mnt/home/user.name/yard/run_cellranger_count/pbmc_1k_v3_fastqs \
+--sample=pbmc_1k_v3 \
+--transcriptome=/mnt/home/user.name/yard/run_cellranger_count/refdata-cellranger-GRCh38-3.0.0
+--include-introns
+--expect-cells=10000 \
+
+# Explore the Output of cellranger count
+ls -1 run_count_1kpbmcs/outs

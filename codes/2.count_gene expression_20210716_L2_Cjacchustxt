@@ -1,0 +1,30 @@
+# Get FASTQ and Reference Data
+mkdir /media/jianie/DATA/run_count_20210716_L2
+cd /media/jianie/DATA/run_count_20210716_L2
+
+
+# References - 2020-A (July 7, 2020)
+cd /home/jianie/yard/refdata/refdata-cellranger-GRCh38-3.0.0
+cd /home/jianie/yard/refdata/refdata-gex-mm10-2020-A
+cd /home/jianie/yard/refdata/refdata-gex-GRCh38-and-mm10-2020-A
+cd /home/jianie/yard/refdata/Cjacchus_012021
+
+# Setup the Command for cellranger count
+cd /media/jianie/DATA/run_count_20210716_L2
+cellranger count --help
+
+
+# Run cellranger count
+cellranger count --id=Norton \
+--fastqs=/media/jianie/DATA/run_mkfastq_20210716/20210716_L2_fastq/outs/fastq_path/HGK5TDSX2/Norton \
+--sample=Norton \
+--transcriptome=/home/jianie/yard/refdata/Cjacchus_012021 \
+--expect-cells=10000 \
+
+# Explore the Output of cellranger count
+ls -1 Norton/outs
+
+# Total time
+2021-09-10 16:38:56 [runtime] (ready) 
+
+
