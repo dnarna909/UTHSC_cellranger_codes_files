@@ -21,7 +21,7 @@ library(rio)
 
 # Combine Metrics Summary to Counts Records
 ```{r}
-aggr <- rio::import("/media/jianie/DATA/Single-Cell-Sample-Sheet/cellranger/aggregation.xlsx")
+aggr <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFIles/cellranger_counts_summary.xlsx")
 aggr2 <- aggr[-which(aggr$Status == "Delete"), ]
 df.all <- data.frame()
 for (pp in aggr2$Metrics) {
@@ -44,20 +44,23 @@ df.all2 <- merge(df.all, aggr2, by = c("List", "sample_id_ori"))
 ```
 
 # Select rows from project for Aggregation in Cellranger
+```{r}
+cols = c("sample_id", "molecule_h5", "sample_id_ori", "List")
+```
 STARR project
 ```{r}
 STARR <- df.all2[which(df.all2$Project == "STARR" & df.all2$Agg == "Yes"), ]
-write.csv(STARR[c("sample_id", "molecule_h5", "sample_id_ori", "List")], file = "STARR.agg.csv")
+write.csv(STARR[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv")
 ```
 SGLT2 project
 ```{r}
 SGLT2 <- df.all2[which(df.all2$Project == "SGLT2" & df.all2$Agg == "Yes"), ]
-write.csv(SGLT2[c("sample_id", "molecule_h5")], file = "SGLT2.agg.csv")
+write.csv(SGLT2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.agg.csv")
 ```
 STARR & SGLT2-V5 project
 ```{r}
 STARR2 <- df.all2[which((df.all2$Project == "STARR" | df.all2$sample_id %in% c("76615-V5", "76632-V5", "76638-V5", "76643-V5",
                                                                               "76647-V5", "76649-V5", "76656-V5", "76658-V5")) & 
                          df.all2$Agg == "Yes") , ]
-write.csv(STARR2[c("sample_id", "molecule_h5")], file = "STARR2.agg.csv")
+write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR2.agg.csv")
 ```
