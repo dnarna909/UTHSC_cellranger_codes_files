@@ -67,6 +67,6 @@ cellranger mkfastq --id=20210830_L3_fastq_dual \
 
 # Total time:  2 hr
 2021-09-30 12:23:02 [runtime] (ready)  
-2021-09- 12:37:00 Shutting down.
+2021-09- 
 
 
