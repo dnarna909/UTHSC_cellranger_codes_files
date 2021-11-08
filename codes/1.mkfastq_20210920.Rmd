@@ -11,8 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Setup the Command for cellranger mkfastq
 ## First make a directory in the yard to run the analysis.
-# mkdir /home/jianie/yard/run_cellranger_mkfastq
 ```{bash}
+# mkdir /home/jianie/yard/run_cellranger_mkfastq
 cd /home/jianie/yard/run_cellranger_mkfastq
 ```
 
@@ -86,14 +86,13 @@ cellranger mkfastq --id=20210830_L3_fastq_dual \
 --filter-dual-index
 ```
 
-
-# Lane 1-dual
-# Run cellranger mkfastq_L1
+# 20211105
+# Lane 3-dual
 ```{bash}
-cellranger mkfastq --id=20210716_L1_fastq_dual \
---run=/media/jianie/Seagate_SequencingFiles_2/20210716_UTA_NovaSeq_L1_L2 \
---csv=/media/jianie/Seagate_SequencingFiles_2/All_SampleSheet/cellranger/Nie1-2_07162021_L1.simple.csv \
---filter-dual-index
+cellranger mkfastq --id=20211105_L3_fastq_dual \
+--run=/home/jianie/BCLI/20211105_L3_L4 \
+--csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/FastqFiles/20211105_L3_fastq_dual.csv \
+--filter-single-index
 # Total time: 2 hr
 
 ```
