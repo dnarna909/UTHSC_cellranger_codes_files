@@ -271,7 +271,8 @@ cellranger count --id=STARR_031_force2000 \
 --force-cells=2000 \
 --r2-length 91 \
 --chemistry threeprime
-# 
+# 2021-11-08 14:01:59 [runtime] (ready)  
+# 2021-11-08 16:09:55 Shutting down.
 ``` 
 # STARR_032
 ## STARR_032
@@ -327,7 +328,9 @@ cellranger count --id=STARR_032_force2000 \
 --force-cells=2000 \
 --r2-length 91 \
 --chemistry threeprime
-# 
+# 2021-11-08 11:21:17 [runtime] (ready)   
+# 2021-11-08 14:01:57 Shutting down.
+
 ``` 
 
 # STARR_039
@@ -371,7 +374,7 @@ cellranger count --id=STARR_039_force1500 \
 --r2-length 91 \
 --chemistry threeprime
 # 2021-11-08 07:44:09 [runtime] (ready) 
-# 
+# 2021-11-08 11:21:15 Shutting down.
 ``` 
 
 # STARR_041

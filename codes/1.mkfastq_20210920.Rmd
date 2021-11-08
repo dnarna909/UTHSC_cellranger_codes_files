@@ -82,8 +82,18 @@ cellranger mkfastq --id=20210716_L2_fastq_single \
 ```{bash}
 cellranger mkfastq --id=20210830_L3_fastq_dual \
 --run=/media/jianie/Seagate_SequencingFiles_2/20210830_UTA_NovaSeq_L3_cbcl \
---csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/SequencingSummary/20210830_L3_fastq_dual.csv \
+--csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/FastqFiles/20210830_L3_fastq_dual.csv \
 --filter-dual-index
 ```
 
 
+# Lane 1-dual
+# Run cellranger mkfastq_L1
+```{bash}
+cellranger mkfastq --id=20210716_L1_fastq_dual \
+--run=/media/jianie/Seagate_SequencingFiles_2/20210716_UTA_NovaSeq_L1_L2 \
+--csv=/media/jianie/Seagate_SequencingFiles_2/All_SampleSheet/cellranger/Nie1-2_07162021_L1.simple.csv \
+--filter-dual-index
+# Total time: 2 hr
+
+```
