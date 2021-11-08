@@ -40,39 +40,40 @@ cd /home/jianie/yard/run_cellranger_mkfastq
 
 # 20210716
 # Lane 1-single
+```{bash}
 # Run cellranger mkfastq_L1
 cellranger mkfastq --id=20210716_L1_fastq \
 --run=/home/jianie/yard/data/20210716 \
 --csv=/media/jianie/DATA/run_mkfastq_20210716/Nie1-2_07162021_L1.simple.csv
-
 # Total time: 2 hr
 2021-09-10 13:41:23 [runtime] (ready)  
 2021-09-10 15:49:52 Shutting down.
+```
 
 # Lane 1-dual
 # Run cellranger mkfastq_L1
+```{bash}
 cellranger mkfastq --id=20210716_L1_fastq_dual \
 --run=/media/jianie/Seagate_SequencingFiles_2/20210716_UTA_NovaSeq_L1_L2 \
 --csv=/media/jianie/Seagate_SequencingFiles_2/All_SampleSheet/cellranger/Nie1-2_07162021_L1.simple.csv \
 --filter-dual-index
-
 # Total time: 2 hr
 2021-09-20 09:38:34 [runtime] (ready) 
 2021-09-20 11:47:05 Shutting down.
+```
 
 # 20210716
 # Lane 2-single
+```{bash}
 # Run cellranger mkfastq_L2_single
 cellranger mkfastq --id=20210716_L2_fastq_single \
 --run=/media/jianie/DATA/20210716_UTA \
 --csv=/media/jianie/DATA/run_mkfastq_20210716/Nie1-2_07162021_L2.simple.csv \
 --filter-single-index
-
 # Total time: 2 hr
 2021-09-16 10:04:19 [runtime] (ready)  
 2021-09-16 12:22:40 Shutting down.
-
-
+```
 
 # 20210830
 # Total time:  2 hr
@@ -81,7 +82,7 @@ cellranger mkfastq --id=20210716_L2_fastq_single \
 ```{bash}
 cellranger mkfastq --id=20210830_L3_fastq_dual \
 --run=/media/jianie/Seagate_SequencingFiles_2/20210830_UTA_NovaSeq_L3_cbcl \
---csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/FastqFiles/20210830_L3_fastq_dual.csv \
+--csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/SequencingSummary/20210830_L3_fastq_dual.csv \
 --filter-dual-index
 ```
 

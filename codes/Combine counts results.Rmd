@@ -22,7 +22,7 @@ library(rio)
 # Combine Metrics Summary to Counts Records
 ```{r}
 aggr <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFIles/cellranger_counts_summary.xlsx")
-aggr2 <- aggr[-which(aggr$Status == "Delete"), ]
+aggr2 <- aggr[-which(aggr$Status %in% c("Delete", "middle")), ]
 df.all <- data.frame()
 for (pp in aggr2$Metrics) {
   dx <- rio::import(paste0(pp))
@@ -41,6 +41,8 @@ for (pp in aggr2$Metrics) {
   # print(pp)
 }
 df.all2 <- merge(df.all, aggr2, by = c("List", "sample_id_ori"))
+saveRDS(df.all2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFIles/Counts_Sequencing_Combine.Rds")
+write.csv(df.all2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFIles/Counts_Sequencing_Combine.csv", row.names = FALSE)
 ```
 
 # Select rows from project for Aggregation in Cellranger
