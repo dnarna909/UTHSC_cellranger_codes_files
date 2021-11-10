@@ -90,7 +90,7 @@ cellranger mkfastq --id=20210830_L3_fastq_dual \
 # Lane 3-dual
 ```{bash}
 cellranger mkfastq --id=20211105_L3_fastq_dual \
---run=/home/jianie/BCLI/20211105_L3_L4 \
+--run=/media/jianie/DATA/20211105_L3_L4 \
 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/FastqFiles/20211105_L3_fastq_dual.csv \
 --filter-dual-index
 # Total time: 2 hr
@@ -103,6 +103,6 @@ cellranger mkfastq --id=20211105_L3_fastq_dual \
 --run=/home/jianie/BCLI/20211105_L3_L4 \
 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/FastqFiles/20211105_L3_fastq_dual.csv \
 --filter-dual-index
-# Total time: 2 hr
+# Total time: 4 hr
 
 ```
