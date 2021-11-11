@@ -21,22 +21,27 @@ cd /home/jianie/yard/run_cellranger_mkfastq
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger mkfastq --help
 ```
+
 ```{bash}
 export PATH=/home/jianie/yard/apps/usr/local/bin/bcl2fastq:$PATH
 bcl2fastq --help
 ```
 
 ## check files
+```{bash}
 cat /media/jianie/Seagate_SequencingFiles_2/All_SampleSheet/cellranger/Nie1-2_07162021_L1.simple.csv
 cat /media/jianie/Seagate_SequencingFiles_2/All_SampleSheet/cellranger/Nie1-2_07162021_L2.simple.csv
 ls -altR /media/jianie/Seagate_SequencingFiles_2/All_SampleSheet/cellranger
+``` 
 
 # tree can not be shown in DATA or disk, why ?
+```{bash}
 tree -L 2 /media/jianie/Seagate_SequencingFiles_2/20210716_UTA_NovaSeq_L1_L2
 tree -L 2 /home/jianie/yard/
 
 pwd
 cd /home/jianie/yard/run_cellranger_mkfastq
+```
 
 # 20210716
 # Lane 1-single
@@ -90,6 +95,7 @@ cellranger mkfastq --id=20210830_L3_fastq_dual \
 # Lane 3-dual
 ```{bash}
 cellranger mkfastq --id=20211105_L3_fastq_dual \
+--use-bases-mask=Y28,I10,I10,Y90 \
 --run=/media/jianie/DATA/20211105_L3_L4 \
 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/FastqFiles/20211105_L3_fastq_dual.csv \
 --filter-dual-index
