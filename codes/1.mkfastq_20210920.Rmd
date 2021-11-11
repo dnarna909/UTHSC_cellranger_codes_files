@@ -95,10 +95,11 @@ cellranger mkfastq --id=20210830_L3_fastq_dual \
 # Lane 3-dual
 ```{bash}
 cellranger mkfastq --id=20211105_L3_fastq_dual \
---use-bases-mask=Y28,I10,I10,Y90 \
 --run=/media/jianie/DATA/20211105_L3_L4 \
 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/FastqFiles/20211105_L3_fastq_dual.csv \
---filter-dual-index
+--filter-dual-index \
+--lanes=3 \
+--use-bases-mask=Y28n*,I10,I10n*,Y90n*
 # Total time: 2 hr
 ```
 
