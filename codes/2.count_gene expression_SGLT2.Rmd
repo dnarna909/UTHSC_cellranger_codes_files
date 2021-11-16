@@ -177,10 +177,10 @@ cellranger count --id=76649-V5 \
 # 2021-09-30 09:52:45 Shutting down.
 
 
-
+--------
 # 20211105_L3_L4_single
-## 76632_V5
 ```{bash}
+## 76632_V5
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76632_V5 \
@@ -190,11 +190,9 @@ cellranger count --id=76632_V5 \
 --include-introns=TRUE \
 --expect-cells=10000 \
 --r2-length 91
-```
-Total time: 
+# Total time: 
 
 ## STARR_049
-```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=STARR_049 \
@@ -204,8 +202,7 @@ cellranger count --id=STARR_049 \
 --include-introns=TRUE \
 --expect-cells=10000 \
 --r2-length 91
-```
-Total time: 
+# Total time: 
 
 ## 76656_V5
 ```{bash}
@@ -218,13 +215,12 @@ cellranger count --id=76656_V5 \
 --include-introns=TRUE \
 --expect-cells=10000 \
 --r2-length 91
+# Total time:
 ```
-Total time: 
-
 
 # 20211105_L3_L4_dual
-## 76632_V11
 ```{bash}
+## 76632_V11
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76632_V11 \
@@ -234,8 +230,7 @@ cellranger count --id=76632_V11 \
 --include-introns=TRUE \
 --expect-cells=10000 \
 --r2-length 91
-```
-Total time: 
+# Total time: 
 
 ## 76643_V5
 ```{bash}
@@ -248,11 +243,9 @@ cellranger count --id=76643_V5 \
 --include-introns=TRUE \
 --expect-cells=10000 \
 --r2-length 91
-```
-Total time: 
+# Total time: 
 
 ## 76647_V5
-```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76647_V5 \
@@ -262,11 +255,9 @@ cellranger count --id=76647_V5 \
 --include-introns=TRUE \
 --expect-cells=10000 \
 --r2-length 91
-```
-Total time: 
+# Total time: 
 
 ## STARR_051
-```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=STARR_051 \
@@ -276,11 +267,9 @@ cellranger count --id=STARR_051 \
 --include-introns=TRUE \
 --expect-cells=10000 \
 --r2-length 91
-```
-Total time: 
+# Total time: 
 
 ## 76649_V5
-```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76649_V5 \
@@ -290,11 +279,9 @@ cellranger count --id=76649_V5 \
 --include-introns=TRUE \
 --expect-cells=10000 \
 --r2-length 91
-```
-Total time: 
+# Total time: 
 
 ## 76638_V5_Muscle
-```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76638_V5_Muscle \
@@ -304,11 +291,9 @@ cellranger count --id=76638_V5_Muscle \
 --include-introns=TRUE \
 --expect-cells=10000 \
 --r2-length 91
-```
-Total time: 
+# Total time: 
 
 ## 76638_V5
-```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76638_V5 \
@@ -318,11 +303,9 @@ cellranger count --id=76638_V5 \
 --include-introns=TRUE \
 --expect-cells=10000 \
 --r2-length 91
-```
-Total time: 
+# Total time: 
 
 ## 76658_V5
-```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76658_V5 \
@@ -332,11 +315,9 @@ cellranger count --id=76658_V5 \
 --include-introns=TRUE \
 --expect-cells=10000 \
 --r2-length 91
-```
-Total time: 
+# Total time: 
 
 ## 76638_V11
-```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76638_V11 \
@@ -346,5 +327,9 @@ cellranger count --id=76638_V11 \
 --include-introns=TRUE \
 --expect-cells=10000 \
 --r2-length 91
+# Total time: 
 ```
-Total time: 
+
+
+
+# combine
