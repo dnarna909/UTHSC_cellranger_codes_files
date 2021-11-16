@@ -191,6 +191,8 @@ cellranger count --id=76632_V5 \
 --expect-cells=10000 \
 --r2-length 91
 # Total time: 
+# 2021-11-16 15:26:47 [runtime] (ready)  
+
 
 ## STARR_049
 cd /home/jianie/yard/run_cellranger_count
