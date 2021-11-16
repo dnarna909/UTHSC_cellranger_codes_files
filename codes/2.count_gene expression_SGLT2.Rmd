@@ -189,9 +189,11 @@ cellranger count --id=76632_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r2-length 91
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
 # Total time: 
-# 2021-11-16 15:26:47 [runtime] (ready)  
+# 2021-11-16 17:00:01 [runtime] (ready)
 
 
 ## STARR_049
@@ -203,7 +205,9 @@ cellranger count --id=STARR_049 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r2-length 91
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
 # Total time: 
 
 ## 76656_V5
@@ -216,7 +220,9 @@ cellranger count --id=76656_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r2-length 91
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
 # Total time:
 ```
 
@@ -231,11 +237,12 @@ cellranger count --id=76632_V11 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r2-length 91
+--r1-length 26 \ 
+--r2-length 90 \
+--chemistry threeprime
 # Total time: 
 
 ## 76643_V5
-```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76643_V5 \
@@ -244,7 +251,9 @@ cellranger count --id=76643_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r2-length 91
+--r1-length 26 \ 
+--r2-length 90 \
+--chemistry threeprime
 # Total time: 
 
 ## 76647_V5
@@ -256,7 +265,9 @@ cellranger count --id=76647_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r2-length 91
+--r1-length 26 \ 
+--r2-length 90 \
+--chemistry threeprime
 # Total time: 
 
 ## STARR_051
@@ -268,7 +279,9 @@ cellranger count --id=STARR_051 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r2-length 91
+--r1-length 26 \ 
+--r2-length 90 \
+--chemistry threeprime
 # Total time: 
 
 ## 76649_V5
@@ -280,7 +293,9 @@ cellranger count --id=76649_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r2-length 91
+--r1-length 26 \ 
+--r2-length 90 \
+--chemistry threeprime
 # Total time: 
 
 ## 76638_V5_Muscle
@@ -292,7 +307,9 @@ cellranger count --id=76638_V5_Muscle \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r2-length 91
+--r1-length 26 \ 
+--r2-length 90 \
+--chemistry threeprime
 # Total time: 
 
 ## 76638_V5
@@ -304,7 +321,9 @@ cellranger count --id=76638_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r2-length 91
+--r1-length 26 \ 
+--r2-length 90 \
+--chemistry threeprime
 # Total time: 
 
 ## 76658_V5
@@ -316,7 +335,9 @@ cellranger count --id=76658_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r2-length 91
+--r1-length 26 \ 
+--r2-length 90 \
+--chemistry threeprime
 # Total time: 
 
 ## 76638_V11
@@ -328,10 +349,38 @@ cellranger count --id=76638_V11 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r2-length 91
+--r1-length 26 \ 
+--r2-length 90 \
+--chemistry threeprime
 # Total time: 
 ```
 
 
 
 # combine
+STARR_051_combine
+STARR_049_combine
+
+76632_V11_combine
+```{bash}
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76632_V11_combine \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--sample=76632_V11 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \ 
+--r2-length 90 \
+--chemistry threeprime
+# Total time: 
+```
+
+76632_V5_combine
+76638_V5_combine
+76638_V5_Muscle_combine
+76643_V5_combine
+76647_V5_combine
+76649_V5_combine
+
