@@ -194,7 +194,7 @@ cellranger count --id=76632_V5 \
 --chemistry threeprime
 # Total time: 
 # 2021-11-16 17:00:01 [runtime] (ready)
-
+# 2021-11-16 17:48:54 Shutting down.
 
 ## STARR_049
 cd /home/jianie/yard/run_cellranger_count
@@ -208,10 +208,11 @@ cellranger count --id=STARR_049 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
-# Total time: 
+# Total time:  1 hr
+# 2021-11-16 17:48:55 [runtime] (ready) 
+# 2021-11-16 18:53:26 Shutting down.
 
 ## 76656_V5
-```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76656_V5 \
@@ -223,7 +224,9 @@ cellranger count --id=76656_V5 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
-# Total time:
+# Total time: 3 hr
+# 2021-11-17 07:27:10 [runtime] (ready) 
+# 2021-11-17 10:27:35 Shutting down.
 ```
 
 # 20211105_L3_L4_dual
@@ -237,7 +240,7 @@ cellranger count --id=76632_V11 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r1-length 26 \ 
+--r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time: 
@@ -251,7 +254,7 @@ cellranger count --id=76643_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r1-length 26 \ 
+--r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time: 
@@ -265,7 +268,7 @@ cellranger count --id=76647_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r1-length 26 \ 
+--r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time: 
@@ -279,7 +282,7 @@ cellranger count --id=STARR_051 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r1-length 26 \ 
+--r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time: 
@@ -293,7 +296,7 @@ cellranger count --id=76649_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r1-length 26 \ 
+--r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time: 
@@ -307,7 +310,7 @@ cellranger count --id=76638_V5_Muscle \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r1-length 26 \ 
+--r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time: 
@@ -321,7 +324,7 @@ cellranger count --id=76638_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r1-length 26 \ 
+--r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time: 
@@ -335,7 +338,7 @@ cellranger count --id=76658_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r1-length 26 \ 
+--r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time: 
@@ -349,7 +352,7 @@ cellranger count --id=76638_V11 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r1-length 26 \ 
+--r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time: 
@@ -358,11 +361,39 @@ cellranger count --id=76638_V11 \
 
 
 # combine
-STARR_051_combine
-STARR_049_combine
-
-76632_V11_combine
 ```{bash}
+# STARR_051_combine
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_051_combine \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--sample=STARR_051 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time: 
+
+# STARR_049_combine
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_049_combine \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--sample=STARR_049 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time: 
+```
+
+
+```{bash}
+# 76632_V11_combine
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76632_V11_combine \
@@ -371,16 +402,91 @@ cellranger count --id=76632_V11_combine \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
---r1-length 26 \ 
+--r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time: 
-```
 
-76632_V5_combine
-76638_V5_combine
-76638_V5_Muscle_combine
-76643_V5_combine
-76647_V5_combine
-76649_V5_combine
+# 76632_V5_combine
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76632_V5_combine \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--sample=76632_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time: 
 
+# 76638_V5_combine
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76638_V5_combine \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--sample=76638_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time: 
+
+# 76638_V5_Muscle_combine
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76638_V5_Muscle_combine \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--sample=76638_V5_Muscle \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time: 
+
+# 76643_V5_combine
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76643_V5_combine \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--sample=76643_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time: 
+
+# 76647_V5_combine
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76647_V5_combine \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--sample=76647_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time: 
+
+# 76649_V5_combine
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76649_V5_combine \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--sample=76649_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time: 
