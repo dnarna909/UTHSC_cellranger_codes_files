@@ -21,7 +21,7 @@ library(rio)
 
 # Combine Metrics Summary to Counts Records
 ```{r}
-aggr <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFIles/cellranger_counts_summary.xlsx")
+aggr <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 3_cellranger_counts_summary.xlsx")
 aggr2 <- aggr[-which(aggr$Status %in% c("Delete", "middle")), ]
 df.all <- data.frame()
 for (pp in aggr2$Metrics) {
@@ -34,15 +34,16 @@ for (pp in aggr2$Metrics) {
   # sapply(dx, mode)
   library(tibble)
   dx <- add_column(dx, sample_id_ori = aggr2[which(aggr2$Metrics == pp), "sample_id_ori"], .before = 1)
-  dx <- add_column(dx, List = aggr2[which(aggr2$Metrics == pp), "List"], .before = 1)
+  dx <- add_column(dx, Counts_List = aggr2[which(aggr2$Metrics == pp), "Counts_List"], .before = 1)
   if ( match(pp, aggr2$Metrics) == 1 ) {df.all <- rbind(df.all, dx) } else {
     if ( length(setdiff(colnames(df.all), colnames(dx))) > 0 ) {df.all <- dplyr::bind_rows(df.all, dx)} else {
       df.all <- rbind(df.all, dx)} } 
   # print(pp)
 }
-df.all2 <- merge(df.all, aggr2, by = c("List", "sample_id_ori"))
-saveRDS(df.all2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFIles/Counts_Sequencing_Combine.Rds")
-write.csv(df.all2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFIles/Counts_Sequencing_Combine.csv", row.names = FALSE)
+
+df.all2 <- merge(df.all, aggr2, by = c("Counts_List", "sample_id_ori"))
+saveRDS(df.all2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Counts_Sequencing_Combine.Rds")
+write.csv(df.all2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Counts_Sequencing_Combine.csv", row.names = FALSE)
 ```
 
 # Select rows from project for Aggregation in Cellranger
