@@ -192,7 +192,7 @@ cellranger count --id=76632_V5 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
-# Total time: 
+# Total time: 48 min
 # 2021-11-16 17:00:01 [runtime] (ready)
 # 2021-11-16 17:48:54 Shutting down.
 
@@ -244,6 +244,7 @@ cellranger count --id=76632_V11 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time: 
+# Done
 
 ## 76643_V5
 cd /home/jianie/yard/run_cellranger_count
@@ -257,8 +258,7 @@ cellranger count --id=76643_V5 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
-# Total time: 
-
+# Total time: Done
 # 2021-11-17 12:04:59 Shutting down.
 
 ## 76647_V5
@@ -273,7 +273,7 @@ cellranger count --id=76647_V5 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
-# Total time: 
+# Total time: 3hr
 # 2021-11-17 12:05:01 [runtime] (ready)  
 # 2021-11-17 15:25:03 Shutting down.
 
@@ -289,7 +289,7 @@ cellranger count --id=STARR_051 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
-# Total time: 
+# Total time: 2 hr
 # 2021-11-17 15:25:04 [runtime] (ready)  
 # 2021-11-17 17:06:09 Shutting down.
 
@@ -305,7 +305,7 @@ cellranger count --id=76649_V5 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
-# Total time: 
+# Total time: 4 hr
 # 2021-11-17 17:06:10 [runtime] (ready)  
 # 2021-11-17 21:21:22 Shutting down.
 
@@ -321,7 +321,7 @@ cellranger count --id=76638_V5_Muscle \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
-# Total time: 
+# Total time: 2 hr
 # 2021-11-17 21:21:24 [runtime] (ready)  
 # 2021-11-17 23:23:05 Shutting down.
 
@@ -337,7 +337,7 @@ cellranger count --id=76638_V5 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
-# Total time: 
+# Total time: 2hr
 # 2021-11-17 23:23:07 [runtime] (ready)  
 # 2021-11-18 01:07:54 Shutting down.
 
@@ -353,7 +353,7 @@ cellranger count --id=76658_V5 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
-# Total time: 
+# Total time: 3 hr
 # 2021-11-18 01:07:56 [runtime] (ready)   
 # 2021-11-18 03:56:50 Shutting down.
 
@@ -369,10 +369,9 @@ cellranger count --id=76638_V11 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
-# Total time: 
+# Total time: 2.5 hr
 # 2021-11-18 03:56:52 [runtime] (ready) 
 # 2021-11-18 06:21:51 Shutting down.
-
 ```
 
 
@@ -392,7 +391,7 @@ cellranger count --id=STARR_051_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_051
-# Total time: 
+# Total time: 3 hr
 # 2021-11-18 13:17:57 [runtime] (ready) 
 # 2021-11-18 16:10:37 Shutting down.
 
@@ -409,7 +408,9 @@ cellranger count --id=STARR_049_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_049
-# Total time: 
+# Total time: 3 hr
+# 2021-11-19 10:57:51 [runtime] (ready) 
+# 2021-11-19 13:39:51 Shutting down.
 ```
 
 
@@ -427,14 +428,15 @@ cellranger count --id=76632_V11_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project 76632_V11
-# Total time: 
+# Total time: 1.5 hr
 # 2021-11-18 16:10:40 [runtime] (ready)  
+# 2021-11-18 18:45:55 Shutting down.
 
 # 76632_V5_combine
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76632_V5_combine \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
 --sample=76632_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -444,6 +446,8 @@ cellranger count --id=76632_V5_combine \
 --chemistry threeprime \
 --project 76632_V5
 # Total time: 
+# 2021-11-19 16:22:24 [runtime] (ready) 
+# 
 
 # 76638_V5_combine
 cd /home/jianie/yard/run_cellranger_count
@@ -458,7 +462,9 @@ cellranger count --id=76638_V5_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project 76638_V5
-# Total time: 
+# Total time: 3 hr
+# 2021-11-18 18:45:58 [runtime] (ready)  
+# 2021-11-18 21:40:40 Shutting down.
 
 # 76638_V5_Muscle_combine
 cd /home/jianie/yard/run_cellranger_count
@@ -472,7 +478,7 @@ cellranger count --id=76638_V5_Muscle_combine \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime \
---project 76638_V5
+--project 76638_V5_Muscle
 # Total time: 
 
 # 76643_V5_combine
@@ -488,7 +494,9 @@ cellranger count --id=76643_V5_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project 76643_V5
-# Total time: 
+# Total time: 2 hr
+# 2021-11-18 21:40:42 [runtime] (ready) 
+# 2021-11-18 23:37:30 Shutting down.
 
 # 76647_V5_combine
 cd /home/jianie/yard/run_cellranger_count
@@ -503,7 +511,9 @@ cellranger count --id=76647_V5_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project 76647_V5
-# Total time: 
+# Total time: 5 hr
+# 2021-11-18 23:37:31 [runtime] (ready) 
+# 2021-11-19 04:58:49 Shutting down.
 
 # 76649_V5_combine
 cd /home/jianie/yard/run_cellranger_count
@@ -519,3 +529,5 @@ cellranger count --id=76649_V5_combine \
 --chemistry threeprime \
 --project 76649_V5
 # Total time: 
+# 2021-11-19 04:58:51 [runtime] (ready) 
+# 2021-11-19 10:57:51 Shutting down.
