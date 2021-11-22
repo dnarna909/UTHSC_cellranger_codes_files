@@ -445,9 +445,9 @@ cellranger count --id=76632_V5_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project 76632_V5
-# Total time: 
+# Total time: 3hr
 # 2021-11-19 16:22:24 [runtime] (ready) 
-# 
+# 2021-11-19 19:21:07 Shutting down.
 
 # 76638_V5_combine
 cd /home/jianie/yard/run_cellranger_count
@@ -479,7 +479,9 @@ cellranger count --id=76638_V5_Muscle_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project 76638_V5_Muscle
-# Total time: 
+# Total time: 3 hr
+# 2021-11-19 19:21:09 [runtime] (ready)  
+# 2021-11-19 22:23:00 Shutting down.
 
 # 76643_V5_combine
 cd /home/jianie/yard/run_cellranger_count
