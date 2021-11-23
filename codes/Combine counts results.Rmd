@@ -16,7 +16,6 @@ for (package in packageList) {
   if(!require(package, character.only = TRUE)){
     install.packages(package); require(package, character.only = TRUE); }
 }
-library(rio)
 ```
 
 # Combine Metrics Summary to Counts Records
