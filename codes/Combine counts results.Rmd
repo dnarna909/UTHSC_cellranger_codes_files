@@ -41,6 +41,7 @@ for (pp in aggr2$Metrics) {
 }
 
 df.all2 <- merge(df.all, aggr2, by = c("Counts_List", "sample_id_ori"))
+df.all2 <- df.all2[order(df.all2$Counts_List),]
 saveRDS(df.all2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Counts_Sequencing_Combine.Rds")
 write.csv(df.all2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Counts_Sequencing_Combine.csv", row.names = FALSE)
 ```
