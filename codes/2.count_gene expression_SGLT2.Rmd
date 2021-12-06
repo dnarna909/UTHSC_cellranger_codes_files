@@ -426,7 +426,7 @@ cellranger count --id=STARR_051_combine \
 # 2021-11-18 13:17:57 [runtime] (ready) 
 # 2021-11-18 16:10:37 Shutting down.
 
-# STARR_049_combine
+# STARR_049_combine: mistake for dual
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=STARR_049_combine \
@@ -442,6 +442,22 @@ cellranger count --id=STARR_049_combine \
 # Total time: 3 hr
 # 2021-11-19 10:57:51 [runtime] (ready) 
 # 2021-11-19 13:39:51 Shutting down.
+
+# STARR_049_combine: mistake for dual
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_049_combine \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_single/ \
+--sample=STARR_049 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project STARR_049
+# Total time: 
+
 ```
 
 
