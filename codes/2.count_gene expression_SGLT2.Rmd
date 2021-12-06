@@ -432,7 +432,7 @@ cellranger count --id=76632_V11_combine \
 # 2021-11-18 16:10:40 [runtime] (ready)  
 # 2021-11-18 18:45:55 Shutting down.
 
-# 76632_V5_combine
+# 76632_V5_combine: mistake in dual
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76632_V5_combine \
@@ -448,6 +448,23 @@ cellranger count --id=76632_V5_combine \
 # Total time: 3hr
 # 2021-11-19 16:22:24 [runtime] (ready) 
 # 2021-11-19 19:21:07 Shutting down.
+
+# 76632_V5_combine: corrected
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76632_V5_combine \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_single/ \
+--sample=76632_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project 76632_V5
+# Total time: 
+# 2021-12-06 12:23:34 [runtime] (ready) 
+
 
 # 76638_V5_combine
 cd /home/jianie/yard/run_cellranger_count
