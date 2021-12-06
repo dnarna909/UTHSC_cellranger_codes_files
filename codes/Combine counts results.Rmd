@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 install packages
 ```{r package, include=FALSE}
-packageList <- c("rio", "dplyr")
+packageList <- c("rio", "dplyr", "tibble")
 for (package in packageList) {
   if(!require(package, character.only = TRUE)){
     install.packages(package); require(package, character.only = TRUE); }
@@ -19,7 +19,7 @@ for (package in packageList) {
 ```
 
 # Combine Metrics Summary to Counts Records
-```{r}
+```{r chunk 1}
 Sequencing <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 2_Sequencing Samples.xlsx")
 aggr <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 3_cellranger_counts_summary.xlsx")
 aggr2 <- aggr[-which(aggr$Status %in% c("Delete", "middle")), ]
@@ -32,20 +32,37 @@ for (pp in aggr2$Metrics) {
   dx[] <- lapply(dx[], function(x){ if(is.character(x)) as.numeric(gsub("%|,", "", x)) else x} )
   # sapply(dx, class)
   # sapply(dx, mode)
-  library(tibble)
   dx <- add_column(dx, sample_id_ori = aggr2[which(aggr2$Metrics == pp), "sample_id_ori"], .before = 1)
   dx <- add_column(dx, Counts_List = aggr2[which(aggr2$Metrics == pp), "Counts_List"], .before = 1)
   if ( match(pp, aggr2$Metrics) == 1 ) {df.all <- rbind(df.all, dx) } else {
-    if ( length(setdiff(colnames(df.all), colnames(dx))) > 0 ) {df.all <- dplyr::bind_rows(df.all, dx)} else {
+    if ( length( union(setdiff(colnames(df.all), colnames(dx)), setdiff(colnames(dx), colnames(df.all))) ) > 0 ) {
+      df.all <- dplyr::bind_rows(df.all, dx)} else {
       df.all <- rbind(df.all, dx)} } 
   # print(pp)
 }
 
+intersect(colnames(df.all), colnames(aggr2))
 df.all2 <- merge(df.all, aggr2, by = c("Counts_List", "sample_id_ori"))
-df.all3 <- merge(df.all2, Sequencing, by = c("Sample_ID", "Sequencing_Date"))
-df.all3 <- df.all3[order(df.all3$Counts_List),]
-saveRDS(df.all2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Counts_Sequencing_Combine.Rds")
-write.csv(df.all2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Counts_Sequencing_Combine.csv", row.names = FALSE)
+intersect(colnames(df.all2), colnames(Sequencing))
+df.all3 <- merge(df.all2, Sequencing, by = c("Sample_ID", "Sequencing_Date", "Project", "Lane", "SQ_List", "Disk", "CountsFolder"))
+colnames(df.all3)
+
+# add sum for sequencing lane
+sum <- df.all3 %>% filter(Status == "Original") %>% group_by(Sequencing_Date, Lane) %>% summarise(Sum.Sequencing = sum(`Number of Reads`))
+df.all4 <- merge(sum, df.all3, by = c("Sequencing_Date", "Lane"))
+df.all4 <- add_column(df.all4, Percent.PerLane = ifelse(df.all4$Status == "Original", 
+                                                        round(df.all4$`Number of Reads`/df.all4$Sum.Sequencing *100, digits = 1), NA), 
+                      .after = 3)
+df.all4 <- add_column(df.all4, Diff.PerLane = ifelse(df.all4$Status == "Original", 
+                                                        round(df.all4$Percent.PerLane - (df.all4$`Target %` *100), digits = 1), NA), 
+                      .after = 4)
+df.all4 <- df.all4[order(df.all4$SQ_List),]
+```
+
+
+```{r chunk 2}
+saveRDS(df.all4, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 4_Counts_Sequencing_Combine.Rds")
+write.csv(df.all4, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 4_Counts_Sequencing_Combine.csv", row.names = FALSE)
 ```
 
 # Select rows from project for Aggregation in Cellranger
