@@ -357,6 +357,22 @@ cellranger count --id=76658_V5 \
 # 2021-11-18 01:07:56 [runtime] (ready)   
 # 2021-11-18 03:56:50 Shutting down.
 
+## 76658_V5_force10000
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76658_V5_force10000 \
+--fastqs=/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/76658_V5 \
+--sample=76658_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time:  hr
+# 
+
+
 ## 76638_V11
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -372,6 +388,21 @@ cellranger count --id=76638_V11 \
 # Total time: 2.5 hr
 # 2021-11-18 03:56:52 [runtime] (ready) 
 # 2021-11-18 06:21:51 Shutting down.
+
+## 76638_V11_force10000
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76638_V11 \
+--fastqs=/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
+--sample=76638_V11 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time:  hr
+# 
 ```
 
 
@@ -550,3 +581,18 @@ cellranger count --id=76649_V5_combine \
 # Total time: 
 # 2021-11-19 04:58:51 [runtime] (ready) 
 # 2021-11-19 10:57:51 Shutting down.
+
+# 76649_V5_combine_force15000
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76649_V5_combine_force15000 \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
+--sample=76649_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=15000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project 76649_V5
+
