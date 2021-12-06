@@ -370,7 +370,7 @@ cellranger count --id=76658_V5_force10000 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time:  hr
-# 
+# 2021-12-06 16:00:25 [runtime] (ready) 
 
 
 ## 76638_V11
@@ -392,7 +392,7 @@ cellranger count --id=76638_V11 \
 ## 76638_V11_force10000
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger count --id=76638_V11 \
+cellranger count --id=76638_V11_force10000 \
 --fastqs=/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
 --sample=76638_V11 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
@@ -400,7 +400,8 @@ cellranger count --id=76638_V11 \
 --force-cells=10000 \
 --r1-length 26 \
 --r2-length 90 \
---chemistry threeprime
+--chemistry threeprime \
+--project 76638_V11
 # Total time:  hr
 # 
 ```
@@ -509,8 +510,9 @@ cellranger count --id=76632_V5_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project 76632_V5
-# Total time: 
+# Total time: 3.5 hr
 # 2021-12-06 12:23:34 [runtime] (ready) 
+# 2021-12-06 16:00:23 Shutting down.
 
 
 # 76638_V5_combine
