@@ -371,7 +371,7 @@ cellranger count --id=76658_V5_force10000 \
 --chemistry threeprime
 # Total time:  hr
 # 2021-12-06 16:00:25 [runtime] (ready) 
-
+# 2021-12-06 06∶45∶07 PM
 
 ## 76638_V11
 cd /home/jianie/yard/run_cellranger_count
@@ -402,8 +402,9 @@ cellranger count --id=76638_V11_force10000 \
 --r2-length 90 \
 --chemistry threeprime \
 --project 76638_V11
-# Total time:  hr
-# 
+# Total time: 2.5 hr
+# 04∶06∶31 AM
+# 06∶27∶55 AM
 ```
 
 
@@ -444,7 +445,7 @@ cellranger count --id=STARR_049_combine \
 # 2021-11-19 10:57:51 [runtime] (ready) 
 # 2021-11-19 13:39:51 Shutting down.
 
-# STARR_049_combine: mistake for dual
+# STARR_049_combine: corrected
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=STARR_049_combine \
@@ -457,8 +458,9 @@ cellranger count --id=STARR_049_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_049
-# Total time: 
-
+# Total time: 3.5 hr
+# 12∶36∶06 AM
+# 04∶06∶31 AM
 ```
 
 
@@ -596,7 +598,7 @@ cellranger count --id=76649_V5_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project 76649_V5
-# Total time: 
+# Total time: 6 hr
 # 2021-11-19 04:58:51 [runtime] (ready) 
 # 2021-11-19 10:57:51 Shutting down.
 
@@ -613,4 +615,6 @@ cellranger count --id=76649_V5_combine_force15000 \
 --r2-length 90 \
 --chemistry threeprime \
 --project 76649_V5
-
+# Total time: 6 hr
+# 06∶45∶07 PM
+# 12∶36∶06 AM
