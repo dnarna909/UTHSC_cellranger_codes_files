@@ -32,6 +32,8 @@ cellranger aggr --id=10s_STARR_aggr --csv=/media/jianie/Seagate_SequencingFiles_
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=12STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv
+# 2021-12-08 08:34:02 [runtime] (ready) 
+# 2021-12-08 10:27:41 Shutting down.
 ```
 
 ```{bash}

@@ -566,6 +566,7 @@ cellranger count --id=76638_V5_Muscle_combine_force10000 \
 --project 76638_V5_Muscle
 # Total time: 
 # 2021-12-08 07:27:39 [runtime] (ready) 
+# 2021-12-08 10:37:10 Shutting down.
 
 
 # 76643_V5_combine
