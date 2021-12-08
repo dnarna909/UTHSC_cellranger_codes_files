@@ -1,0 +1,42 @@
+---
+title: "Untitled"
+author: "Jia Nie"
+date: "12/8/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{bash}
+# Overview of cellranger aggr
+cellranger aggr --help
+
+# Get Data
+mkdir ~/yard/run_cellranger_aggr
+```
+
+# Setup the Command for cellranger aggr
+```{bash}
+cd ~/yard/run_cellranger_aggr
+cellranger aggr --id=10s_STARR_aggr --csv=/media/jianie/Seagate_SequencingFiles_2/All_SampleSheet/cellranger/aggregation.STARR.csv
+# Run cellranger aggr: 30 min
+# 2021-11-02 14:30:23 [runtime] Reattaching in local mode.
+# 2021-11-02 14:54:38 Shutting down.
+```
+
+```{bash}
+cd ~/yard/run_cellranger_aggr
+cellranger aggr --id=12STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv
+```
+
+```{bash}
+cd ~/yard/run_cellranger_aggr
+cellranger aggr --id=19STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR2.agg.csv
+```
+
+```{bash}
+cd ~/yard/run_cellranger_aggr
+cellranger aggr --id=8SGLT2_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.agg.csv
+```
