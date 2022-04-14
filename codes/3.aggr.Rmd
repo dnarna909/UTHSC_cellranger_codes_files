@@ -22,7 +22,7 @@ mkdir /home/jianie/yard/run_cellranger_aggr
 ```{bash}
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger aggr --id=10s_STARR_aggr --csv=/media/jianie/Seagate_SequencingFiles_2/All_SampleSheet/cellranger/aggregation.STARR.csv
+cellranger aggr --id=10s_STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg_2.csv
 # Run cellranger aggr: 30 min
 # 2021-11-02 14:30:23 [runtime] Reattaching in local mode.
 # 2021-11-02 14:54:38 Shutting down.
@@ -32,7 +32,7 @@ cellranger aggr --id=10s_STARR_aggr --csv=/media/jianie/Seagate_SequencingFiles_
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=12STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv
-# 2021-12-13 14:06:08 [runtime] (ready) 
+# 2022-04-08 12:16:42 [runtime] (ready) 
 # 
 ```
 
