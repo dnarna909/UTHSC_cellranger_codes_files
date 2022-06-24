@@ -266,7 +266,7 @@ cellranger count --id=76638_V5_Muscle_combine_force10000 \
 --sample=76638_V5_Muscle \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
---expect-cells=10000 \
+--force-cells=10000 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime \

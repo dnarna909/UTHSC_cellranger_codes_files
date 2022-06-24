@@ -288,6 +288,7 @@ cellranger count --id=STARR_026_combine \
 # Run cellranger count_3hr
 # 2022-04-14 07:49:48 [runtime] (ready)  
 # 2022-04-14 10:32:31 Shutting down.
+# result not good, not need
 ```
 
 ## 20210114_UTA_NovaSeq_L3_fastq
