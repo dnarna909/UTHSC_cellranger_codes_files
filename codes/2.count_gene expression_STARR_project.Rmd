@@ -276,7 +276,7 @@ cellranger count --id=STARR_024_combine \
 # 2021-10-01 16:48:33 [runtime] (ready) 
 # 2021-10-01 21:16:15 Shutting down.
 
-cellranger count --id=STARR_026 \
+cellranger count --id=STARR_026_combine \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --fastqs=/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_fastq/C202SC19080754_2/raw_data/HTCMTDSXX/STARR026,/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_fastq/C202SC19080754_2/raw_data/HTCMTDSXX/STARR026h \
 --sample=STARR026 \
@@ -285,8 +285,9 @@ cellranger count --id=STARR_026 \
 --r2-length 90 \
 --chemistry threeprime
 --include-introns=TRUE
+# Run cellranger count_3hr
 # 2022-04-14 07:49:48 [runtime] (ready)  
-
+# 2022-04-14 10:32:31 Shutting down.
 ```
 
 ## 20210114_UTA_NovaSeq_L3_fastq
@@ -333,6 +334,10 @@ cellranger count --id=STARR_043_force9000 \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_043
+# Run cellranger count_4hr
+# 2022-04-14 10:32:33 [runtime] (ready) 
+# 2022-04-14 14:21:07 Shutting down.
+
 ```
 
 ## 20210716_L1_fastq_dual_cellranger

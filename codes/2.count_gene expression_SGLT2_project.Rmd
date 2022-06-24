@@ -346,4 +346,34 @@ cellranger count --id=76649_V5_combine_force15000 \
 
 
 
+## 20220616_L1_fastq_dual
+```{bash}
 
+```
+
+## 20220616_L1_fastq_single
+```{bash}
+
+```
+
+## 20220620_20220002_fastq
+```{bash}
+
+```
+
+## 20220620_20220003_fastq
+```{bash}
+
+```
+
+## 20220620_20220004_fastq
+```{bash}
+
+```
+
+## 20220620_20220005_fastq
+```{bash}
+
+```
+
+## combine
