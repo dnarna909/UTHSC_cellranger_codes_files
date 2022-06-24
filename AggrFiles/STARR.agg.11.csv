@@ -1,0 +1,12 @@
+sample_id,molecule_h5,sample_id_ori,Counts_List
+STARR_015,/media/jianie/Seagate_SequencingFiles_1/20190912_NovaSeq_fastq_Counts/STARR_015_combine_force/outs/molecule_info.h5,STARR_015_combine_force,28
+STARR_016,/media/jianie/Seagate_SequencingFiles_1/20190912_NovaSeq_fastq_Counts/STARR_016/outs/molecule_info.h5,STARR_016,30
+STARR_031,/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_Counts/STARR_031_force2600/outs/molecule_info.h5,STARR_031_force2600,96
+STARR_028,/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_Counts/STARR_028_force2000/outs/molecule_info.h5,STARR_028_force2000,89
+STARR_026,/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_Counts/STARR_026/outs/molecule_info.h5,STARR_026,41
+STARR_032,/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_Counts/STARR_032_force2000/outs/molecule_info.h5,STARR_032_force2000,97
+STARR_039,/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_Counts/STARR_039_force1500/outs/molecule_info.h5,STARR_039_force1500,99
+STARR_043,/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_Counts/STARR_043/outs/molecule_info.h5,STARR_043,66
+STARR_041,/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/STARR_041_combine_force/outs/molecule_info.h5,STARR_041_combine_force,79
+STARR_024,/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/STARR_024_combine/outs/molecule_info.h5,STARR_024_combine,76
+STARR_049,/media/jianie/SequencingFiles_3/20211105_L3_L4_Counts/STARR_049_combine/outs/molecule_info.h5,STARR_049_combine,113
