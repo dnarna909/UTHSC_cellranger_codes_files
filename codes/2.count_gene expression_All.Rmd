@@ -836,7 +836,7 @@ cellranger count --id=76638_V11 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime \
---project 
+--project
 # Total time: 2.5 hr
 # 2021-11-18 03:56:52 [runtime] (ready) 
 # 2021-11-18 06:21:51 Shutting down.
@@ -988,8 +988,9 @@ cellranger count --id=STARR_026 \
 --chemistry threeprime \
 --project STARR_026
 # Total time: 2 hr
-#   
-# 
+#   2022-06-24 16:49:37 [runtime] (ready) 
+#   2022-06-24 18:51:20 Shutting down.
+
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -1003,9 +1004,10 @@ cellranger count --id=STARR_041 \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_041
-# Total time: 2 hr
-#   
-# 
+# Total time: 4 hr
+#   2022-06-24 18:51:22 [runtime] (ready)  
+#   2022-06-24 22:16:07 Shutting down.
+
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -1019,9 +1021,10 @@ cellranger count --id=STARR_043 \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_043
-# Total time: 2 hr
-#   
-# 
+# Total time: 0.5 hr
+#   2022-06-24 22:16:10 [runtime] (ready) 
+#   2022-06-24 22:30:24 Shutting down.
+
 ```
 
 
@@ -1088,8 +1091,8 @@ cellranger count --id=76656_V11 \
 --chemistry threeprime \
 --project 76656_V11_L001
 # Total time: 2 hr
-#  Wed 22 Jun 2022 03∶25∶56 AM CDT
-#  Wed 22 Jun 2022 05∶01∶57 AM CDT
+#  
+# 
 ```
 
 
