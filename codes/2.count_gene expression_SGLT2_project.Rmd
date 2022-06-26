@@ -392,8 +392,6 @@ cellranger count --id=76638_V11_combine \
 --chemistry threeprime \
 --project
 
-
-
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76658_V5_combine \
