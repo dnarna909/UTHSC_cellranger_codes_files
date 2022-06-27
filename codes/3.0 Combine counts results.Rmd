@@ -57,6 +57,16 @@ df.all3 <- add_column(df.all3, Diff.PerLane = ifelse(df.all3$Status == "Original
                                                         round(df.all3$Percent.PerLane - (df.all3$`Target %` *100), digits = 1), NA), 
                       .after = 4)
 df.all3 <- df.all3[order(df.all3$SQ_List),]
+
+columns.select <- c("Counts_List", "sample_id_ori", "SQ_List" ,  "Sequencing_Date", "Lane" , 
+                    "sample_id",  "Project" ,"Disk" , "CountsFolder" , "sample_id" ,
+                    "Sequencing_Date", "Project" ,"Lane", "SQ_List", "Disk",
+                    "CountsFolder" ,"Counts_List" , "sample_id_ori" , "Estimated Number of Cells" ,
+                    "Mean Reads per Cell" ,"Median Genes per Cell" , "Number of Reads", "Agg" , "Status",
+                    "molecule_h5",  "Sample_Date",   "Cell Numbers",  "Library_ID", "Reads/Cell",
+                    "Reads/Sample","Target %" , "Sum" , "I7_Index ID", "I7_Index_Sequence" ,
+                    "I5_Index ID" , "I5_Index_Sequence")
+df.depth <- df.all3[columns.select]
 ```
 
 
