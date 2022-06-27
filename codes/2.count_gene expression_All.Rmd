@@ -518,6 +518,8 @@ cellranger count --id=STARR_043 \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_043
+# Wed 06 Oct 2021 06∶46∶03 PM CDT
+
 ```
 
 ## 20210716_L1_fastq_dual_cellranger
@@ -1090,9 +1092,10 @@ cellranger count --id=76656_V11 \
 --r2-length 90 \
 --chemistry threeprime \
 --project 76656_V11_L001
-# Total time: 2 hr
-#  
-# 
+# Total time: 5 hr
+#  Sun 26 Jun 2022 02∶26∶13 PM CDT
+#  Sun 26 Jun 2022 09∶14∶37 AM CDT
+
 ```
 
 

@@ -73,6 +73,7 @@ df.depth <- df.all3[columns.select]
 ```{r chunk 2}
 saveRDS(df.all3, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 4_Counts_Sequencing_Combine.Rds")
 write.csv(df.all3, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 4_Counts_Sequencing_Combine.csv", row.names = FALSE)
+write.csv(df.all3, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 4_Counts_Sequencing_Combine.csv", row.names = FALSE)
 ```
 
 

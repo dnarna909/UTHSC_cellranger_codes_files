@@ -17,6 +17,10 @@ cd /media/jianie/DATA/refdata/Cjacchus_012021 # marmoset from Sean_UTSA
 # Set up route
 ```{bash}
 mkdir /home/jianie/yard/run_cellranger_count
+```
+
+
+```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH # set up the variables
 cellranger count --help
@@ -271,9 +275,10 @@ cellranger count --id=76638_V5_Muscle_combine_force10000 \
 --r2-length 90 \
 --chemistry threeprime \
 --project 76638_V5_Muscle
-# Total time: 
-# 2021-12-08 07:27:39 [runtime] (ready) 
-# 2021-12-08 10:37:10 Shutting down.
+# Total time: 5 HR
+# Sun 26 Jun 2022 01∶41∶34 PM CDT
+# Sun 26 Jun 2022 08∶55∶26 AM CDT
+
 
 # 76643_V5_combine
 cd /home/jianie/yard/run_cellranger_count
@@ -389,8 +394,7 @@ cellranger count --id=76638_V11_combine \
 --expect-cells=10000 \
 --r1-length 26 \
 --r2-length 90 \
---chemistry threeprime \
---project
+--chemistry threeprime
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -402,8 +406,7 @@ cellranger count --id=76658_V5_combine \
 --expect-cells=10000 \
 --r1-length 26 \
 --r2-length 90 \
---chemistry threeprime \
---project
+--chemistry threeprime
 
 
 

@@ -17,6 +17,10 @@ cd /media/jianie/DATA/refdata/Cjacchus_012021 # marmoset from Sean_UTSA
 # Set up route
 ```{bash}
 mkdir /home/jianie/yard/run_cellranger_count
+```
+
+
+```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH # set up the variables
 cellranger count --help
@@ -487,9 +491,9 @@ cellranger count --id=STARR_077_LS_force12248 \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_077_LS_L003
-# Total time: 4 hr
-#  
-#  
+# Total time: 3 hr
+#  Sun 26 Jun 2022 05∶00∶13 PM CDT
+#  Sun 26 Jun 2022 02∶26∶13 PM CDT
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -504,8 +508,8 @@ cellranger count --id=STARR_077_FZ_force12248 \
 --chemistry threeprime \
 --project STARR_077_FZ_L003
 # Total time: 3 hr
-#  
-#  
+#  Sun 26 Jun 2022 06∶58∶36 PM CDT
+#  Sun 26 Jun 2022 05∶00∶13 PM CDT
 
 
 ```
@@ -544,7 +548,7 @@ cellranger count --id=STARR_026_combine \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=STARR_041_combine \
---fastqs=/media/jianie/SequencingFiles_3/20220616_L1_fastq_single/,/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_fastq/NieFASTQ_P0111212Single/outs/fastq_path/HTK5NDSXY/ \
+--fastqs=/media/jianie/SequencingFiles_3/20220616_L1_fastq_single/,/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_fastq/NieFASTQ_P0111212Single/outs/fastq_path/HTK5NDSXY/,/media/jianie/Seagate_SequencingFiles_2/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/ \
 --sample=STARR_041 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
