@@ -97,7 +97,8 @@ write.csv(SGLT2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/A
 STARR & SGLT2-V5 project
 ```{r}
 STARR2 <- df.all3[which((df.all3$Project == "STARR" | df.all3$sample_id %in% c("76615_V5", "76632_V5", "76638_V5", "76643_V5",
-                                                                              "76647_V5", "76649_V5", "76656_V5", "76658_V5")) & 
+                                                                              "76647_V5", "76649_V5", "76656_V5", "76658_V5",
+                                                                              "76660_V5", "76661_V5", "76662_V5", "76664_V5")) & 
                          df.all3$Agg == "Yes") , ]
 write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR2.agg.csv", row.names=FALSE)
 ```
