@@ -395,6 +395,9 @@ cellranger count --id=76638_V11_combine \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
+# Total time: 4 hr
+# Mon 27 Jun 2022 11∶12∶55 AM CDT
+# Mon 27 Jun 2022 03∶37∶53 PM CDT
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -407,7 +410,7 @@ cellranger count --id=76658_V5_combine \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
-
+# Total time: 4 hr
 
 
 
