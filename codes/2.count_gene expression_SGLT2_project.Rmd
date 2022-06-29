@@ -401,6 +401,20 @@ cellranger count --id=76638_V11_combine \
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76638_V11_combine_force12000 \
+--fastqs=/media/jianie/SequencingFiles_3/20220620_20220003_fastq/76638_V11_L002,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/76638_V11 \
+--sample=76638_V11 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=12000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time: 4 hr
+
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76658_V5_combine \
 --fastqs=/media/jianie/SequencingFiles_3/20220620_20220003_fastq/76658_V5_L002,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/76658_V5 \
 --sample=76658_V5 \
