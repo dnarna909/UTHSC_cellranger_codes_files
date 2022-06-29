@@ -578,6 +578,7 @@ cellranger count --id=STARR_041_combine_force12000 \
 --chemistry threeprime \
 --project STARR_041
 # Total time: 9 hr
-
+# Tue 28 Jun 2022 10∶32∶01 PM CDT
+# Wed 29 Jun 2022 06∶28∶07 AM CDT
 ```
 
