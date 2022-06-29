@@ -410,9 +410,22 @@ cellranger count --id=76658_V5_combine \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime
-# Total time: 4 hr
+# Total time: 5 hr
 # Tue 28 Jun 2022 05∶32∶33 PM CDT
 # Tue 28 Jun 2022 10∶31∶59 PM CDT
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76658_V5_combine_force12000 \
+--fastqs=/media/jianie/SequencingFiles_3/20220620_20220003_fastq/76658_V5_L002,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/76658_V5 \
+--sample=76658_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=12000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time: 4 hr
 
 ```
 
