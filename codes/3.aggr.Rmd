@@ -59,13 +59,11 @@ export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=19STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR2.agg.csv
 # Wed 13 Apr 2022 05∶47∶38 PM CDT
 # Wed 13 Apr 2022 06∶53∶30 PM CDT
+
+
 ```
 
 ```{bash}
-cd /home/jianie/yard/run_cellranger_aggr
-export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger aggr --id=9SGLT2_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.agg.csv
-
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=10SGLT2_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.agg.csv

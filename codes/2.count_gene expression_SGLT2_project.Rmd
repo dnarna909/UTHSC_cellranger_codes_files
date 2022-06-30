@@ -440,6 +440,8 @@ cellranger count --id=76658_V5_combine_force12000 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time: 4 hr
+# 2022-06-29 14:54:07 [runtime] (ready) 
+# 2022-06-29 18:51:32 Shutting down.
 
 ```
 
