@@ -84,22 +84,36 @@ write.csv(df.depth, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/Expe
 cols = c("sample_id", "molecule_h5", "sample_id_ori", "Counts_List")
 # df.all3 <- readRDS("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 4_Counts_Sequencing_Combine.Rds")
 ```
+
 STARR project
 ```{r}
 STARR <- df.all3[which(df.all3$Project == "STARR" & df.all3$Agg == "Yes"), ]
+STARR <- STARR %>% arrange(sample_id)
 write.csv(STARR[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv", row.names=FALSE)
 ```
+
+STARR project_FZ_LS_test
+```{r}
+Test <- df.all3[which(df.all3$Project == "STARR" & df.all3$sample_id_ori %in% c("STARR_077", "STARR_077_LS_force12248", "STARR_077_FZ_force12248")), ]
+Test <- Test %>% arrange(sample_id)
+write.csv(Test[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR_FZ_Test.agg.csv", row.names=FALSE)
+```
+
+
 SGLT2 project
 ```{r}
 SGLT2 <- df.all3[which(df.all3$Project == "SGLT2" & df.all3$Agg == "Yes"), ]
+SGLT2 <- SGLT2 %>% arrange(sample_id)
 write.csv(SGLT2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.agg.csv", row.names=FALSE)
 ```
+
 STARR & SGLT2-V5 project
 ```{r}
 STARR2 <- df.all3[which((df.all3$Project == "STARR" | df.all3$sample_id %in% c("76615_V5", "76632_V5", "76638_V5", "76643_V5",
                                                                               "76647_V5", "76649_V5", "76656_V5", "76658_V5",
                                                                               "76660_V5", "76661_V5", "76662_V5", "76664_V5")) & 
                          df.all3$Agg == "Yes") , ]
+STARR2 <- STARR2 %>% arrange(sample_id)
 write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR2.agg.csv", row.names=FALSE)
 ```
 
