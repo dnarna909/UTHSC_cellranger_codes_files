@@ -411,6 +411,8 @@ cellranger count --id=76638_V11_combine_force12000 \
 --r2-length 90 \
 --chemistry threeprime
 # Total time: 4 hr
+# 2022-06-30 11:44:55 [runtime] (ready) 
+# 2022-06-30 15:20:47 Shutting down.
 
 
 cd /home/jianie/yard/run_cellranger_count
