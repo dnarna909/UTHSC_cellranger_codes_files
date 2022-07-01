@@ -468,6 +468,21 @@ cellranger count --id=STARR_049_combine \
 # Total time: 3.5 hr
 # 12∶36∶06 AM
 # 04∶06∶31 AM
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_049_combine_force8001 \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_single/ \
+--sample=STARR_049 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=8001 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project STARR_049
+
+
 ```
 
 
