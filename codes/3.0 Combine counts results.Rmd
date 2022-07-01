@@ -85,6 +85,14 @@ cols = c("sample_id", "molecule_h5", "sample_id_ori", "Counts_List")
 # df.all3 <- readRDS("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 4_Counts_Sequencing_Combine.Rds")
 ```
 
+STARR all project
+```{r}
+STARR.All <- df.all3[which(df.all3$Project == "STARR" & df.all3$Agg %in% c("Yes", "Tobe")), ]
+STARR.All <- STARR.All %>% arrange(sample_id)
+write.csv(STARR.All[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.All.agg.csv", row.names=FALSE)
+```
+
+
 STARR project
 ```{r}
 STARR <- df.all3[which(df.all3$Project == "STARR" & df.all3$Agg == "Yes"), ]

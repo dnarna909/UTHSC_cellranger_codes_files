@@ -19,6 +19,7 @@ mkdir /home/jianie/yard/run_cellranger_aggr
 ```
 
 # Setup the Command for cellranger aggr
+## STARR
 ```{bash}
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -26,33 +27,35 @@ cellranger aggr --id=10s_STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_co
 # Run cellranger aggr: 30 min
 # 2021-11-02 14:30:23 [runtime] Reattaching in local mode.
 # 2021-11-02 14:54:38 Shutting down.
-```
 
-```{bash}
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=11STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.11.csv
 # 2022-04-14 16:27:56 [runtime] (ready)  
 # 2022-04-14 16:57:25 Shutting down.
 
-```
-
-```{bash}
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=12STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv
 # 2022-04-14 14:34:57 [runtime] (ready)  
 # 2022-04-14 15:09:42 Shutting down.
 
-
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=12STARR_aggr_new --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv
 # 2022-06-30 09:05:38 [runtime] 
 # 2022-06-30 09:38:41 Shutting down.
+```
 
+STARR all project
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_All_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.All.agg.csv
 
 ```
+
+
 
 
 ```{bash}
@@ -76,6 +79,7 @@ cellranger aggr --id=19STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_code
 
 ```
 
+## SGLT2
 ```{bash}
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -87,7 +91,7 @@ cellranger aggr --id=10SGLT2_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_code
 
 ```
 
-
+## Masternak
 ```{bash}
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
