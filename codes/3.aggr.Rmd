@@ -19,6 +19,33 @@ mkdir /home/jianie/yard/run_cellranger_aggr
 ```
 
 # Setup the Command for cellranger aggr
+# Seagate_SequencingFiles_1 -----------------------------------------------------------------------------------------------------------
+
+# Seagate_SequencingFiles_2 -----------------------------------------------------------------------------------------------------------
+
+# SequencingFiles_3 -------------------------------------------------------------------------------------------------------------------
+## 20211105_L3_L4
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=S3_1_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/S3_1.agg.csv
+# 2022-07-06 09:01:47 [runtime] (ready)  
+# 2022-07-06 11:04:09 Shutting down.
+
+```
+
+## 20220616_L1_Counts, 20220620_Counts
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=S3_2_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/S3_2.agg.csv
+# 2022-07-06 11:04:09 [runtime] (ready)
+# 2022-07-06 13:39:41 Shutting down.
+
+```
+
+
+
 ## STARR
 ```{bash}
 cd /home/jianie/yard/run_cellranger_aggr
@@ -52,6 +79,8 @@ STARR all project
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=STARR_All_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.All.agg.csv
+# 2022-07-02 01:23:59 [runtime] (ready) 
+# 2022-07-02 02:37:37 Shutting down.
 
 ```
 
@@ -65,6 +94,13 @@ cellranger aggr --id=STARR_FZ_aggr_new --csv=/media/jianie/DATA/UTHSC_cellranger
 # 14 MIN
 # 2022-06-30 23:13:34 [runtime] (ready) 
 # 2022-06-30 23:27:25 Shutting down.
+
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_FZ_aggr_5 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR_FZ_Test.agg.csv
+# 2022-07-06 08:11:01 [runtime] 
+# 2022-07-06 08:43:58 Shutting down.
 
 ```
 

@@ -148,6 +148,8 @@ cellranger count --id=76656_V5_force6500 \
 --chemistry threeprime \
 --project 76656_V5
 # Total time: 3 hr
+# 2022-07-01 19:09:23 [runtime] (ready) 
+# 2022-07-01 22:02:53 Shutting down.
 
 ```
 
@@ -211,7 +213,7 @@ cellranger count --id=76632_V11_combine \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76632_V11_combine_force6000 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
 --sample=76632_V11 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -220,7 +222,10 @@ cellranger count --id=76632_V11_combine_force6000 \
 --r2-length 90 \
 --chemistry threeprime \
 --project 76632_V11
-# Total time: 1.5 hr
+# Total time: 3 hr
+# 2022-07-05 18:44:12 [runtime] (ready)    
+# 2022-07-05 21:05:01 Shutting down.
+
 
 # 76632_V5_combine: mistake in dual
 cd /home/jianie/yard/run_cellranger_count
@@ -346,7 +351,7 @@ cellranger count --id=76647_V5_combine \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76647_V5_combine_froce12000 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
 --sample=76647_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -356,6 +361,8 @@ cellranger count --id=76647_V5_combine_froce12000 \
 --chemistry threeprime \
 --project 76647_V5
 # Total time: 5 hr
+# 2022-07-05 13:25:20 [runtime] (ready) 
+# 2022-07-05 18:44:10 Shutting down.
 
 
 

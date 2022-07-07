@@ -81,6 +81,45 @@ write.csv(df.depth, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/Expe
 
 # Select rows from project for Aggregation in Cellranger
 ```{r}
+cols2 = c("sample_id", "molecule_h5", "sample_id_ori2", "Counts_List")
+```
+
+# Seagate_SequencingFiles_1 -----------------------------------------------------------------------------------------------------------
+
+# Seagate_SequencingFiles_2 -----------------------------------------------------------------------------------------------------------
+
+# SequencingFiles_3 -------------------------------------------------------------------------------------------------------------------
+## 20211105_L3_L4
+```{r}
+S3_1 <- df.all3[which((df.all3$Sequencing_Date %in% c("20211105"))), ]
+S3_1 <- S3_1 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
+                                                sample_id = sample_id_ori)
+write.csv(S3_1[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/S3_1.agg.csv", row.names=FALSE)
+write.csv(S3_1, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/S3_1.csv", row.names=FALSE)
+```
+
+## 20220616_L1_Counts, 20220620_Counts
+```{r}
+S3_2 <- df.all3[which((df.all3$Sequencing_Date %in% c("20220616", "20220620"))), ]
+S3_2 <- S3_2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
+                                                sample_id = sample_id_ori)
+write.csv(S3_2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/S3_2.agg.csv", row.names=FALSE)
+write.csv(S3_2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/S3_2.csv", row.names=FALSE)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+# Project based
+```{r}
 cols = c("sample_id", "molecule_h5", "sample_id_ori", "Counts_List")
 # df.all3 <- readRDS("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 4_Counts_Sequencing_Combine.Rds")
 ```
@@ -102,9 +141,13 @@ write.csv(STARR[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/A
 
 STARR project_FZ_LS_test
 ```{r}
-Test <- df.all3[which(df.all3$Project == "STARR" & df.all3$sample_id_ori %in% c("STARR_077", "STARR_077_LS_force12248", "STARR_077_FZ_force12248")), ]
-Test <- Test %>% arrange(sample_id)
-write.csv(Test[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR_FZ_Test.agg.csv", row.names=FALSE)
+cols2 = c("sample_id", "molecule_h5", "sample_id_ori2", "Counts_List")
+Test <- df.all3[which(df.all3$Project == "STARR" & df.all3$sample_id_ori %in% c("STARR_077", 
+                                                                                "STARR_077_LS", "STARR_077_LS_force12248",
+                                                                                "STARR_077_FZ", "STARR_077_FZ_force12248")), ]
+Test <- Test %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
+                                                sample_id = sample_id_ori)
+write.csv(Test[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR_FZ_Test.agg.csv", row.names=FALSE)
 ```
 
 
@@ -130,3 +173,6 @@ Masternak project
 dataframe <- df.all3[which(df.all3$Project == "Masternak" ), ] # & df.all3$Agg == "Yes"
 write.csv(dataframe[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Masternak.agg.csv", row.names=FALSE)
 ```
+
+
+
