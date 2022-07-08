@@ -42,6 +42,11 @@ cellranger aggr --id=S3_2_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_f
 # 2022-07-06 11:04:09 [runtime] (ready)
 # 2022-07-06 13:39:41 Shutting down.
 
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=S3_2_aggr2 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/S3_2.agg.csv
+# 2022-07-08 08:03:14 [runtime] (ready) 
+# 
 ```
 
 

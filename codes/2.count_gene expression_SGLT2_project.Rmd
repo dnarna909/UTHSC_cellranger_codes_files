@@ -466,6 +466,35 @@ cellranger count --id=76638_V11_combine_force12000 \
 # 2022-06-30 11:44:55 [runtime] (ready) 
 # 2022-06-30 15:20:47 Shutting down.
 
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76638_V11_combine_force15000 \
+--fastqs=/media/jianie/SequencingFiles_3/20220620_20220003_fastq/76638_V11_L002,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/76638_V11 \
+--sample=76638_V11 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=15000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time: 3 hr
+# 2022-07-07 14:13:53 [runtime] (ready)  
+# Thu 07 Jul 2022 05∶49∶38 PM CDT
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76638_V11_combine_force18000 \
+--fastqs=/media/jianie/SequencingFiles_3/20220620_20220003_fastq/76638_V11_L002,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/76638_V11 \
+--sample=76638_V11 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=18000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+# Total time: 4 hr
+# Thu 07 Jul 2022 05∶49∶38 PM CDT
+# 2022-07-07 21:24:26 Shutting down.
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
