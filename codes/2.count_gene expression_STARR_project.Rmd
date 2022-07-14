@@ -650,6 +650,22 @@ cellranger count --id=STARR_026_combine_force9000 \
 # 2022-07-07 21:24:29 [runtime] (ready) 
 # 2022-07-08 01:18:50 Shutting down.
 
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_026_combine_force8000 \
+--fastqs=/media/jianie/SequencingFiles_3/20220616_L1_fastq_single/,/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_fastq/C202SC19080754_2/raw_data/HTCMTDSXX/ \
+--sample=STARR_026 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=8000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project STARR_026
+# 4hr
+# 2022-07-14 08:36:24 [runtime] (ready) 
+# 
+
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
