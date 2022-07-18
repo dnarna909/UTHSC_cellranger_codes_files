@@ -3,8 +3,8 @@
 "76632_V11","/media/jianie/Seagate_SequencingFiles_2/20210830_L3_counts_dual/76632_V11/outs/molecule_info.h5","76632_V11",81
 "76632_V5","/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/76632_V5/outs/molecule_info.h5","76632_V5",71
 "76638_V5","/media/jianie/Seagate_SequencingFiles_2/20210830_L3_counts_dual/76638_V5/outs/molecule_info.h5","76638_V5",82
-"76638_V5_Muscle_force","/media/jianie/Seagate_SequencingFiles_2/20210830_L3_counts_dual/76638_V5_Muscle_force/outs/molecule_info.h5","76638_V5_Muscle",84
 "76638_V5_Muscle","/media/jianie/Seagate_SequencingFiles_2/20210830_L3_counts_dual/76638_V5_Muscle/outs/molecule_info.h5","76638_V5_Muscle",83
+"76638_V5_Muscle_force","/media/jianie/Seagate_SequencingFiles_2/20210830_L3_counts_dual/76638_V5_Muscle_force/outs/molecule_info.h5","76638_V5_Muscle",84
 "76643_V5","/media/jianie/Seagate_SequencingFiles_2/20210830_L3_counts_dual/76643_V5/outs/molecule_info.h5","76643_V5",85
 "76647_V5","/media/jianie/Seagate_SequencingFiles_2/20210830_L3_counts_dual/76647_V5/outs/molecule_info.h5","76647_V5",86
 "76649_V5","/media/jianie/Seagate_SequencingFiles_2/20210830_L3_counts_dual/76649_V5/outs/molecule_info.h5","76649_V5",87
@@ -13,7 +13,7 @@
 "Con-R1","/media/jianie/Seagate_SequencingFiles_2/20210716_L1_count_dual/Con-R1/outs/molecule_info.h5","Con-R1",69
 "Con-R2","/media/jianie/Seagate_SequencingFiles_2/20210716_L1_count_dual/Con-R2/outs/molecule_info.h5","Con-R2",70
 "Norton_combine","/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/Norton_combine/outs/molecule_info.h5","Norton",73
-"Norton","/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/Norton/outs/molecule_info.h5","Norton",72
+"Norton_2nd","/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/Norton_2nd/outs/molecule_info.h5","Norton",72
 "Norton_combine_force","/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/Norton_combine_force/outs/molecule_info.h5","Norton",74
 "STARR_024","/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/STARR_024/outs/molecule_info.h5","STARR_024",75
 "STARR_024_combine_force8000","/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/STARR_024_combine_force8000/outs/molecule_info.h5","STARR_024",162
@@ -23,9 +23,9 @@
 "STARR_039_force2000","/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_Counts/STARR_039_force2000/outs/molecule_info.h5","STARR_039",92
 "STARR_041","/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_Counts/STARR_041/outs/molecule_info.h5","STARR_041",65
 "STARR_041_combine","/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/STARR_041_combine/outs/molecule_info.h5","STARR_041",78
-"STARR_041","/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/STARR_041/outs/molecule_info.h5","STARR_041",77
+"STARR_041_2nd","/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/STARR_041_2nd/outs/molecule_info.h5","STARR_041",77
 "STARR_041_combine_force","/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/STARR_041_combine_force/outs/molecule_info.h5","STARR_041",79
-"STARR_043_force9000","/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_Counts/STARR_043_force9000/outs/molecule_info.h5","STARR_043",129
 "STARR_043","/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_Counts/STARR_043/outs/molecule_info.h5","STARR_043",66
+"STARR_043_force9000","/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_Counts/STARR_043_force9000/outs/molecule_info.h5","STARR_043",129
 "STARR_049","/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/STARR_049/outs/molecule_info.h5","STARR_049",80
 "STARR_051","/media/jianie/Seagate_SequencingFiles_2/20210830_L3_counts_dual/STARR_051/outs/molecule_info.h5","STARR_051",88

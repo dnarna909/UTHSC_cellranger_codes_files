@@ -19,24 +19,38 @@ mkdir /home/jianie/yard/run_cellranger_aggr
 ```
 
 # Setup the Command for cellranger aggr
-# Seagate_SequencingFiles_1 -----------------------------------------------------------------------------------------------------------
+# Mouse
 ```{bash}
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger aggr --id=S1_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/S1.agg.csv
+cellranger aggr --id=Mouse_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Mouse.agg.csv
+#   
+# 
+
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Marmoset_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Marmoset.agg.csv
+#   
+# 
+
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=SGLT2_all_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.csv
+#  2022-07-14 15:28:37 [runtime] (ready)  
+#  
+
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_all_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.agg.csv
 #   
 # 
 
 ```
-# Seagate_SequencingFiles_2 -----------------------------------------------------------------------------------------------------------
-```{bash}
-cd /home/jianie/yard/run_cellranger_aggr
-export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger aggr --id=S2_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/S2.agg.csv
-#   
-# 
 
-```
+
 
 
 # SequencingFiles_3 -------------------------------------------------------------------------------------------------------------------

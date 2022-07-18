@@ -664,7 +664,7 @@ cellranger count --id=STARR_026_combine_force8000 \
 --project STARR_026
 # 4hr
 # 2022-07-14 08:36:24 [runtime] (ready) 
-# 
+# 2022-07-14 12:36:32 Shutting down.
 
 
 cd /home/jianie/yard/run_cellranger_count
