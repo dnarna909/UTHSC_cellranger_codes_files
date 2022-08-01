@@ -857,7 +857,9 @@ cellranger count --id=STARR_075_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_075
-# Total time: 4 hr
+# Total time: 8 hr
+# Mon 01 Aug 2022 07∶16∶44 AM CDT
+# Mon 01 Aug 2022 03∶10∶18 PM CDT
 ```
 
 ```{bash}
