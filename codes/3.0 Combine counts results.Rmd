@@ -156,7 +156,7 @@ write.csv(Human_nuc, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/Agg
 ```
 
 
-## Project based
+## All in each Project 
 ```{r}
 SGLT2 <- df.all3[which((df.all3$Project %in% c("SGLT2")) &  df.all3$Done == "Jia" ), ]
 SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
@@ -187,17 +187,6 @@ STARR <- STARR %>% arrange(sample_id)
 write.csv(STARR[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv", row.names=FALSE)
 ```
 
-STARR project_FZ_LS_test
-```{r}
-cols2 = c("sample_id", "molecule_h5", "sample_id_ori2", "Counts_List")
-Test <- df.all3[which(df.all3$Project == "STARR" & df.all3$sample_id_ori %in% c("STARR_077", 
-                                                                                "STARR_077_LS", "STARR_077_LS_force12248",
-                                                                                "STARR_077_FZ", "STARR_077_FZ_force12248")), ]
-Test <- Test %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori)
-write.csv(Test[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR_FZ_Test.agg.csv", row.names=FALSE)
-```
-
 SGLT2 project
 ```{r}
 SGLT2 <- df.all3[which(df.all3$Project == "SGLT2" & df.all3$Agg == "Yes"), ]
@@ -212,16 +201,44 @@ STARR2 <- df.all3[which((df.all3$Project == "STARR" | df.all3$sample_id %in% c("
                                                                               "76660_V5", "76661_V5", "76662_V5", "76664_V5")) & 
                          df.all3$Agg == "Yes") , ]
 STARR2 <- STARR2 %>% arrange(sample_id)
-write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR2.agg.csv", row.names=FALSE)
+write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.V5.agg.csv", row.names=FALSE)
 ```
 
 STARR & SGLT2 project
 ```{r}
 STARR2 <- df.all3[which(df.all3$Project %in% c("SGLT2", "STARR") & df.all3$Agg == "Yes") , ]
 STARR2 <- STARR2 %>% arrange(sample_id)
-write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR2.agg.csv", row.names=FALSE)
+write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.agg.csv", row.names=FALSE)
+
 ```
 
+STARR Barshop GCCRI compare
+```{r}
+cols2 = c("sample_id", "molecule_h5", "sample_id_ori2", "Counts_List")
+Test <- df.all3[which(df.all3$Project == "STARR" & df.all3$sample_id_ori %in% c("STARR_085_Bar", 
+                                                                                "STARR_085")), ]
+Test <- Test %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
+                                                sample_id = sample_id_ori)
+write.csv(Test[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR_Bar_Compare.agg.csv", row.names=FALSE)
+```
+
+STARR project_FZ_LS_test
+```{r}
+cols2 = c("sample_id", "molecule_h5", "sample_id_ori2", "Counts_List")
+Test <- df.all3[which(df.all3$Project == "STARR" & df.all3$sample_id_ori %in% c("STARR_077", 
+                                                                                "STARR_077_LS", "STARR_077_LS_force12248",
+                                                                                "STARR_077_FZ", "STARR_077_FZ_force12248")), ]
+Test <- Test %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
+                                                sample_id = sample_id_ori)
+write.csv(Test[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR_FZ_Test.agg.csv", row.names=FALSE)
+
+Test <- df.all3[which(df.all3$Project == "STARR" & df.all3$sample_id_ori %in% c("STARR_077", "STARR_077_10",
+                                                                                "STARR_077_LS", "STARR_077_LS_force18417",
+                                                                                "STARR_077_FZ", "STARR_077_FZ_force12248")), ]
+Test <- Test %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
+                                                sample_id = sample_id_ori)
+write.csv(Test[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR_FZ.csv", row.names=FALSE)
+```
 
 Masternak project
 ```{r}

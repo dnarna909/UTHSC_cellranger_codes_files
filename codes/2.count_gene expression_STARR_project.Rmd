@@ -718,6 +718,9 @@ cellranger count --id=STARR_063_combine \
 --chemistry threeprime \
 --project STARR_063
 # Total time: 4 hr
+# STARR_063_combine
+# Sat 30 Jul 2022 12∶31∶48 PM CDT
+# Sat 30 Jul 2022 04∶14∶26 PM CDT
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -731,7 +734,10 @@ cellranger count --id=STARR_069_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_069
-# Total time: 4 hr
+# Total time: 3 hr
+# STARR_069_combine
+# Sat 30 Jul 2022 04∶14∶26 PM CDT
+# Sat 30 Jul 2022 07∶44∶49 PM CDT
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -745,7 +751,10 @@ cellranger count --id=STARR_060_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_060
-# Total time: 4 hr
+# Total time: 6 hr
+# STARR_060_combine
+# Sat 30 Jul 2022 07∶44∶49 PM CDT
+# Sun 31 Jul 2022 01∶24∶32 AM CDT
 
 
 cd /home/jianie/yard/run_cellranger_count
@@ -760,7 +769,10 @@ cellranger count --id=STARR_072_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_072
-# Total time: 4 hr
+# Total time: 6 hr
+# STARR_072_combine
+# Sun 31 Jul 2022 01∶24∶32 AM CDT
+# Sun 31 Jul 2022 07∶19∶45 AM CDT
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -774,7 +786,10 @@ cellranger count --id=STARR_077_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_077
-# Total time: 4 hr
+# Total time: 5 hr
+# STARR_077_combine
+# Sun 31 Jul 2022 07∶19∶45 AM CDT
+# Sun 31 Jul 2022 12∶48∶16 PM CDT
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -788,7 +803,10 @@ cellranger count --id=STARR_079_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_079
-# Total time: 4 hr
+# Total time: 6 hr
+# STARR_079_combine
+# Sun 31 Jul 2022 12∶48∶16 PM CDT
+# Sun 31 Jul 2022 06∶30∶16 PM CDT
 ```
 
 ## 20220722_L11_fastq
@@ -805,7 +823,10 @@ cellranger count --id=STARR_071_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_071
-# Total time: 4 hr
+# Total time: 6 hr
+# STARR_071_combine
+# Sun 31 Jul 2022 06∶30∶16 PM CDT
+# Sun 31 Jul 2022 11∶29∶07 PM CDT
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -819,7 +840,10 @@ cellranger count --id=STARR_073_combine \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_073
-# Total time: 4 hr
+# Total time: 8 hr
+# STARR_073_combine
+# Sun 31 Jul 2022 11∶29∶07 PM CDT
+# Mon 01 Aug 2022 07∶16∶44 AM CDT
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
