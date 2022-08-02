@@ -40,8 +40,8 @@ cellranger aggr --id=Marmoset_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_cod
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=SGLT2_all_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.csv
-#  2022-07-14 15:28:37 [runtime] (ready)  
-#  
+# 2022-08-02 08:53:47 [runtime] (ready)   
+# 2022-08-02 14:05:49 Shutting down.
 
 
 cd /home/jianie/yard/run_cellranger_aggr
@@ -49,6 +49,9 @@ export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=STARR_all_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.agg.csv
 # 2022-07-02 01:23:59 [runtime] (ready) 
 # 2022-07-02 02:37:37 Shutting down. 
+
+# 2022-08-01 16:34:11 [runtime] (ready) 
+# 2022-08-01 22:46:30 Shutting down.
 
 ```
 
