@@ -113,6 +113,10 @@ export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=12STARR_aggr_new --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv
 # 2022-06-30 09:05:38 [runtime] 
 # 2022-06-30 09:38:41 Shutting down.
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=12STARR_aggr_new --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv
 ```
 
 
@@ -124,6 +128,12 @@ cellranger aggr --id=10SGLT2_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_code
 # 1hr
 # 2022-06-30 09:38:42 [runtime] (ready) 
 # 2022-06-30 10:25:44 Shutting down.
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=10SGLT2_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.agg.csv
+
+
 ```
 
 # STARR & SGLT2-V5 project

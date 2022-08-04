@@ -1571,7 +1571,7 @@ cellranger count --id=STARR_085_Bar \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_085_Bar
-#' Total time: 6 hr
+#' Total time: 18 hr
 #' STARR_085_Bar
 #' Tue 26 Jul 2022 12∶28∶20 PM CDT
 #' Thu 28 Jul 2022 06∶49∶48 AM CDT
@@ -1659,7 +1659,7 @@ cellranger count --id=STARR_077_10 \
 --r2-length 90 \
 --chemistry threeprime \
 --project STARR_077_10
-# Total time: 1 hr
+# Total time: 23 hr
 # STARR_077_10
 # Tue 26 Jul 2022 08∶06∶47 PM CDT
 # Wed 27 Jul 2022 09∶53∶36 PM CDT
