@@ -19,7 +19,7 @@ mkdir /home/jianie/yard/run_cellranger_aggr
 ```
 
 # Setup the Command for cellranger aggr
-# Mouse
+## Species
 ```{bash}
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -85,6 +85,8 @@ cellranger aggr --id=S3_2_aggr2 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_
 # 2022-07-08 16:21:25 Shutting down.
 
 ```
+
+
 
 
 # STARR Final
