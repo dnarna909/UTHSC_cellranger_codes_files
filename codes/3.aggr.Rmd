@@ -53,6 +53,8 @@ cellranger aggr --id=STARR_all_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_co
 # 2022-08-01 16:34:11 [runtime] (ready) 
 # 2022-08-01 22:46:30 Shutting down.
 
+#' 2022-08-09 16:22:46 [runtime] (ready) 
+#' 
 ```
 
 
