@@ -366,12 +366,12 @@ cellranger count --id=76647_V5_combine_froce12000 \
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger count --id=76647_V5_combine_froce10000 \
+cellranger count --id=76647_V5_combine_froce9410 \
 --fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
 --sample=76647_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
---force-cells=10000 \
+--force-cells=9410 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime \
@@ -415,12 +415,12 @@ cellranger count --id=76649_V5_combine_force15000 \
 # 76649_V5_combine_force15000
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger count --id=76649_V5_combine_force14000 \
+cellranger count --id=76649_V5_combine_force14472 \
 --fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
 --sample=76649_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
---force-cells=14000 \
+--force-cells=14472 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime \
