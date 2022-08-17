@@ -9,7 +9,7 @@
 "STARR_039","/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_Counts/STARR_039/outs/molecule_info.h5","STARR_039",64
 "STARR_041","/media/jianie/SequencingFiles_3/20220616_L1_Counts/STARR_041_combine3/outs/molecule_info.h5","STARR_041_combine3",156
 "STARR_043","/media/jianie/SequencingFiles_3/20220616_L1_Counts/STARR_043_combine_force9000/outs/molecule_info.h5","STARR_043_combine_force9000",165
-"STARR_049","/media/jianie/SequencingFiles_3/20211105_L3_L4_Counts/STARR_049_combine_force8001/outs/molecule_info.h5","STARR_049_combine_force8001",163
+"STARR_049","/media/jianie/SequencingFiles_3/20211105_L3_L4_Counts/STARR_049_combine_force8300/outs/molecule_info.h5","STARR_049_combine_force8300",232
 "STARR_059","/media/jianie/SequencingFiles_3/20220616_L1_Counts/STARR_059_force5782/outs/molecule_info.h5","STARR_059_force5782",233
 "STARR_060","/media/jianie/SequencingFiles_4/20220715_Counts/STARR_060_combine_force9963/outs/molecule_info.h5","STARR_060_combine_force9963",245
 "STARR_063","/media/jianie/SequencingFiles_4/20220715_Counts/STARR_063_combine_force7705/outs/molecule_info.h5","STARR_063_combine_force7705",256
@@ -20,3 +20,4 @@
 "STARR_077","/media/jianie/SequencingFiles_4/20220715_Counts/STARR_077_combine/outs/molecule_info.h5","STARR_077_combine",208
 "STARR_079","/media/jianie/SequencingFiles_4/20220715_Counts/STARR_079_combine_force13464/outs/molecule_info.h5","STARR_079_combine_force13464",246
 "STARR_080","/media/jianie/SequencingFiles_4/20220715_Counts/STARR_080_force4315/outs/molecule_info.h5","STARR_080_force4315",244
+"STARR_085","/media/jianie/SequencingFiles_4/20220715_Counts/STARR_085_Bar_force8000/outs/molecule_info.h5","STARR_085_Bar_force8000",228
