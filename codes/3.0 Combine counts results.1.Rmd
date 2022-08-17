@@ -215,7 +215,7 @@ write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/
 STARR Barshop GCCRI compare
 ```{r}
 cols2 = c("sample_id", "molecule_h5", "sample_id_ori2", "Counts_List")
-Test <- df.all3[which(df.all3$Project == "STARR" & df.all3$sample_id_ori %in% c("STARR_085_Bar_force10000", 
+Test <- df.all3[which(df.all3$Project == "STARR" & df.all3$sample_id_ori %in% c("STARR_085_Bar_force8000", 
                                                                                 "STARR_085")), ]
 Test <- Test %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
                                                 sample_id = sample_id_ori)
