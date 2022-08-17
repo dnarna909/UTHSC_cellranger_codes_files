@@ -2,9 +2,9 @@
 "Buttons_Marmoset","/media/jianie/Seagate_SequencingFiles_1/20190717_NextSeq_fastq_Counts/Buttons_Marmoset/outs/molecule_info.h5","Buttons",10
 "NG_Buttons","/media/jianie/Seagate_SequencingFiles_1/20190912_NovaSeq_fastq_Counts/NG_Buttons/outs/molecule_info.h5","Buttons",23
 "Button","/media/jianie/Seagate_SequencingFiles_1/20190912_NovaSeq_fastq_Counts/Button/outs/molecule_info.h5","Buttons",32
-"Button_combine_force","/media/jianie/Seagate_SequencingFiles_1/20190912_NovaSeq_fastq_Counts/Button_combine_force/outs/molecule_info.h5","Buttons",34
-"Button_combine","/media/jianie/Seagate_SequencingFiles_1/20190912_NovaSeq_fastq_Counts/Button_combine/outs/molecule_info.h5","Buttons",33
 "ALL_Buttons","/media/jianie/Seagate_SequencingFiles_1/20190912_NovaSeq_fastq_Counts/ALL_Buttons/outs/molecule_info.h5","Buttons",26
+"Button_combine","/media/jianie/Seagate_SequencingFiles_1/20190912_NovaSeq_fastq_Counts/Button_combine/outs/molecule_info.h5","Buttons",33
+"Button_combine_force","/media/jianie/Seagate_SequencingFiles_1/20190912_NovaSeq_fastq_Counts/Button_combine_force/outs/molecule_info.h5","Buttons",34
 "Evie","/media/jianie/Seagate_SequencingFiles_1/20210114_UTA_NovaSeq_L3_Counts/Evie/outs/molecule_info.h5","Evie",60
 "Norton","/media/jianie/Seagate_SequencingFiles_1/20210114_UTA_NovaSeq_L3_Counts/Norton/outs/molecule_info.h5","Norton",62
 "Norton_combine","/media/jianie/Seagate_SequencingFiles_2/20210716_L2_counts_single/Norton_combine/outs/molecule_info.h5","Norton",73
