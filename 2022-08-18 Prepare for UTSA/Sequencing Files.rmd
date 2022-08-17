@@ -1,0 +1,32 @@
+---
+title: "Combine counts results"
+author: "Jia Nie"
+date: "11/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+install packages
+```{r package, include=FALSE}
+packageList <- c("rio", "dplyr", "tibble")
+for (package in packageList) {
+  if(!require(package, character.only = TRUE)){
+    install.packages(package); require(package, character.only = TRUE); }
+}
+```
+
+
+```{r}
+aggr <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 3_cellranger_counts_summary.xlsx")
+select <- aggr %>% filter(Project == "STARR" & Agg == "Yes") %>% arrange(sample_id) %>% pull(sample_id)
+select.cols <- c("Counts_List","SQ_List","Sequencing_Date", "Lane","sample_id","sample_id_ori","Agg","Status","Project","AnalysisDate","Done","Sequencing_Type" )
+aggr2 <- aggr %>% filter(Project == "STARR" &  Status == "Original" & 
+                           ! Agg %in% c("Hf test", "FZ test", "Bar test") &
+                           sample_id %in% select) %>% arrange(sample_id) %>% select(all_of(select.cols))
+write.csv(aggr2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/Sequencing Files.csv", row.names=FALSE)
+
+```
+
