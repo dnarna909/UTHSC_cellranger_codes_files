@@ -30,19 +30,24 @@ select.cols <- c("Counts_List","SQ_List","Sequencing_Date", "Lane","sample_id","
 sequencing.info <- aggr %>% filter(Project == "STARR" &  Status == "Original" & 
                            ! Agg %in% c("Hf test", "FZ test", "Bar test") &
                            sample_id %in% select.starrs) %>% arrange(sample_id) %>% select(all_of(select.cols))
-write.csv(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/Sequencing Files.csv", row.names=FALSE)
+xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/Sequencing Files.xlsx", row.names=FALSE)
 
 ```
 
 # sample form
 ```{r}
-starr.samples.all <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR-BaselineCharacterist_DATA_Final.csv")
+starr.samples.all <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR-BaselineCharacterist_DATA_Final.xlsx")
+colnames(starr.samples.all)
 starr.samples.cols <- c("id", "SingleNuclei", "record_id", "recruited_from", 
-                 "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c"  ,
+                 "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c", "dbc12_overwt"    ,
                  "systolic" , "diastolic" , 
                  "cholesterol" , "triglycerides" , "hdl", "ldl" )
 starr.samples.cols <- c("id", "SingleNuclei", "record_id", "recruited_from", 
-                 "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c" )
-starr.sn <- starr.samples.all %>% filter( id %in% select.starrs) %>% arrange(id) %>% select(all_of(starr.samples.cols))
+                 "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c")
+starr.sn <- starr.samples.all %>% filter( id %in% select.starrs) %>% arrange(id) %>% select(all_of(starr.samples.cols)) %>% mutate(Age.group = ifelse(age >= 65, "Older", ifelse(age <65 & age >= 45, "Middle", "Young")))
+table(starr.sn$Age.group) 
+# table(starr.sn$dbc12_overwt)
+# write.csv(starr.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.subject.info.csv", row.names=FALSE)
+xlsx::write.xlsx(starr.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.subject.info.xlsx", sheetName = "STARR", row.names=FALSE)
 ```
 

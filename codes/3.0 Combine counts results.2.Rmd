@@ -146,6 +146,7 @@ STARR <- df.all3[which(df.all3$Project == "STARR" & df.all3$Agg == "Yes"), ]
 STARR <- STARR %>% arrange(sample_id)
 write.csv(STARR[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv", row.names=FALSE)
 write.csv(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.Final.csv", row.names=FALSE)
+xlsx::write.xlsx(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/STARR.sn.aggr.info.xlsx", sheetName = "STARR", row.names=FALSE)
 ```
 
 ## SGLT2 project
