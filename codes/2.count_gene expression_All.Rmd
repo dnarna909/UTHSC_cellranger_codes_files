@@ -348,14 +348,14 @@ cellranger count --id=Rapa_Mar \
 
 cellranger count --id=STARR_024 \
 --fastqs=/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_fastq/C202SC19080754_2/raw_data/HTCMTDSXX/ \
---sample=STARR024 \
+--sample=STARR_024 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
 --expect-cells=10000 \
 --r1-length 26 \
 --r2-length 90 \
 --chemistry threeprime \
---project STARR024
+--project STARR_024
 # Run cellranger count_2hr
 # 2021-10-13 17:03:25 [runtime] (ready) 
 # 2021-10-13 19:35:41 Shutting down.
@@ -363,8 +363,8 @@ cellranger count --id=STARR_024 \
 cellranger count --id=STARR_026 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --fastqs=/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_fastq/C202SC19080754_2/raw_data/HTCMTDSXX/ \
---project STARR026 \
---sample=STARR026 \
+--project STARR_026 \
+--sample=STARR_026 \
 --expect-cells=10000 \
 --r1-length 26 \
 --r2-length 90 \
@@ -377,8 +377,8 @@ cellranger count --id=STARR_026 \
 cellranger count --id=STARR_026h \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --fastqs=/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_fastq/C202SC19080754_2/raw_data/HTCMTDSXX/ \
---project STARR026h \
---sample=STARR026h \
+--project STARR_026h \
+--sample=STARR_026h \
 --expect-cells=10000 \
 --r1-length 26 \
 --r2-length 90 \
@@ -388,8 +388,8 @@ cellranger count --id=STARR_026h \
 cellranger count --id=STARR_028 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --fastqs=/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_fastq/C202SC19080754_2/raw_data/HTCMTDSXX/ \
---project STARR028 \
---sample=STARR028 \
+--project STARR_028 \
+--sample=STARR_028 \
 --expect-cells=10000 \
 --r1-length 26 \
 --r2-length 90 \
@@ -402,8 +402,8 @@ cellranger count --id=STARR_028 \
 cellranger count --id=STARR_031 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --fastqs=/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_fastq/C202SC19080754_2/raw_data/HTCMTDSXX/ \
---project STARR031 \
---sample=STARR031 \
+--project STARR_031 \
+--sample=STARR_031 \
 --expect-cells=10000 \
 --r1-length 26 \
 --r2-length 90 \
@@ -416,8 +416,8 @@ cellranger count --id=STARR_031 \
 cellranger count --id=STARR_032 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --fastqs=/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_fastq/C202SC19080754_2/raw_data/HTCMTDSXX/ \
---project STARR032 \
---sample=STARR032 \
+--project STARR_032 \
+--sample=STARR_032 \
 --expect-cells=10000 \
 --r1-length 26 \
 --r2-length 90 \
@@ -468,7 +468,7 @@ cellranger count --id=Norton \
 ## 20210126_UTA_NovaSeq_L3_fastq
 ```{bash}
 cellranger count --id=76615_V5 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_fastq/NieFASTQ_P0111212Dual/outs/fastq_path/HTK5NDSXY/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210126_UTA_NovaSeq_L3_fastq/NieFASTQ_P0111212Dual/outs/fastq_path/HTK5NDSXY/ \
 --sample=76615_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -481,7 +481,7 @@ cellranger count --id=76615_V5 \
 # 2021-10-12 17:43:36 Shutting down.
 
 cellranger count --id=STARR_039 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_fastq/NieFASTQ_P0111212Single/outs/fastq_path/HTK5NDSXY/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210126_UTA_NovaSeq_L3_fastq/NieFASTQ_P0111212Single/outs/fastq_path/HTK5NDSXY/ \
 --sample=STARR_039 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -495,7 +495,7 @@ cellranger count --id=STARR_039 \
 # 2021-10-11 17:43:09 Shutting down.
 
 cellranger count --id=STARR_041 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_fastq/NieFASTQ_P0111212Single/outs/fastq_path/HTK5NDSXY/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210126_UTA_NovaSeq_L3_fastq/NieFASTQ_P0111212Single/outs/fastq_path/HTK5NDSXY/ \
 --sample=STARR_041 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -509,7 +509,7 @@ cellranger count --id=STARR_041 \
 # 2021-10-13 10:23:52 Shutting down.
 
 cellranger count --id=STARR_043 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210126_UTA_NovaSeq_L3_fastq/NieFASTQ_P0111212Single/outs/fastq_path/HTK5NDSXY/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210126_UTA_NovaSeq_L3_fastq/NieFASTQ_P0111212Single/outs/fastq_path/HTK5NDSXY/ \
 --sample=STARR_043 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -525,7 +525,7 @@ cellranger count --id=STARR_043 \
 ## 20210716_L1_fastq_dual_cellranger
 ```{bash}
 cellranger count --id=Amei-R1 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L1_fastq_dual_cellranger/outs/fastq_path/HGK5TDSX2/ \
+--fastqs=/media/jianie/SequencingFiles_3/20210716_L1_fastq_dual_cellranger/outs/fastq_path/HGK5TDSX2/ \
 --sample=Amei-R1 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-gex-mm10-2020-A \
 --include-introns=TRUE \
@@ -536,7 +536,7 @@ cellranger count --id=Amei-R1 \
 --project Amei-R1
 
 cellranger count --id=Amei-R2 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L1_fastq_dual_cellranger/outs/fastq_path/HGK5TDSX2/ \
+--fastqs=/media/jianie/SequencingFiles_3/20210716_L1_fastq_dual_cellranger/outs/fastq_path/HGK5TDSX2/ \
 --sample=Amei-R2 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-gex-mm10-2020-A \
 --include-introns=TRUE \
@@ -547,7 +547,7 @@ cellranger count --id=Amei-R2 \
 --project Amei-R2
 
 cellranger count --id=Con-R1 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L1_fastq_dual_cellranger/outs/fastq_path/HGK5TDSX2/ \
+--fastqs=/media/jianie/SequencingFiles_3/20210716_L1_fastq_dual_cellranger/outs/fastq_path/HGK5TDSX2/ \
 --sample=Con-R1 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-gex-mm10-2020-A \
 --include-introns=TRUE \
@@ -558,7 +558,7 @@ cellranger count --id=Con-R1 \
 --project Con-R1
 
 cellranger count --id=Con-R2 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L1_fastq_dual_cellranger/outs/fastq_path/HGK5TDSX2/ \
+--fastqs=/media/jianie/SequencingFiles_3/20210716_L1_fastq_dual_cellranger/outs/fastq_path/HGK5TDSX2/ \
 --sample=Con-R2 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-gex-mm10-2020-A \
 --include-introns=TRUE \
@@ -572,7 +572,7 @@ cellranger count --id=Con-R2 \
 ## 20210716_L2_fastq_dual_cellranger
 ```{bash}
 cellranger count --id=76632_V5 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/ \
+--fastqs=/media/jianie/SequencingFiles_3/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/ \
 --sample=76632_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -586,7 +586,7 @@ cellranger count --id=76632_V5 \
 # 2021-09-23 13:23:23 Shutting down.
 
 cellranger count --id=STARR_024 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/ \
+--fastqs=/media/jianie/SequencingFiles_3/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/ \
 --sample=STARR_024 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -597,7 +597,7 @@ cellranger count --id=STARR_024 \
 --project STARR_024
 
 cellranger count --id=STARR_041 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/ \
+--fastqs=/media/jianie/SequencingFiles_3/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/ \
 --sample=STARR_041 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -608,7 +608,7 @@ cellranger count --id=STARR_041 \
 --project STARR_041
 
 cellranger count --id=STARR_049 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/ \
+--fastqs=/media/jianie/SequencingFiles_3/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/ \
 --sample=STARR_049 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -625,7 +625,7 @@ cellranger count --id=STARR_049 \
 ## 20210830_L3_fastq_dual
 ```{bash}
 cellranger count --id=76632_V11 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/ \
 --sample=76632_V11 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -639,7 +639,7 @@ cellranger count --id=76632_V11 \
 # 2021-09-29 19:17:00 Shutting down.
 
 cellranger count --id=76638_V5 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/ \
 --sample=76638_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -653,7 +653,7 @@ cellranger count --id=76638_V5 \
 # 2021-09-30 01:33:37 Shutting down.
 
 cellranger count --id=76638_V5_Muscle \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/ \
 --sample=76638_V5_Muscle \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -667,7 +667,7 @@ cellranger count --id=76638_V5_Muscle \
 # 2021-10-15 09:32:01 Shutting down.
 
 cellranger count --id=76643_V5 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/ \
 --sample=76643_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -681,7 +681,7 @@ cellranger count --id=76643_V5 \
 # 2021-09-29 21:17:36 Shutting down.
 
 cellranger count --id=76647_V5 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/ \
 --sample=76647_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -695,7 +695,7 @@ cellranger count --id=76647_V5 \
 # 2021-09-29 23:50:52 Shutting down.
 
 cellranger count --id=76649_V5 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/ \
 --sample=76649_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -709,7 +709,7 @@ cellranger count --id=76649_V5 \
 # 2021-09-30 09:52:45 Shutting down.
 
 cellranger count --id=STARR_051 \
---fastqs=/media/jianie/Seagate_SequencingFiles_2/20210830_L3_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/ \
 --sample=STARR_051 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -1834,7 +1834,7 @@ cellranger count --id=STARR_075_2nd \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76658_V11_3rd \
---fastqs=/media/jianie/SequencingFiles_4/20220801_L8_fastq/ \
+--fastqs=/media/jianie/SequencingFiles_6/20220801_L8_fastq/ \
 --sample=76658_V11 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -1850,7 +1850,7 @@ cellranger count --id=76658_V11_3rd \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76649_V11_3rd \
---fastqs=/media/jianie/SequencingFiles_4/20220801_L8_fastq/ \
+--fastqs=/media/jianie/SequencingFiles_6/20220801_L8_fastq/ \
 --sample=76649_V11 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -1867,7 +1867,7 @@ cellranger count --id=76649_V11_3rd \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76647_V11_3rd \
---fastqs=/media/jianie/SequencingFiles_4/20220801_L8_fastq/ \
+--fastqs=/media/jianie/SequencingFiles_6/20220801_L8_fastq/ \
 --sample=76647_V11 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -1888,7 +1888,7 @@ cellranger count --id=76647_V11_3rd \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76643_V11_3rd \
---fastqs=/media/jianie/SequencingFiles_4/20220801_L9_fastq/ \
+--fastqs=/media/jianie/SequencingFiles_6/20220801_L9_fastq/ \
 --sample=76643_V11 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -1904,7 +1904,7 @@ cellranger count --id=76643_V11_3rd \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76660_V5_3rd \
---fastqs=/media/jianie/SequencingFiles_4/20220801_L9_fastq/ \
+--fastqs=/media/jianie/SequencingFiles_6/20220801_L9_fastq/ \
 --sample=76660_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -1920,7 +1920,7 @@ cellranger count --id=76660_V5_3rd \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76661_V5_3rd \
---fastqs=/media/jianie/SequencingFiles_4/20220801_L9_fastq/ \
+--fastqs=/media/jianie/SequencingFiles_6/20220801_L9_fastq/ \
 --sample=76661_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -1936,7 +1936,7 @@ cellranger count --id=76661_V5_3rd \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76656_V11_3rd \
---fastqs=/media/jianie/SequencingFiles_4/20220801_L9_fastq/ \
+--fastqs=/media/jianie/SequencingFiles_6/20220801_L9_fastq/ \
 --sample=76656_V11 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
