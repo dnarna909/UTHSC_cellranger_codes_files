@@ -43,6 +43,8 @@ cellranger aggr --id=SGLT2_all_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_co
 # 2022-08-02 08:53:47 [runtime] (ready)   
 # 2022-08-02 14:05:49 Shutting down.
 
+# 2022-08-21 18:11:48
+# 2022-08-22 01:09:58
 
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH

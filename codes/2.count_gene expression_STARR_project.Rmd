@@ -1383,6 +1383,9 @@ cellranger count --id=STARR_077_combine \
 # Sun 31 Jul 2022 07∶19∶45 AM CDT
 # Sun 31 Jul 2022 12∶48∶16 PM CDT
 
+
+
+
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=STARR_077_combine_force13098 \
