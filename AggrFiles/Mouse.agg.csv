@@ -12,12 +12,12 @@
 "NG_KO_ND","/media/jianie/Seagate_SequencingFiles_1/20190816_NovaSeq_fastq_Counts/NG_KO_ND/outs/molecule_info.h5","KO_ND",17
 "ND_Old","/media/jianie/Seagate_SequencingFiles_1/20190717_NextSeq_fastq_Counts/ND_Old/outs/molecule_info.h5","ND_Old",12
 "ND_Old_force","/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_Counts/ND_Old_force/outs/molecule_info.h5","ND_Old",54
-"ND_Old_combine_force","/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_Counts/ND_Old_combine_force/outs/molecule_info.h5","ND_Old",55
 "Nova_NDOld","/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_Counts/Nova_NDOld/outs/molecule_info.h5","ND_Old",49
+"ND_Old_combine_force","/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_Counts/ND_Old_combine_force/outs/molecule_info.h5","ND_Old",55
 "ND_Old_2nd","/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_Counts/ND_Old_2nd/outs/molecule_info.h5","ND_Old",56
 "ND_Young","/media/jianie/Seagate_SequencingFiles_1/20190717_NextSeq_fastq_Counts/ND_Young/outs/molecule_info.h5","ND_Young",11
-"ND_Young_combine_force","/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_Counts/ND_Young_combine_force/outs/molecule_info.h5","ND_Young",53
 "ND_Young_combine_force_5000","/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_Counts/ND_Young_combine_force_5000/outs/molecule_info.h5","ND_Young",52
+"ND_Young_combine_force","/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_Counts/ND_Young_combine_force/outs/molecule_info.h5","ND_Young",53
 "Nova_NDYoung","/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_Counts/Nova_NDYoung/outs/molecule_info.h5","ND_Young",48
 "P16-HFD","/media/jianie/Seagate_SequencingFiles_1/20190613_NextSeq_fastq_Counts/P16-HFD/outs/molecule_info.h5","P16_HFD",2
 "NG_P16_HFD","/media/jianie/Seagate_SequencingFiles_1/20190816_NovaSeq_fastq_Counts/NG_P16_HFD/outs/molecule_info.h5","P16_HFD",16

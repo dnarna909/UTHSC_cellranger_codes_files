@@ -1,6 +1,6 @@
 "sample_id","molecule_h5","sample_id_ori2","Counts_List"
-"76615_V5","/media/jianie/Seagate_SequencingFiles_1/20210126_UTA_NovaSeq_L3_Counts/76615_V5/outs/molecule_info.h5","76615_V5",63
 "76615_V5_force10447","/media/jianie/Seagate_SequencingFiles_1/20210126_UTA_NovaSeq_L3_Counts/76615_V5_force10447/outs/molecule_info.h5","76615_V5",264
+"76615_V5","/media/jianie/Seagate_SequencingFiles_1/20210126_UTA_NovaSeq_L3_Counts/76615_V5/outs/molecule_info.h5","76615_V5",63
 "76632_V11","/media/jianie/Seagate_SequencingFiles_1/20210830_L3_counts_dual/76632_V11/outs/molecule_info.h5","76632_V11",81
 "76632_V11_2nd","/media/jianie/SequencingFiles_3/20211105_L3_L4_Counts/76632_V11_2nd/outs/molecule_info.h5","76632_V11",102
 "76632_V11_combine_force6000","/media/jianie/SequencingFiles_3/20211105_L3_L4_Counts/76632_V11_combine_force6000/outs/molecule_info.h5","76632_V11",170
@@ -12,9 +12,9 @@
 "76638_V11","/media/jianie/SequencingFiles_3/20211105_L3_L4_Counts/76638_V11/outs/molecule_info.h5","76638_V11",111
 "76638_V11_combine","/media/jianie/SequencingFiles_3/20220620_Counts/76638_V11_combine/outs/molecule_info.h5","76638_V11",154
 "76638_V11_combine_force15000","/media/jianie/SequencingFiles_3/20220620_Counts/76638_V11_combine_force15000/outs/molecule_info.h5","76638_V11",172
-"76638_V11_2nd","/media/jianie/SequencingFiles_3/20220620_Counts/76638_V11_2nd/outs/molecule_info.h5","76638_V11",141
-"76638_V11_combine_force12000","/media/jianie/SequencingFiles_3/20220620_Counts/76638_V11_combine_force12000/outs/molecule_info.h5","76638_V11",161
 "76638_V11_combine_force18000","/media/jianie/SequencingFiles_3/20220620_Counts/76638_V11_combine_force18000/outs/molecule_info.h5","76638_V11",173
+"76638_V11_combine_force12000","/media/jianie/SequencingFiles_3/20220620_Counts/76638_V11_combine_force12000/outs/molecule_info.h5","76638_V11",161
+"76638_V11_2nd","/media/jianie/SequencingFiles_3/20220620_Counts/76638_V11_2nd/outs/molecule_info.h5","76638_V11",141
 "76638_V5","/media/jianie/Seagate_SequencingFiles_1/20210830_L3_counts_dual/76638_V5/outs/molecule_info.h5","76638_V5",82
 "76638_V5_combine","/media/jianie/SequencingFiles_3/20211105_L3_L4_Counts/76638_V5_combine/outs/molecule_info.h5","76638_V5",116
 "76638_V5_2nd","/media/jianie/SequencingFiles_3/20211105_L3_L4_Counts/76638_V5_2nd/outs/molecule_info.h5","76638_V5",108
@@ -31,8 +31,8 @@
 "76643_V5_2nd","/media/jianie/SequencingFiles_3/20211105_L3_L4_Counts/76643_V5_2nd/outs/molecule_info.h5","76643_V5",103
 "76647_V11","/media/jianie/SequencingFiles_3/20220620_Counts/76647_V11/outs/molecule_info.h5","76647_V11",138
 "76647_V11_2nd","/media/jianie/SequencingFiles_4/20220715_Counts/76647_V11_2nd/outs/molecule_info.h5","76647_V11",188
-"76647_V11_3rd","/media/jianie/SequencingFiles_6/20220801_Counts/76647_V11_3rd/outs/molecule_info.h5","76647_V11",239
 "76647_V11_combine","/media/jianie/SequencingFiles_6/20220801_Counts/76647_V11_combine/outs/molecule_info.h5","76647_V11",259
+"76647_V11_3rd","/media/jianie/SequencingFiles_6/20220801_Counts/76647_V11_3rd/outs/molecule_info.h5","76647_V11",239
 "76647_V5","/media/jianie/Seagate_SequencingFiles_1/20210830_L3_counts_dual/76647_V5/outs/molecule_info.h5","76647_V5",86
 "76647_V5_combine_force9410","/media/jianie/SequencingFiles_3/20211105_L3_L4_Counts/76647_V5_combine_force9410/outs/molecule_info.h5","76647_V5",235
 "76647_V5_combine","/media/jianie/SequencingFiles_3/20211105_L3_L4_Counts/76647_V5_combine/outs/molecule_info.h5","76647_V5",119
@@ -58,8 +58,8 @@
 "76658_V11_combine","/media/jianie/SequencingFiles_6/20220801_Counts/76658_V11_combine/outs/molecule_info.h5","76658_V11",257
 "76658_V5","/media/jianie/SequencingFiles_3/20211105_L3_L4_Counts/76658_V5/outs/molecule_info.h5","76658_V5",110
 "76658_V5_force10000","/media/jianie/SequencingFiles_3/20211105_L3_L4_Counts/76658_V5_force10000/outs/molecule_info.h5","76658_V5",127
-"76658_V5_combine_force12000","/media/jianie/SequencingFiles_3/20220620_Counts/76658_V5_combine_force12000/outs/molecule_info.h5","76658_V5",160
 "76658_V5_combine","/media/jianie/SequencingFiles_3/20220620_Counts/76658_V5_combine/outs/molecule_info.h5","76658_V5",159
+"76658_V5_combine_force12000","/media/jianie/SequencingFiles_3/20220620_Counts/76658_V5_combine_force12000/outs/molecule_info.h5","76658_V5",160
 "76658_V5_2nd","/media/jianie/SequencingFiles_3/20220620_Counts/76658_V5_2nd/outs/molecule_info.h5","76658_V5",142
 "76660_V11","/media/jianie/SequencingFiles_4/20220715_Counts/76660_V11/outs/molecule_info.h5","76660_V11",178
 "76660_V5","/media/jianie/SequencingFiles_3/20220620_Counts/76660_V5/outs/molecule_info.h5","76660_V5",143
