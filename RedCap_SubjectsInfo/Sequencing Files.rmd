@@ -57,7 +57,7 @@ xlsx::write.xlsx(starr.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_fil
 starr.samples.all <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR-BaselineCharacterist_DATA_Final.xlsx")
 colnames(starr.samples.all) 
 starr.samples.cols <- c("id", "SingleNuclei", "record_id", "recruited_from", 
-                          "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c", "dbc12_overwt"    ,
+                          "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c", "dbc12_overwt",
                           "systolic" , "diastolic" , 
                           "cholesterol" , "triglycerides" , "hdl", "ldl" )
 starr.samples.all <- starr.samples.all %>%  arrange(id) %>% 
