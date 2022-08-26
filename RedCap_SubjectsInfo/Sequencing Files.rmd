@@ -28,22 +28,22 @@ select.starrs <- aggr %>% filter(Project == "STARR" & Agg == "Yes") %>% arrange(
 ```{r}
 select.cols <- c("Counts_List","SQ_List","Sequencing_Date", "Lane","sample_id","sample_id_ori","Agg","Status","Project","AnalysisDate","Done","Sequencing_Type" )
 sequencing.info <- aggr %>% filter(Project == "STARR" &  Status == "Original" & 
-                           ! Agg %in% c("Hf test", "FZ test", "Bar test") &
-                           sample_id %in% select.starrs) %>% arrange(sample_id) %>% select(all_of(select.cols))
+                                     ! Agg %in% c("Hf test", "FZ test", "Bar test") &
+                                     sample_id %in% select.starrs) %>% arrange(sample_id) %>% select(all_of(select.cols))
 xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/Sequencing Files.xlsx", row.names=FALSE)
 
 ```
 
-# SN and sequencing ready sample form
+# STARR_SN and sequencing ready sample form
 ```{r}
 starr.samples.all <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR-BaselineCharacterist_DATA_Final.xlsx")
 colnames(starr.samples.all)
 starr.samples.cols <- c("id", "SingleNuclei", "record_id", "recruited_from", 
-                 "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c", "dbc12_overwt"    ,
-                 "systolic" , "diastolic" , 
-                 "cholesterol" , "triglycerides" , "hdl", "ldl" )
+                        "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c", "dbc12_overwt"    ,
+                        "systolic" , "diastolic" , 
+                        "cholesterol" , "triglycerides" , "hdl", "ldl" )
 starr.samples.cols <- c("id", "SingleNuclei", "record_id", "recruited_from", 
-                 "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c")
+                        "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c")
 starr.sn <- starr.samples.all %>% filter( id %in% select.starrs) %>% arrange(id) %>% select(all_of(starr.samples.cols)) %>% mutate(Age.group = ifelse(age >= 65, "Older", ifelse(age <65 & age >= 45, "Middle", "Young")))
 table(starr.sn$Age.group) 
 # table(starr.sn$dbc12_overwt)
@@ -52,20 +52,83 @@ xlsx::write.xlsx(starr.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_fil
 ```
 
 
-# All SN sample form
+# STARR_All SN sample form
 ```{r}
 starr.samples.all <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR-BaselineCharacterist_DATA_Final.xlsx")
-colnames(starr.samples.all)
+colnames(starr.samples.all) 
 starr.samples.cols <- c("id", "SingleNuclei", "record_id", "recruited_from", 
-                 "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c", "dbc12_overwt"    ,
-                 "systolic" , "diastolic" , 
-                 "cholesterol" , "triglycerides" , "hdl", "ldl" )
+                          "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c", "dbc12_overwt"    ,
+                          "systolic" , "diastolic" , 
+                          "cholesterol" , "triglycerides" , "hdl", "ldl" )
+starr.samples.all <- starr.samples.all %>%  arrange(id) %>% 
+  rename(Age = `age`, `Height (inches)` =  height, `Weight (pounds)` = weight, BMI = bmi, Glucose = glucose, `A1c Value`= hemoglobin_a1c)%>%  
+  mutate(Age_Group = ifelse(Age >= 65, "Older", ifelse(Age <65 & Age >= 45, "Middle", "Young")),
+         Gender = ifelse(sex == 1, "Female", "Male"),
+         Status = ifelse(BMI >= 30, "Obese",
+                         ifelse(BMI >= 25 & BMI <30, "Overweight",
+                                ifelse(BMI >= 18.5 & BMI <25, "Lean", "NA")))
+  )
+
 starr.samples.cols <- c("id", "SingleNuclei", "record_id", "recruited_from", 
-                 "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c")
-starr.sn.all <- starr.samples.all %>% filter( SingleNuclei == "Yes") %>% arrange(id) %>% select(all_of(starr.samples.cols)) %>% mutate(Age.group = ifelse(age >= 65, "Older", ifelse(age <65 & age >= 45, "Middle", "Young")))
-table(starr.sn.all$Age.group) 
-# table(starr.sn$dbc12_overwt)
-# write.csv(starr.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.subject.info.csv", row.names=FALSE)
+                        "Gender", 
+                        "Age" ,"Age_Group",
+                        "Height (inches)" , "Weight (pounds)", "BMI", "Status",
+                        "Glucose" ,  "A1c Value", "fasting", "dbc4_diabetes")
+starr.sn.all <- starr.samples.all %>% filter( SingleNuclei == "Yes") %>% arrange(id) %>% select(all_of(starr.samples.cols)) 
+table(starr.sn.all$Age_Group) 
+table(starr.sn.all$dbc4_diabetes)
+# write.csv(starr.sn.all, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.all.subject.info.csv", row.names=FALSE)
 xlsx::write.xlsx(starr.sn.all, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.all.subject.info.xlsx", sheetName = "STARR", row.names=FALSE)
 ```
 
+# SGLT2_All SN sample form
+```{r}
+sglt2.samples.all <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/SGLT2iAndAging-Test1Csh_DATA_LABELS_Final.xlsx")
+colnames(sglt2.samples.all)
+sglt2.samples.cols <- c("id", "SingleNuclei", "Record ID: 766-", "Age at Consent", "Age (years)", "Group Assignment:",
+                        "Gender" , "Event Name" , "Height (inches)" , "Weight (pounds)",  "BMI", "Glucose" , "A1c Value", "Diabetes",
+                        "Blood Pressure Systolic", "Blood Pressure Diastolic", 
+                        "Cholesterol, Total" , "triglycerides" , "HDL", "LDL" )
+
+sglt2.samples.all <- sglt2.samples.all %>% 
+  rename( Age = `Age at Consent` 
+  )%>% 
+  mutate(Age_Group = ifelse(Age >= 65, "Older", ifelse(Age <65 & Age >= 45, "Middle", "Young")),
+         Status = ifelse(BMI >= 30, "Obese",
+                         ifelse(BMI >= 25 & BMI <30, "Overweight",
+                                ifelse(BMI >= 18.5 & BMI <25, "Lean", "NA"))),
+         subject_id = paste0("766", `Record ID: 766-`)
+  )
+select.sglt2 <- sglt2.samples.all %>% filter(SingleNuclei == "Yes") %>% arrange(id) %>% pull(subject_id) %>% unique()
+
+sglt2.V1.cols <- c("id", "Record ID: 766-", "subject_id", "Event Name" , 
+                   "Race","Gender",
+                   "Age", "Age_Group",
+                   #"Height (inches)" , "Weight (pounds)",  "BMI", "Status",
+                   "Glucose" , "A1c Value", "Diabetes")
+sglt2.sn.V1 <- sglt2.samples.all %>% filter(`Event Name` == "Visit 1") %>% arrange(id) %>% select(all_of(sglt2.V1.cols)) %>% 
+  rename( id.V1 = id, `Event Name_V1` = `Event Name`,
+  )
+
+sglt2.V5.cols <- c("id", "Record ID: 766-","subject_id", "Event Name" , 
+                   "SingleNuclei", "Group Assignment:", 
+                    "Height (inches)" , "Weight (pounds)",  "BMI", "Status"
+                   )
+sglt2.sn.V5 <- sglt2.samples.all %>% filter(`Event Name` == "Visit 5",  SingleNuclei == "Yes") %>% arrange(id) %>% select(all_of(sglt2.V5.cols)) 
+sglt2.sn.basal <- sglt2.sn.V5 %>% left_join(sglt2.sn.V1, by = c("Record ID: 766-", "subject_id"))
+
+sglt2.V11.cols <- c("id", "Record ID: 766-","subject_id", "Event Name" , 
+                   "SingleNuclei", 
+                   "Height (inches)" , "Weight (pounds)",  "BMI", "Status",
+                   "Glucose" , "A1c Value")
+sglt2.sn.V11 <- sglt2.samples.all %>% filter(`Event Name` == "Visit 11",  SingleNuclei == "Yes") %>% arrange(id) %>% select(all_of(sglt2.V11.cols)) 
+sglt2.sn.V11 <- sglt2.sn.V11 %>% left_join(sglt2.sn.V1 %>% select(!all_of(c("Glucose" , "A1c Value"))) , by = c("Record ID: 766-", "subject_id")) %>%
+  left_join(sglt2.sn.V5 %>% select(all_of(c("subject_id" , "Group Assignment:"))), by = c("subject_id"))
+
+sglt2.sn.all <- sglt2.sn.V11 %>% full_join(sglt2.sn.basal, by = intersect(colnames(sglt2.sn.V11),  colnames(sglt2.sn.basal)) ) %>% arrange(subject_id)
+
+table(sglt2.sn.all$Age_Group) 
+# table(sglt2.sn$dbc12_overwt)
+# write.csv(sglt2.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/sglt2.sn.subject.info.csv", row.names=FALSE)
+xlsx::write.xlsx(sglt2.sn.all, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/sglt2.sn.all.subject.info.xlsx", sheetName = "SGLT2", row.names=FALSE)
+```
