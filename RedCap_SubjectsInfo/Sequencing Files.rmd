@@ -34,7 +34,7 @@ xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_co
 
 ```
 
-# sample form
+# SN and sequencing ready sample form
 ```{r}
 starr.samples.all <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR-BaselineCharacterist_DATA_Final.xlsx")
 colnames(starr.samples.all)
@@ -49,5 +49,23 @@ table(starr.sn$Age.group)
 # table(starr.sn$dbc12_overwt)
 # write.csv(starr.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.subject.info.csv", row.names=FALSE)
 xlsx::write.xlsx(starr.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.subject.info.xlsx", sheetName = "STARR", row.names=FALSE)
+```
+
+
+# All SN sample form
+```{r}
+starr.samples.all <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR-BaselineCharacterist_DATA_Final.xlsx")
+colnames(starr.samples.all)
+starr.samples.cols <- c("id", "SingleNuclei", "record_id", "recruited_from", 
+                 "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c", "dbc12_overwt"    ,
+                 "systolic" , "diastolic" , 
+                 "cholesterol" , "triglycerides" , "hdl", "ldl" )
+starr.samples.cols <- c("id", "SingleNuclei", "record_id", "recruited_from", 
+                 "age" , "sex", "weight" , "height", "bmi", "glucose" ,"fasting",  "hemoglobin_a1c")
+starr.sn.all <- starr.samples.all %>% filter( SingleNuclei == "Yes") %>% arrange(id) %>% select(all_of(starr.samples.cols)) %>% mutate(Age.group = ifelse(age >= 65, "Older", ifelse(age <65 & age >= 45, "Middle", "Young")))
+table(starr.sn.all$Age.group) 
+# table(starr.sn$dbc12_overwt)
+# write.csv(starr.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.subject.info.csv", row.names=FALSE)
+xlsx::write.xlsx(starr.sn.all, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.all.subject.info.xlsx", sheetName = "STARR", row.names=FALSE)
 ```
 
