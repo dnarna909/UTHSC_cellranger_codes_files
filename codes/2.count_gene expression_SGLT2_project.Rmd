@@ -222,7 +222,7 @@ cellranger count --id=76638_V11_force10000 \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76632_V11_combine \
---fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
 --sample=76632_V11 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -270,7 +270,7 @@ cellranger count --id=76632_V11_combine_force6012 \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76632_V5_combine \
---fastqs=/media/jianie/SequencingFiles_3/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--fastqs=/media/jianie/SequencingFiles_3/20210716_L2_fastq_single_cellranger/outs/fastq_path/HGK5TDSX2/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
 --sample=76632_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -320,7 +320,7 @@ cellranger count --id=76632_V5_combine_force9545 \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76638_V5_combine \
---fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
 --sample=76638_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -336,7 +336,7 @@ cellranger count --id=76638_V5_combine \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76638_V5_combine_force9413 \
---fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
 --sample=76638_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -351,7 +351,7 @@ cellranger count --id=76638_V5_combine_force9413 \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76638_V5_Muscle_combine \
---fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
 --sample=76638_V5_Muscle \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -386,7 +386,7 @@ cellranger count --id=76638_V5_Muscle_combine_force10000 \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76643_V5_combine \
---fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
 --sample=76643_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -403,7 +403,7 @@ cellranger count --id=76643_V5_combine \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76647_V5_combine \
---fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
 --sample=76647_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
@@ -451,7 +451,7 @@ cellranger count --id=76647_V5_combine_froce9410 \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76649_V5_combine \
---fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/DATA/20211105_L3_L4_fastq_dual/ \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
 --sample=76649_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
