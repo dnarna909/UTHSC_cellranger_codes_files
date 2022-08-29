@@ -153,7 +153,7 @@ xlsx::write.xlsx(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/
 ```{r}
 SGLT2 <- df.all3[which(df.all3$Project == "SGLT2" & df.all3$Agg == "Yes"), ]
 SGLT2 <- SGLT2 %>% arrange(sample_id)
-write.csv(SGLT2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.agg.csv", row.names=FALSE)
+write.csv(SGLT2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final.agg.csv", row.names=FALSE)
 write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final.csv", row.names=FALSE)
 ```
 

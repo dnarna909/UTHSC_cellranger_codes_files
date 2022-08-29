@@ -46,6 +46,9 @@ cellranger aggr --id=SGLT2_all_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_co
 # 2022-08-21 18:11:48
 # 2022-08-22 01:09:58
 
+# 2022-08-29 15:26:07 [runtime] 
+# 
+
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=STARR_all_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.agg.csv
