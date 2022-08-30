@@ -47,8 +47,17 @@ cellranger aggr --id=SGLT2_all_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_co
 # 2022-08-22 01:09:58
 
 # 2022-08-29 15:26:07 [runtime] 
-# 
+#
 
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=SGLT2_all_aggr_part --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part.csv
+# 2022-08-30 10:00:27 [runtime] (ready) 
+
+```
+
+
+```{bash}
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=STARR_all_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.agg.csv
@@ -71,38 +80,13 @@ cellranger aggr --id=STARR_all_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_co
 ```{bash}
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger aggr --id=10s_STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg_2.csv
-# Run cellranger aggr: 30 min
-# 2021-11-02 14:30:23 [runtime] Reattaching in local mode.
-# 2021-11-02 14:54:38 Shutting down.
-
-cd /home/jianie/yard/run_cellranger_aggr
-export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger aggr --id=11STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.11.csv
-# 2022-04-14 16:27:56 [runtime] (ready)  
-# 2022-04-14 16:57:25 Shutting down.
-
-cd /home/jianie/yard/run_cellranger_aggr
-export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger aggr --id=12STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv
-# 2022-04-14 14:34:57 [runtime] (ready)  
-# 2022-04-14 15:09:42 Shutting down.
-
-cd /home/jianie/yard/run_cellranger_aggr
-export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger aggr --id=12STARR_aggr_new --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv
-# 2022-06-30 09:05:38 [runtime] 
-# 2022-06-30 09:38:41 Shutting down.
-
-cd /home/jianie/yard/run_cellranger_aggr
-export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger aggr --id=STARR_aggr_Final --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv
+cellranger aggr --id=STARR_aggr_Final --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.Final.agg.csv
 #' 2022-08-17 08:59:31 [runtime] (ready) 
 #' 2022-08-17 11:11:09 Shutting down.
 
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger aggr --id=STARR_aggr_Final_22 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.agg.csv
+cellranger aggr --id=STARR_aggr_Final_22 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.Final.agg.csv
 
 
 ```
