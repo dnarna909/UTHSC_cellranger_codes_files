@@ -81,6 +81,7 @@ write.csv(df.depth, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/Expe
 
 # Select rows from project for Aggregation in Cellranger
 ```{r}
+library(dplyr)
 cols2 = c("sample_id", "molecule_h5", "sample_id_ori2", "Counts_List")
 df.all3 <- readRDS("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 4_Counts_Sequencing_Combine.Rds")
 unique(df.all3$Sequencing_Date)
@@ -164,18 +165,20 @@ df.all3 <- readRDS("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSu
 ## STARR project
 ```{r}
 STARR <- df.all3[which(df.all3$Project == "STARR" & df.all3$Agg == "Yes"), ]
-STARR <- STARR %>% arrange(sample_id)
+STARR <- STARR %>% arrange(sample_id) %>% mutate(Agg.List = 1:n() )
 write.csv(STARR[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.Final.agg.csv", row.names=FALSE)
 write.csv(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.Final.csv", row.names=FALSE)
 xlsx::write.xlsx(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/STARR.sn.aggr.info.xlsx", sheetName = "STARR", row.names=FALSE)
+saveRDS(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.sn.aggr.info.rds")
 ```
 
 ## SGLT2 project
 ```{r}
 SGLT2 <- df.all3[which(df.all3$Project == "SGLT2" & df.all3$Agg == "Yes"), ]
-SGLT2 <- SGLT2 %>% arrange(sample_id)
+SGLT2 <- SGLT2 %>% arrange(sample_id) %>% mutate(Agg.List = 1:n() )
 write.csv(SGLT2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final.agg.csv", row.names=FALSE)
 write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final.csv", row.names=FALSE)
+saveRDS(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.sn.aggr.info.rds")
 ```
 
 STARR & SGLT2-V5 project
