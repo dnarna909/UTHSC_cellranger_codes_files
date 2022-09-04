@@ -178,6 +178,7 @@ SGLT2 <- df.all3[which(df.all3$Project == "SGLT2" & df.all3$Agg == "Yes"), ]
 SGLT2 <- SGLT2 %>% arrange(sample_id) %>% mutate(Agg.List = 1:n() )
 write.csv(SGLT2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final.agg.csv", row.names=FALSE)
 write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final.csv", row.names=FALSE)
+xlsx::write.xlsx(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/SGLT2.sn.aggr.info.xlsx", sheetName = "STARR", row.names=FALSE)
 saveRDS(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.sn.aggr.info.rds")
 ```
 
@@ -189,6 +190,8 @@ STARR2 <- df.all3[which((df.all3$Project == "STARR" | df.all3$sample_id %in% c("
                          df.all3$Agg == "Yes") , ]
 STARR2 <- STARR2 %>% arrange(sample_id)
 write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.V5.agg.csv", row.names=FALSE)
+xlsx::write.xlsx(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/STARR.SGLT2.V5.agg.xlsx", sheetName = "STARR", row.names=FALSE)
+saveRDS(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.V5.agg.rds")
 ```
 
 STARR & SGLT2 project
@@ -196,6 +199,8 @@ STARR & SGLT2 project
 STARR2 <- df.all3[which(df.all3$Project %in% c("SGLT2", "STARR") & df.all3$Agg == "Yes") , ]
 STARR2 <- STARR2 %>% arrange(sample_id)
 write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.agg.csv", row.names=FALSE)
+xlsx::write.xlsx(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/STARR.SGLT2.agg.xlsx", sheetName = "STARR", row.names=FALSE)
+saveRDS(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.agg.rds")
 
 ```
 
