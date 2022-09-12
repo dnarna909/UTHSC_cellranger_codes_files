@@ -88,6 +88,9 @@ cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=STARR_aggr_Final_22 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.Final.agg.csv
 
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_aggr_Final_20 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.Final.agg.csv
 
 ```
 
