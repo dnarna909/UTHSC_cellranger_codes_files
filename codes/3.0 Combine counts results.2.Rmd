@@ -145,6 +145,12 @@ SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
 write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part.csv", row.names=FALSE)
 write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.part.csv", row.names=FALSE)
 
+SGLT2 <- df.all3[which((df.all3$Project %in% c("SGLT2")) &  df.all3$Done == "Jia" ), ]
+SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
+                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20220912")
+write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part0912.csv", row.names=FALSE)
+write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.part0912.csv", row.names=FALSE)
+
 ```
 
 ```{r}
