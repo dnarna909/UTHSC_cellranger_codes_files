@@ -54,6 +54,10 @@ export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=SGLT2_all_aggr_part --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part.csv
 # 2022-08-30 10:00:27 [runtime] (ready) 
 
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=SGLT2_all_aggr_0912 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part0912.csv
+# 2022-08-30 10:00:27 [runtime] (ready) 
 ```
 
 
@@ -90,7 +94,7 @@ cellranger aggr --id=STARR_aggr_Final_22 --csv=/media/jianie/DATA/UTHSC_cellrang
 
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
-cellranger aggr --id=STARR_aggr_Final_20 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.Final.agg.csv
+cellranger aggr --id=STARR_aggr_Final_18 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.Final.agg.csv
 
 ```
 
