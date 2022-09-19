@@ -1638,6 +1638,7 @@ cellranger count --id=STARR_075_combine_force18792 \
 
 ```
 
+# 20220914_L12_L13_L14_L15_L16_fastq combine
 ```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH

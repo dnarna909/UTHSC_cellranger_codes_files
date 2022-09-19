@@ -958,7 +958,7 @@ cellranger count --id=76656_V11_combine_force13551 \
 ```
 
 
-## 20220914_L13_fastq
+## 20220914_L13_fastq combine
 ```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -995,7 +995,7 @@ cellranger count --id=76658_V5_3_combine \
 
 
 
-## 20220914_L14_fastq
+## 20220914_L14_fastq  combine
 ```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -1029,8 +1029,8 @@ cellranger count --id=76664_V5_2_combine \
 ```
 
 
-## 20220914_L15_fastq
-```{bash}
+## 20220914_L15_fastq  combine
+```{bash} 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76660_V11_2_combine \
