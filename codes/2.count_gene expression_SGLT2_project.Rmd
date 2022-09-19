@@ -958,3 +958,121 @@ cellranger count --id=76656_V11_combine_force13551 \
 ```
 
 
+## 20220914_L13_fastq
+```{bash}
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76638_V11_3_combine \
+--fastqs=/media/jianie/SequencingFiles_3/20220620_20220003_fastq/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/,/media/jianie/SequencingFiles_6/20220914_L13_fastq/ \
+--sample=76638_V11 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project 76638_V11
+# Total time: 1 hr
+#'
+#' 
+#' 
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76658_V5_3_combine \
+--fastqs=/media/jianie/SequencingFiles_6/20220914_L13_fastq/,/media/jianie/SequencingFiles_3/20220620_20220003_fastq/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
+--sample=76658_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project 76658_V5
+# Total time: 1 hr
+
+```
+
+
+
+## 20220914_L14_fastq
+```{bash}
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76662_V11_2_combine \
+--fastqs=/media/jianie/SequencingFiles_4/20220715_L6_fastq/,/media/jianie/SequencingFiles_6/20220914_L14_fastq/ \
+--sample=76662_V11 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project 76662_V11
+# Total time: 1 hr
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76664_V5_2_combine \
+--fastqs=/media/jianie/SequencingFiles_6/20220914_L14_fastq/,/media/jianie/SequencingFiles_6/20220914_L14_fastq/ \
+--sample=76664_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project 76664_V5
+# Total time: 1 hr
+
+
+```
+
+
+## 20220914_L15_fastq
+```{bash}
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76660_V11_2_combine \
+--fastqs=/media/jianie/SequencingFiles_4/20220715_L6_fastq/,/media/jianie/SequencingFiles_6/20220914_L15_fastq/ \
+--sample=76660_V11 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project 76660_V11
+# Total time: 1 hr
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76661_V11_2_combine \
+--fastqs=/media/jianie/SequencingFiles_4/20220715_L6_fastq/,/media/jianie/SequencingFiles_6/20220914_L15_fastq/ \
+--sample=76661_V11 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project 76661_V11
+# Total time: 1 hr
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76662_V5_2_combine \
+--fastqs=/media/jianie/SequencingFiles_4/20220715_L6_fastq/,/media/jianie/SequencingFiles_6/20220914_L15_fastq/ \
+--sample=76662_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project 76662_V5
+# Total time: 1 hr
+
+
+```
+
