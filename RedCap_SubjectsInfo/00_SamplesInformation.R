@@ -6,12 +6,12 @@ memory.limit(size = 80000000)
 
 # set parameters
 # set parameters for QC
-Disk <- c("/media/jianie/Extreme SSD1/") 
-# Disk <- c("D:/")
+# Disk <- c("/media/jianie/Extreme SSD1/") 
+Disk <- c("D:/")
 
 # set parameters for Sample Information
-sample.info.disk <- "/media/jianie/DATA/"
-# sample.info.disk <- "C:/Users/niej/Documents/"
+# sample.info.disk <- "/media/jianie/DATA/"
+sample.info.disk <- "C:/Users/niej/Documents/"
 sample.info.path <- "UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/"
 
 sample.file.name1 <- "sglt2.sn.all.subject.info.rds"
