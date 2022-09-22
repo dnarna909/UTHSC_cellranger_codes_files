@@ -44,7 +44,7 @@ for (pp in aggr2$Metrics) {
 intersect(colnames(df.all), colnames(aggr2))
 df.all2 <- merge(df.all, aggr2, by = c("Counts_List", "sample_id_ori"))
 intersect(colnames(df.all2), colnames(Sequencing))
-df.all3 <- merge(df.all2, Sequencing, by = c("sample_id", "Sequencing_Date", "Project", "Lane", "SQ_List", "Disk", "CountsFolder"))
+df.all3 <- merge(df.all2, Sequencing, by = c("sample_id", "Sequencing_Date", "Library_ID", "Project", "Lane", "SQ_List", "Disk", "CountsFolder"))
 colnames(df.all3)
 
 # add sum for sequencing lane
@@ -151,6 +151,13 @@ SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
 write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part0912.csv", row.names=FALSE)
 write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.part0912.csv", row.names=FALSE)
 
+
+SGLT2 <- df.all3[which((df.all3$Project %in% c("SGLT2")) &  df.all3$Done == "Jia" ), ]
+SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
+                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20220919")
+write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part0919.csv", row.names=FALSE)
+write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.part0919.csv", row.names=FALSE)
+
 ```
 
 ```{r}
@@ -159,6 +166,15 @@ STARR <- STARR %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
                                                 sample_id = sample_id_ori)
 write.csv(STARR[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.agg.csv", row.names=FALSE)
 write.csv(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.csv", row.names=FALSE)
+
+
+
+STARR <- df.all3[which((df.all3$Project %in% c("STARR")) &  df.all3$Done == "Jia" ), ]
+STARR <- STARR %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
+                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20220919")
+write.csv(STARR[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.agg.part0919.csv", row.names=FALSE)
+write.csv(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.part0919.csv", row.names=FALSE)
+
 ```
 
 
