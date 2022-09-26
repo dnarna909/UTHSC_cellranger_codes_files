@@ -158,6 +158,13 @@ SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
 write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part0919.csv", row.names=FALSE)
 write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.part0919.csv", row.names=FALSE)
 
+# SGLT2 <- df.all3[which((df.all3$Project %in% c("SGLT2")) &  df.all3$Done == "Jia" ), ]
+SGLT2 <- df.all3[which(df.all3$Done == "Jia" ), ]
+SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
+                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20220923")
+write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part0923.csv", row.names=FALSE)
+write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.part0923.csv", row.names=FALSE)
+
 ```
 
 ```{r}
@@ -175,6 +182,12 @@ STARR <- STARR %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
 write.csv(STARR[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.agg.part0919.csv", row.names=FALSE)
 write.csv(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.part0919.csv", row.names=FALSE)
 
+
+STARR <- df.all3[which((df.all3$Project %in% c("STARR")) &  df.all3$Done == "Jia" ), ]
+STARR <- STARR %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
+                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20220923")
+write.csv(STARR[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.agg.part0923.csv", row.names=FALSE)
+write.csv(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.part0923.csv", row.names=FALSE)
 ```
 
 
