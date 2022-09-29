@@ -44,7 +44,7 @@ for (pp in aggr2$Metrics) {
 intersect(colnames(df.all), colnames(aggr2))
 df.all2 <- merge(df.all, aggr2, by = c("Counts_List", "sample_id_ori"))
 intersect(colnames(df.all2), colnames(Sequencing))
-df.all3 <- merge(df.all2, Sequencing, by = c("sample_id", "Sequencing_Date", "Library_ID", "Project", "Lane", "SQ_List", "Disk", "CountsFolder"))
+df.all3 <- df.all2 %>% full_join(Sequencing, by = c("SQ_List", "Sequencing_Date", "Lane", "Library_ID", "sample_id", "Project", "Disk", "CountsFolder"))
 colnames(df.all3)
 
 # add sum for sequencing lane
