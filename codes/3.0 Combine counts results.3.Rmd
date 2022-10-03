@@ -69,7 +69,6 @@ columns.select <- c("Counts_List", "sample_id_ori", "SQ_List" ,  "Sequencing_Dat
 df.depth <- df.all3 %>% select(all_of(columns.select))
 ```
 
-
 ```{r chunk 2}
 saveRDS(df.all3, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 4_Counts_Sequencing_Combine.Rds")
 write.csv(df.all3, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 4_Counts_Sequencing_Combine.csv", row.names = FALSE)
@@ -79,7 +78,9 @@ write.csv(df.depth, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/Expe
 
 
 
-# Select rows from project for Aggregation in Cellranger
+
+
+# Select rows from project for Aggregation in Cellranger 
 ```{r}
 library(dplyr)
 cols2 = c("sample_id", "molecule_h5", "sample_id_ori2", "Counts_List")
@@ -88,117 +89,21 @@ unique(df.all3$Sequencing_Date)
 table(df.all3$Sequencing_Date, df.all3$Disk)
 ```
 
-# Species based
-```{r}
-table(df.all3$Sequencing_Date, df.all3$Project)
-Mouse <- df.all3[which((df.all3$Project %in% c("Aging_Mouse", "ALCAT_Mouse"))), ]
-Mouse <- Mouse %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori)
-write.csv(Mouse[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Mouse.agg.csv", row.names=FALSE)
-write.csv(Mouse, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Mouse.csv", row.names=FALSE)
-```
-
-
-```{r}
-Marmoset <- df.all3[which((df.all3$Project %in% c("Marmoset"))), ]
-Marmoset <- Marmoset %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori)
-write.csv(Marmoset[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Marmoset.agg.csv", row.names=FALSE)
-write.csv(Marmoset, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Marmoset.csv", row.names=FALSE)
-```
-
-
-```{r}
-Human_nuc <- df.all3[which((df.all3$Project %in% c("SGLT2", "STARR")) &  df.all3$Done == "Jia" ), ]
-Human_nuc <- Human_nuc %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori)
-write.csv(Human_nuc[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Human_nuc.agg.csv", row.names=FALSE)
-write.csv(Human_nuc, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Human_nuc.csv", row.names=FALSE)
-```
-
-
 # All in each Project 
 ```{r}
-SGLT2 <- df.all3[which((df.all3$Project %in% c("SGLT2")) &  df.all3$Done == "Jia" ), ]
-SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori)
-write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.csv", row.names=FALSE)
-write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.csv", row.names=FALSE)
-
-SGLT2 <- df.all3[which((df.all3$Project %in% c("SGLT2")) &  df.all3$Done == "Jia" ), ]
-SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori) %>% filter(Counts_List < 260)
-write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part2.csv", row.names=FALSE)
-write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.part2.csv", row.names=FALSE)
-
-
-SGLT2 <- df.all3[which((df.all3$Project %in% c("SGLT2")) &  df.all3$Done == "Jia" ), ]
-SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori) %>% filter(Counts_List > 259)
-write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part.csv", row.names=FALSE)
-write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.part.csv", row.names=FALSE)
-
-
-SGLT2 <- df.all3[which((df.all3$Project %in% c("SGLT2")) &  df.all3$Done == "Jia" ), ]
-SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20220830")
-write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part.csv", row.names=FALSE)
-write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.part.csv", row.names=FALSE)
-
-SGLT2 <- df.all3[which((df.all3$Project %in% c("SGLT2")) &  df.all3$Done == "Jia" ), ]
-SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20220912")
-write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part0912.csv", row.names=FALSE)
-write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.part0912.csv", row.names=FALSE)
-
-
-SGLT2 <- df.all3[which((df.all3$Project %in% c("SGLT2")) &  df.all3$Done == "Jia" ), ]
-SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20220919")
-write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part0919.csv", row.names=FALSE)
-write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.part0919.csv", row.names=FALSE)
-
-# SGLT2 <- df.all3[which((df.all3$Project %in% c("SGLT2")) &  df.all3$Done == "Jia" ), ]
-SGLT2 <- df.all3[which(df.all3$Done == "Jia" ), ]
-SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20220923")
-write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part0923.csv", row.names=FALSE)
-write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.part0923.csv", row.names=FALSE)
-
-# SGLT2 <- df.all3[which((df.all3$Project %in% c("SGLT2")) &  df.all3$Done == "Jia" ), ]
-SGLT2 <- df.all3[which(df.all3$Done == "Jia" ), ]
-SGLT2 <- SGLT2 %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20220927")
-write.csv(SGLT2[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.agg.part0927.csv", row.names=FALSE)
-write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.all.part0927.csv", row.names=FALSE)
-
-```
-
-```{r}
-STARR <- df.all3[which((df.all3$Project %in% c("STARR")) &  df.all3$Done == "Jia" ), ]
-STARR <- STARR %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori)
-write.csv(STARR[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.agg.csv", row.names=FALSE)
-write.csv(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.csv", row.names=FALSE)
-
-
-
-STARR <- df.all3[which((df.all3$Project %in% c("STARR")) &  df.all3$Done == "Jia" ), ]
-STARR <- STARR %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20220919")
-write.csv(STARR[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.agg.part0919.csv", row.names=FALSE)
-write.csv(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.part0919.csv", row.names=FALSE)
-
-
-STARR <- df.all3[which((df.all3$Project %in% c("STARR")) &  df.all3$Done == "Jia" ), ]
-STARR <- STARR %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
-                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20220923")
-write.csv(STARR[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.agg.part0923.csv", row.names=FALSE)
-write.csv(STARR, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.all.part0923.csv", row.names=FALSE)
+Part <- df.all3[which(df.all3$Done == "Jia" & df.all3$Species == "Human"), ]
+Part <- Part %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
+                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20220929")
+write.csv(Part[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_0929.csv", row.names=FALSE)
+write.csv(Part, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg.all.infor_0929.csv", row.names=FALSE)
 ```
 
 
-# Final Project based
+
+
+
+
+# Final Project based 
 ```{r}
 cols = c("sample_id", "molecule_h5", "sample_id_ori", "Counts_List")
 df.all3 <- readRDS("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 4_Counts_Sequencing_Combine.Rds")
