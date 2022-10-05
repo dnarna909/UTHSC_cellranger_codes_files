@@ -1,0 +1,396 @@
+---
+title: "Downloading run by CLI_Ubuntu"
+author: "Jia Nie"
+date: "11/8/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#' Title: Options for downloading run folders from BaseSpace Sequence Hub
+# https://emea.support.illumina.com/bulletins/2017/02/options-for-downloading-run-folders-from-basespace-sequence-hub.html 
+#' # BaseSpace Command Line Interface (CLI)
+```{bash}
+bs list appsession --help 
+bs list runs
+bs list projects
+```
+
+#' Runs are downloaded with the following command format:
+# bs download run -i {RunIDNumber} -o {Destination}
+# bs download project -i {RunIDNumber} -o {Destination}
+
+#' Set the working directory
+```{bash}
+mkdir /home/jianie/BCLI
+cd /home/jianie/BCLI
+```
+
+```{bash}
+mkdir /home/jianie/BCLI/20210114_UTA_NovaSeq_L3
+cd /home/jianie/BCLI/20210114_UTA_NovaSeq_L3
+bs download run -i 199742583 -o /home/jianie/BCLI/20210114_UTA_NovaSeq_L3 RunDownload
+```
+
+```{bash}
+mkdir /home/jianie/BCLI/20210126_UTA_NovaSeq_L3
+cd /home/jianie/BCLI/20210126_UTA_NovaSeq_L3
+bs download run -i 200331144 -o /home/jianie/BCLI/20210126_UTA_NovaSeq_L3 RunDownload
+```
+
+```{bash}
+mkdir /home/jianie/BCLI/20210716_L1_L2
+cd /home/jianie/BCLI/20210716_L1_L2
+bs download run -i 211123954 -o /home/jianie/BCLI/20210716_L1_L2 RunDownload
+```
+
+```{bash}
+mkdir /home/jianie/BCLI/20210830_L3
+cd /home/jianie/BCLI/20210830_L3
+bs download run -i 212795585 -o /home/jianie/BCLI/20210830_L3 RunDownload
+# Total time: 4hr
+```
+
+```{bash}
+mkdir /home/jianie/BCLI/20210830_L3_fastq
+cd /home/jianie/BCLI/20210830_L3_fastq
+bs download project -i 292437155 -o /home/jianie/BCLI/20210830_L3_fastq ProjectDownload
+```
+
+```{bash}
+mkdir /home/jianie/BCLI/20211105_L3_L4
+cd /home/jianie/BCLI/20211105_L3_L4
+bs download run -i 218524368 -o /home/jianie/BCLI/20211105_L3_L4 RunDownload
+```
+
+# 20220620 -------------------------------------------------------------------------------------
+
+bs list runs
++-------------------------------+-----------+-----------------------+--------+
+|             Name              |    Id     |    ExperimentName     | Status |
++-------------------------------+-----------+-----------------------+--------+
+| 220616_A00330_0108_BHMW35DSX3 | 237596411 | Nie1-3_Khan4_06162022 | Failed |
++-------------------------------+-----------+-----------------------+--------+
+```{bash}
+mkdir /home/jianie/BCLI/20220616_L1
+cd /home/jianie/BCLI/20220616_L1
+bs download run -i 237596411 -o /home/jianie/BCLI/20220616_L1 RunDownload
+```
+10:30 am - 
+
+
+bs list projects
++-------------------+-----------+--------------+
+|       Name        |    Id     |  TotalSize   |
++-------------------+-----------+--------------+
+| P08232021         | 292437155 | 449685938329 |
+| Nie_L2_P202220002 | 355038806 | 501577549396 |
+| Nie_L3_P202220003 | 355038807 | 495796741847 |
+| Nie_P20220004     | 355040048 | 464120750995 |
+| Nie_P20220005     | 355040049 | 498606194266 |
++-------------------+-----------+--------------+
+```{bash}
+mkdir /home/jianie/BCLI/20220620_L2
+cd /home/jianie/BCLI/20220620_L2
+bs download project -i 355038806 -o /home/jianie/BCLI/20220620_L2 ProjectDownload
+
+mkdir /home/jianie/BCLI/20220620_L3
+cd /home/jianie/BCLI/20220620_L3
+bs download project -i 355038807 -o /home/jianie/BCLI/20220620_L3 ProjectDownload
+
+mkdir /home/jianie/BCLI/20220620_L4
+cd /home/jianie/BCLI/20220620_L4
+bs download project -i 355040048 -o /home/jianie/BCLI/20220620_L4 ProjectDownload
+
+mkdir /home/jianie/BCLI/20220620_L5
+cd /home/jianie/BCLI/20220620_L5
+bs download project -i 355040049 -o /home/jianie/BCLI/20220620_L5 ProjectDownload
+```
+
+
+# 20220715 -------------------------------------------------------------------------------------
+
+
+bs list projects
++---------------------------+-----------+--------------+
+|           Name            |    Id     |  TotalSize   |
++---------------------------+-----------+--------------+
+| Nie_L2_P202220002         | 355038806 | 0            |
+| Nie_L3_P202220003         | 355038807 | 0            |
+| Nie_P20220004             | 355040048 | 0            |
+| Nie_P20220005             | 355040049 | 0            |
+| Nie_P20220006_L6_07152022 | 357525693 | 472226829948 |
+| Nie_P20220007_L7_07152022 | 357525694 | 460995965466 |
++---------------------------+-----------+--------------+
+```{bash}
+mkdir /home/jianie/BCLI/20220715_L6
+cd /home/jianie/BCLI/20220715_L6
+bs download project -i 357525693 -o /home/jianie/BCLI/20220715_L6 ProjectDownload
+
+mkdir /home/jianie/BCLI/20220715_L7
+cd /home/jianie/BCLI/20220715_L7
+bs download project -i 357525694 -o /home/jianie/BCLI/20220715_L7 ProjectDownload
+```
+14:30 July 18 to 
+
+
+
+bs list runs
++-------------------------------+-----------+----------------------------+----------+
+|             Name              |    Id     |       ExperimentName       |  Status  |
++-------------------------------+-----------+----------------------------+----------+
+| 220616_A00330_0108_BHMW35DSX3 | 237596411 | Nie1-3_Khan4_06162022      | Failed   |
+| 220715_A00672_0098_AHT7MCDSX3 | 239162933 | Kwon1_Raj2_Nie3-4_07152022 | Complete |
++-------------------------------+-----------+----------------------------+----------+
+```{bash}
+mkdir /home/jianie/BCLI/20220715_L3_L4
+cd /home/jianie/BCLI/20220715_L3_L4
+bs download run -i 239162933 -o /home/jianie/BCLI/20220715_L3_L4 RunDownload
+```
+ 
+
+bs list projects
++---------------------------+-----------+--------------+
+|           Name            |    Id     |  TotalSize   |
++---------------------------+-----------+--------------+
+| Nie_L2_P202220002         | 355038806 | 0            |
+| Nie_L3_P202220003         | 355038807 | 0            |
+| Nie_P20220004             | 355040048 | 0            |
+| Nie_P20220005             | 355040049 | 0            |
+| Nie_P20220006_L6_07152022 | 357525693 | 472226829948 |
+| Nie_P20220007_L7_07152022 | 357525694 | 460995965466 |
+| Nie_P2022008_L8_07182022  | 357902650 | 508249003023 |
+| Nie_P2022009_L9_07182022  | 357902651 | 502122422836 |
++---------------------------+-----------+--------------+
+```{bash}
+mkdir /home/jianie/BCLI/20220718_L8
+cd /home/jianie/BCLI/20220718_L8
+bs download project -i 357902650 -o /home/jianie/BCLI/20220718_L8 ProjectDownload
+
+mkdir /home/jianie/BCLI/20220718_L9
+cd /home/jianie/BCLI/20220718_L9
+bs download project -i 357902651 -o /home/jianie/BCLI/20220718_L9 ProjectDownload
+```
+
+bs list runs
++-------------------------------+-----------+---------------------------------------+----------+
+|             Name              |    Id     |            ExperimentName             |  Status  |
++-------------------------------+-----------+---------------------------------------+----------+
+| 220616_A00330_0108_BHMW35DSX3 | 237596411 | Nie1-3_Khan4_06162022                 | Failed   |
+| 220715_A00672_0098_AHT7MCDSX3 | 239162933 | Kwon1_Raj2_Nie3-4_07152022            | Complete |
+| 220718_A00330_0111_AHLVGVDSX3 | 239329091 | Liang1_Schmid2_Nie3L8_Nie4L9_07182022 | Complete |
++-------------------------------+-----------+---------------------------------------+----------+
+```{bash}
+mkdir /home/jianie/BCLI/20220718_L3_L4
+cd /home/jianie/BCLI/20220718_L3_L4
+bs download run -i 239329091 -o /home/jianie/BCLI/20220718_L3_L4 RunDownload
+```
+
+bs list projects
++----------------------------+-----------+--------------+
+|            Name            |    Id     |  TotalSize   |
++----------------------------+-----------+--------------+
+| Nie_L2_P202220002          | 355038806 | 0            |
+| Nie_L3_P202220003          | 355038807 | 0            |
+| Nie_P20220004              | 355040048 | 0            |
+| Nie_P20220005              | 355040049 | 0            |
+| Nie_P20220006_L6_07152022  | 357525693 | 472226829948 |
+| Nie_P20220007_L7_07152022  | 357525694 | 460995965466 |
+| Nie_P2022008_L8_07182022   | 357902650 | 508249003023 |
+| Nie_P2022009_L9_07182022   | 357902651 | 502122422836 |
+| Nie_P20220010_L10_07212022 | 358132114 | 522194819780 |
+| Nie_P20220011_L11_07212022 | 358132115 | 499178578941 |
++----------------------------+-----------+--------------+
+```{bash}
+mkdir /home/jianie/BCLI/20220722_L10
+cd /home/jianie/BCLI/20220722_L10
+bs download project -i 358132114 -o /home/jianie/BCLI/20220722_L10 ProjectDownload
+
+mkdir /home/jianie/BCLI/20220722_L11
+cd /home/jianie/BCLI/20220722_L11
+bs download project -i 358132115 -o /home/jianie/BCLI/20220722_L11 ProjectDownload
+```
+
+
+bs list runs
++-------------------------------+-----------+---------------------------------------+----------+
+|             Name              |    Id     |            ExperimentName             |  Status  |
++-------------------------------+-----------+---------------------------------------+----------+
+| 220616_A00330_0108_BHMW35DSX3 | 237596411 | Nie1-3_Khan4_06162022                 | Failed   |
+| 220715_A00672_0098_AHT7MCDSX3 | 239162933 | Kwon1_Raj2_Nie3-4_07152022            | Complete |
+| 220718_A00330_0111_AHLVGVDSX3 | 239329091 | Liang1_Schmid2_Nie3L8_Nie4L9_07182022 | Complete |
+| 220721_A00672_0099_BHT7MTDSX3 | 239474261 | Hillhouse1_Roy2_Nie3-4_07212022       | Complete |
++-------------------------------+-----------+---------------------------------------+----------+
+```{bash}
+mkdir /home/jianie/BCLI/20220722_L3_L4
+cd /home/jianie/BCLI/20220722_L3_L4
+bs download run -i 239474261 -o /home/jianie/BCLI/20220722_L3_L4 RunDownload
+```
+
+
+bs list projects
++-----------------------------------+-----------+--------------+
+|               Name                |    Id     |  TotalSize   |
++-----------------------------------+-----------+--------------+
+| Nie_L2_P202220002                 | 355038806 | 0            |
+| Nie_L3_P202220003                 | 355038807 | 0            |
+| Nie_P20220004                     | 355040048 | 0            |
+| Nie_P20220005                     | 355040049 | 0            |
+| Nie_P20220006_L6_07152022         | 357525693 | 472226829948 |
+| Nie_P20220007_L7_07152022         | 357525694 | 460995965466 |
+| Nie_P2022008_L8_07182022          | 357902650 | 508249003023 |
+| Nie_P2022009_L9_07182022          | 357902651 | 502122422836 |
+| Nie_P20220010_L10_07212022        | 358132114 | 522194819780 |
+| Nie_P20220011_L11_07212022        | 358132115 | 499178578941 |
+| Nie_P20220008_L8_2nd-run_01082022 | 359381044 | 504635535848 |
+| Nie_P20220009_L9_2nd-run_01082022 | 359381045 | 505670295728 |
++-----------------------------------+-----------+--------------+
+```{bash}
+mkdir /home/jianie/BCLI/20220801_L8_2nd
+cd /home/jianie/BCLI/20220801_L8_2nd
+bs download project -i 359381044 -o /home/jianie/BCLI/20220801_L8_2nd ProjectDownload
+
+mkdir /home/jianie/BCLI/20220801_L9_2nd
+cd /home/jianie/BCLI/20220801_L9_2nd
+bs download project -i 359381045 -o /home/jianie/BCLI/20220801_L9_2nd ProjectDownload
+```
+
+bs list runs
++-------------------------------+-----------+----------------------------------------+----------+
+|             Name              |    Id     |             ExperimentName             |  Status  |
++-------------------------------+-----------+----------------------------------------+----------+
+| 220616_A00330_0108_BHMW35DSX3 | 237596411 | Nie1-3_Khan4_06162022                  | Failed   |
+| 220715_A00672_0098_AHT7MCDSX3 | 239162933 | Kwon1_Raj2_Nie3-4_07152022             | Complete |
+| 220718_A00330_0111_AHLVGVDSX3 | 239329091 | Liang1_Schmid2_Nie3L8_Nie4L9_07182022  | Complete |
+| 220721_A00672_0099_BHT7MTDSX3 | 239474261 | Hillhouse1_Roy2_Nie3-4_07212022        | Complete |
+|                               | 240485265 | Nie1-2_Vargas3_Hillhouse4_CLI_08012022 | Complete |
++-------------------------------+-----------+----------------------------------------+----------+
+```{bash}
+mkdir /home/jianie/BCLI/20220801_L1_L2
+cd /home/jianie/BCLI/20220801_L1_L2
+bs download run -i 240485265 -o /home/jianie/BCLI/20220801_L1_L2 RunDownload
+```
+
+# 20220914 --------------------------------------------------------------------------------------------------
+bs list projects
++-----------------------------------+-----------+--------------+
+|               Name                |    Id     |  TotalSize   |
++-----------------------------------+-----------+--------------+
+| Nie_L2_P202220002                 | 355038806 | 0            |
+| Nie_L3_P202220003                 | 355038807 | 0            |
+| Nie_P20220004                     | 355040048 | 0            |
+| Nie_P20220005                     | 355040049 | 0            |
+| Nie_P20220006_L6_07152022         | 357525693 | 472226829948 |
+| Nie_P20220007_L7_07152022         | 357525694 | 460995965466 |
+| Nie_P2022008_L8_07182022          | 357902650 | 508249003023 |
+| Nie_P2022009_L9_07182022          | 357902651 | 502122422836 |
+| Nie_P20220010_L10_07212022        | 358132114 | 522194819780 |
+| Nie_P20220011_L11_07212022        | 358132115 | 499178578941 |
+| Nie_P20220008_L8_2nd-run_01082022 | 359381044 | 504635535848 |
+| Nie_P20220009_L9_2nd-run_01082022 | 359381045 | 505670295728 |
+| Nie_P20220013-L13_09142022        | 365644389 | 513931551691 |
+| Nie_P20220014-L14_09142022        | 365644390 | 499752773574 |
+| Nie_P20220015_L15_09142022        | 365644391 | 508650880529 |
++-----------------------------------+-----------+--------------+
+```{bash}
+mkdir /home/jianie/BCLI/20220914_L13
+cd /home/jianie/BCLI/20220914_L13
+bs download project -i 365644389 -o /home/jianie/BCLI/20220914_L13 ProjectDownload
+
+mkdir /home/jianie/BCLI/20220914_L14
+cd /home/jianie/BCLI/20220914_L14
+bs download project -i 365644390 -o /home/jianie/BCLI/20220914_L14 ProjectDownload
+
+mkdir /home/jianie/BCLI/20220914_L15
+cd /home/jianie/BCLI/20220914_L15
+bs download project -i 365644391 -o /home/jianie/BCLI/20220914_L15 ProjectDownload
+
+```
+
+bs list runs
++-------------------------------+-----------+----------------------------------------+----------+
+|             Name              |    Id     |             ExperimentName             |  Status  |
++-------------------------------+-----------+----------------------------------------+----------+
+| 220616_A00330_0108_BHMW35DSX3 | 237596411 | Nie1-3_Khan4_06162022                  | Failed   |
+| 220715_A00672_0098_AHT7MCDSX3 | 239162933 | Kwon1_Raj2_Nie3-4_07152022             | Complete |
+| 220718_A00330_0111_AHLVGVDSX3 | 239329091 | Liang1_Schmid2_Nie3L8_Nie4L9_07182022  | Complete |
+| 220721_A00672_0099_BHT7MTDSX3 | 239474261 | Hillhouse1_Roy2_Nie3-4_07212022        | Complete |
+|                               | 240485265 | Nie1-2_Vargas3_Hillhouse4_CLI_08012022 | Complete |
+| 220914_A00330_0117_BHWL7NDSX3 | 244081840 | Raj1_Nie13-14-15_09142022              | Complete |
+| 220926_A00672_0106_AHY7TNDSX3 | 244911696 | Nie1-4_09262022                        | Failed   |
++-------------------------------+-----------+----------------------------------------+----------+
+```{bash}
+mkdir /home/jianie/BCLI/20220914_L2_L3_L4
+cd /home/jianie/BCLI/20220914_L2_L3_L4
+bs download run -i 244081840 -o /home/jianie/BCLI/20220914_L2_L3_L4 RunDownload
+```
+
+
+
+# 20220926 --------------------------------------------------------------------------------------------------
++-----------------------------------+-----------+--------------+
+|               Name                |    Id     |  TotalSize   |
++-----------------------------------+-----------+--------------+
+| Nie_L2_P202220002                 | 355038806 | 0            |
+| Nie_L3_P202220003                 | 355038807 | 0            |
+| Nie_P20220004                     | 355040048 | 0            |
+| Nie_P20220005                     | 355040049 | 0            |
+| Nie_P20220006_L6_07152022         | 357525693 | 472226829948 |
+| Nie_P20220007_L7_07152022         | 357525694 | 460995965466 |
+| Nie_P2022008_L8_07182022          | 357902650 | 508249003023 |
+| Nie_P2022009_L9_07182022          | 357902651 | 502122422836 |
+| Nie_P20220010_L10_07212022        | 358132114 | 522194819780 |
+| Nie_P20220011_L11_07212022        | 358132115 | 499178578941 |
+| Nie_P20220008_L8_2nd-run_01082022 | 359381044 | 504635535848 |
+| Nie_P20220009_L9_2nd-run_01082022 | 359381045 | 505670295728 |
+| Nie_P20220013-L13_09142022        | 365644389 | 513931551691 |
+| Nie_P20220014-L14_09142022        | 365644390 | 499752773574 |
+| Nie_P20220015_L15_09142022        | 365644391 | 508650880529 |
+| Nie_P202212-UTSA-L12_09262022     | 367002637 | 158450844891 |
+| Nie_P202212-GCCRI-L12_09262022    | 367002638 | 327941802428 |
+| Nie_P20220017-L17_09262022        | 367002640 | 469161679008 |
+| Nie_P20220018-L18_09262022        | 367002641 | 504780551762 |
++-----------------------------------+-----------+--------------+
+
+```{bash}
+mkdir /home/jianie/BCLI/20220926_L12_UTSA
+cd /home/jianie/BCLI/20220926_L12_UTSA
+bs download project -i 367002637 -o /home/jianie/BCLI/20220926_L12_UTSA ProjectDownload
+
+mkdir /home/jianie/BCLI/20220926_L12_GCCRI
+cd /home/jianie/BCLI/20220926_L12_GCCRI
+bs download project -i 367002638 -o /home/jianie/BCLI/20220926_L12_GCCRI ProjectDownload
+
+mkdir /home/jianie/BCLI/20220926_L17
+cd /home/jianie/BCLI/20220926_L17
+bs download project -i 367002640 -o /home/jianie/BCLI/20220926_L17 ProjectDownload
+
+mkdir /home/jianie/BCLI/20220926_L18
+cd /home/jianie/BCLI/20220926_L18
+bs download project -i 367002641 -o /home/jianie/BCLI/20220926_L18 ProjectDownload
+```
+
+
+bs list runs
++-------------------------------+-----------+----------------------------------------+----------+
+|             Name              |    Id     |             ExperimentName             |  Status  |
++-------------------------------+-----------+----------------------------------------+----------+
+| 220616_A00330_0108_BHMW35DSX3 | 237596411 | Nie1-3_Khan4_06162022                  | Failed   |
+| 220715_A00672_0098_AHT7MCDSX3 | 239162933 | Kwon1_Raj2_Nie3-4_07152022             | Complete |
+| 220718_A00330_0111_AHLVGVDSX3 | 239329091 | Liang1_Schmid2_Nie3L8_Nie4L9_07182022  | Complete |
+| 220721_A00672_0099_BHT7MTDSX3 | 239474261 | Hillhouse1_Roy2_Nie3-4_07212022        | Complete |
+|                               | 240485265 | Nie1-2_Vargas3_Hillhouse4_CLI_08012022 | Complete |
+| 220914_A00330_0117_BHWL7NDSX3 | 244081840 | Raj1_Nie13-14-15_09142022              | Complete |
+| 220926_A00672_0106_AHY7TNDSX3 | 244911696 | Nie1-4_09262022                        | Failed   |
++-------------------------------+-----------+----------------------------------------+----------+
+```{bash}
+mkdir /home/jianie/BCLI/20220926
+cd /home/jianie/BCLI/20220926
+bs download run -i 244911696 -o /home/jianie/BCLI/20220926 RunDownload
+```
+
+
+
+

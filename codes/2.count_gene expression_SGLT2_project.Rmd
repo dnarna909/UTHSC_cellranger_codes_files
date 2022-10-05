@@ -1251,6 +1251,31 @@ cellranger count --id=76647_V5_3_combine \
 --project 76647_V5
 # Total time: 1 hr
 
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76647_V5_3_combine_force14101 \
+--fastqs=/media/jianie/SequencingFiles_7/20220926_L12_fastq_UTSA/,/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
+--sample=76647_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=14101 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project 76647_V5
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76664_V11_1_foce8379 \
+--fastqs=/media/jianie/SequencingFiles_7/20220926_L17_fastq/ \
+--sample=76664_V11 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=8379 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project 76664_V11
 ```
 
 ## 20220926_L16 combine

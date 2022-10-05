@@ -1,0 +1,14 @@
+Name,Need Reads,sample_id,Estimated Number of Cells,SequencingNeed,,,,,,
+Fraction of Reads Kept (76664_V11_1st),"11,861",76664_V11_1st,"9,454","112,133,894",2nd,GCCRI,"1,326,283,830",8.45%,"2,750,616,407",48.22%
+Fraction of Reads Kept (STARR_087_1st),"22,036",STARR_087_1st,"9,597","211,479,492",2nd,GCCRI,,15.95%,,
+Fraction of Reads Kept (STARR_099_1st),"31,804",STARR_099_1st,"12,661","402,670,444",2nd,GCCRI,,30.36%,,
+,"60,000",STARR_084,"10,000","600,000,000",1st,GCCRI,,45.24%,,
+Fraction of Reads Kept (STARR_093_1st),"75,297",STARR_093_1st,"14,037","1,056,943,989",2nd,Barshop,"1,424,332,577",74.21%,,51.78%
+Fraction of Reads Kept (STARR_098_1st),"35,177",STARR_098_1st,"10,444","367,388,588",2nd,Barshop,,25.79%,,
+,,,,,,,,,,
+,"90,000",STARR_078,"10,000","900,000,000",1st,Barshop,"2,700,000,000",33.33%,,
+,"90,000",STARR_105,"10,000","900,000,000",1st,Barshop,,33.33%,,
+,"90,000",STARR_104_2,"10,000","900,000,000",1st,Barshop,,33.33%,,
+,"90,000",STARR_101,"10,000","900,000,000",1st,Barshop,"2,700,000,000",33.33%,,
+,"90,000",STARR_095,"10,000","900,000,000",1st,Barshop,,33.33%,,
+,"90,000",STARR_096,"10,000","900,000,000",1st,Barshop,,33.33%,,

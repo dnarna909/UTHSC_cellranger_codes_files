@@ -1684,7 +1684,7 @@ cellranger count --id=STARR_082_2_combine \
 
 ```
 
-## 20220926_L12_fastq combine
+## 20220926_L12 TO l18fastq combine
 ```{bash}
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
@@ -1702,6 +1702,19 @@ cellranger count --id=STARR_051_3_combine \
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_051_3_combine_force9998 \
+--fastqs=/media/jianie/SequencingFiles_7/20220926_L12_fastq_UTSA/,/media/jianie/Seagate_SequencingFiles_1/20210830_L3_fastq_dual/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_dual/ \
+--sample=STARR_051 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=9998 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project STARR_051
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=STARR_073_3_combine \
 --fastqs=/media/jianie/SequencingFiles_7/20220926_L12_fastq_GCCRI/,/media/jianie/SequencingFiles_4/20220722_L11_fastq/,/media/jianie/SequencingFiles_3/20220620_20220004_fastq/ \
 --sample=STARR_073 \
@@ -1713,6 +1726,20 @@ cellranger count --id=STARR_073_3_combine \
 --chemistry threeprime \
 --project STARR_073
 # Total time: 1 hr
+
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_097_1_force4676 \
+--fastqs=/media/jianie/SequencingFiles_7/20220926_L18_fastq/ \
+--sample=STARR_097 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=4676 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project STARR_097
 
 ```
 
