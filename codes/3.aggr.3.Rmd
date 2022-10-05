@@ -23,6 +23,10 @@ mkdir /home/jianie/yard/run_cellranger_aggr
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=Aggr_0929 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_0929.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Aggr_1005 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_1005.csv
 ```
 
 
