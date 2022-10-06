@@ -1283,7 +1283,7 @@ cellranger count --id=76664_V11_1_foce8379 \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=76656_V5_2_combine \
---fastqs=/media/jianie/SequencingFiles_7/20220926_L16_fastq/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_single/ \
+--fastqs=/media/jianie/SequencingFiles_7/20220926_L16_fastq_single/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_single/ \
 --sample=76656_V5 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
