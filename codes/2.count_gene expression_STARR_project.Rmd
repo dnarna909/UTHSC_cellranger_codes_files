@@ -1730,6 +1730,19 @@ cellranger count --id=STARR_073_3_combine \
 
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_073_3_combine_force23217 \
+--fastqs=/media/jianie/SequencingFiles_7/20220926_L12_fastq_GCCRI/,/media/jianie/SequencingFiles_4/20220722_L11_fastq/,/media/jianie/SequencingFiles_3/20220620_20220004_fastq/ \
+--sample=STARR_073 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=23217 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project STARR_073
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=STARR_097_1_force4676 \
 --fastqs=/media/jianie/SequencingFiles_7/20220926_L18_fastq/ \
 --sample=STARR_097 \

@@ -102,6 +102,12 @@ Part <- Part %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
                                                 sample_id = sample_id_ori) %>% filter(AnalysisDate == "20221005")
 write.csv(Part[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_1005.csv", row.names=FALSE)
 write.csv(Part, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg.all.infor_1005.csv", row.names=FALSE)
+
+Part <- df.all3[which(df.all3$Done == "Jia" & df.all3$Species == "Human"), ]
+Part <- Part %>% arrange(sample_id)  %>% rename(sample_id_ori2 = sample_id,
+                                                sample_id = sample_id_ori) %>% filter(AnalysisDate == "20221010")
+write.csv(Part[cols2], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_1010.csv", row.names=FALSE)
+write.csv(Part, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg.all.infor_1010.csv", row.names=FALSE)
 ```
 
 
