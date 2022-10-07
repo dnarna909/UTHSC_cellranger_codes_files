@@ -153,12 +153,15 @@ saveRDS(sglt2.sn.all, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/Re
 
 # SGLT2_single nuclei and sequencing ready samples
 ```{r}
-SGLT2.agg <- readRDS(file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.sn.aggr.info.rds") %>% rename(Status.counts = Status)
-intersect(colnames(sglt2.sn.all), colnames(SGLT2.agg))
+# SGLT2.agg <- readRDS(file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.sn.aggr.info.rds") %>% rename(Status.counts = Status)
+library(readr)
+SGLT2.agg <- read_csv("/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final_20.csv") %>% rename(Status.counts = Status)
+intersect(colnames(sglt2.sn.all), colnames(SGLT2.agg)) # should be character(0)
 SGLT2.sn <- SGLT2.agg %>% left_join(sglt2.sn.all, by = c("sample_id" = "id")) %>% arrange(Agg.List) # %>% select(all_of(starr.samples.cols)) 
 table(SGLT2.sn$Age_Group) 
 table(SGLT2.sn$dbc12_overwt)
-xlsx::write.xlsx(SGLT2.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/SGLT2.sn.aggr.combine.info.xlsx", sheetName = "STARR", row.names=FALSE)
+table(SGLT2.sn$`Event Name`)
+xlsx::write.xlsx(SGLT2.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/SGLT2.sn.aggr.combine.info.xlsx", sheetName = "SGLT2", row.names=FALSE)
 saveRDS(SGLT2.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/SGLT2.sn.aggr.combine.info.rds")
 ```
 

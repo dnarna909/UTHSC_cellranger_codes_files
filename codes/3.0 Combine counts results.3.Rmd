@@ -137,8 +137,8 @@ SGLT2 <- df.all3[which(df.all3$Project == "SGLT2" & df.all3$Agg == "Yes"), ]
 SGLT2 <- SGLT2 %>% arrange(sample_id) %>% mutate(Agg.List = 1:n() )
 write.csv(SGLT2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final.agg.csv", row.names=FALSE)
 write.csv(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final.csv", row.names=FALSE)
-xlsx::write.xlsx(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/SGLT2.sn.aggr.info.xlsx", sheetName = "STARR", row.names=FALSE)
-saveRDS(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.sn.aggr.info.rds")
+# xlsx::write.xlsx(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/SGLT2.sn.aggr.info.xlsx", sheetName = "STARR", row.names=FALSE)
+saveRDS(SGLT2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final.rds")
 ```
 
 STARR & SGLT2-V5 project
