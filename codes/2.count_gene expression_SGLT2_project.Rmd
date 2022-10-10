@@ -1294,6 +1294,20 @@ cellranger count --id=76656_V5_2_combine \
 --project 76656_V5
 # Total time: 1 hr
 
+
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=76656_V5_2_combine_force7982 \
+--fastqs=/media/jianie/SequencingFiles_7/20220926_L16_fastq_single/,/media/jianie/SequencingFiles_3/20211105_L3_L4_fastq_single/ \
+--sample=76656_V5 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=7982 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project 76656_V5
 ```
 
 
