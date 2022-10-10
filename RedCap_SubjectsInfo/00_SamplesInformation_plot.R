@@ -10,8 +10,8 @@ memory.limit(size = 80000000)
 Disk <- c("D:/")
 
 # set parameters for Sample Information
-# sample.info.disk <- "/media/jianie/DATA/"
-sample.info.disk <- "C:/Users/niej/Documents/"
+sample.info.disk <- "/media/jianie/DATA/"
+# sample.info.disk <- "C:/Users/niej/Documents/"
 sample.info.path <- "UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/"
 
 sample.file.name1 <- "sglt2.sn.all.subject.info.rds"
@@ -21,9 +21,7 @@ library(dplyr)
 
 # add patient information ----------------------------------------------------------------
 # SGLT2
-sglt2 <- rio::import(paste0(sample.info.disk, sample.info.path, sample.file.name1),  
-                    sheet = "SGLT2") %>% mutate(Project = "SGLT2", Group = ifelse(`Group Assignment:` == "Nutritional counseling", "C",
-                                                                                  ifelse(`Group Assignment:` == "Drug - dapagliflozin", "D", NA)))
+sglt2 <- readRDS(paste0(sample.info.disk, sample.info.path, sample.file.name1)) %>% mutate(Project = "SGLT2")
 col.name <- sglt2 %>% 
   select_if(is.character) %>% 
   select(any_of(c("Height (inches)", "Weight (pounds)", 
@@ -37,7 +35,7 @@ starr <-readRDS(paste0(sample.info.disk, sample.info.path, sample.file.name2)) %
 starr %>%  select_if(is.character)
 starr %>% select_if(is.numeric)
 
-
+# import STARR insulin
 library(readxl)
 # insulin result -1
 Insulin_Results_1 <- rio::import(paste0(sample.info.disk, sample.info.path, "STARR_Insulin Measurement.xlsx"),  
@@ -50,6 +48,13 @@ Insulin_Results_2 <- rio::import(paste0(sample.info.disk, sample.info.path, "STA
 starr <- starr %>% left_join(Insulin_Results_1, by = c("subject_id" = "id") ) %>% 
   left_join(Insulin_Results_2, by = c("subject_id" = "id") ) 
 colnames(starr)
+
+# import SGLT2 insulin
+Insulin_Results_3 <- rio::import(paste0(sample.info.disk, sample.info.path, "SGLT2_Insulin Measurement.xlsx"),  
+                                 sheet = "Insulin_1", col_types = c("text", "text", "numeric", "numeric"))
+sglt2 <- sglt2 %>% left_join(Insulin_Results_3, by = c("subject_id" = "id") ) 
+colnames(sglt2)
+
 
 # combine
 # patient <- sglt2 %>% full_join(starr, by = intersect(colnames(sglt2), colnames(starr))) 

@@ -25,7 +25,7 @@ for (package in packageList) {
 aggr <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 3_cellranger_counts_summary.xlsx") %>% rename(Status.counts = Status)
 ```
 
-# sequencing form
+# Generate sequencing form
 ```{r}
 select.cols <- c("Counts_List","SQ_List","Sequencing_Date", "Lane","sample_id","sample_id_ori","Agg","Status.counts","Project","AnalysisDate","Done","Sequencing_Type" )
 select.starrs <- aggr %>% dplyr::filter(Project == "STARR" & Agg == "Yes") %>% arrange(sample_id) %>% pull(sample_id)
@@ -35,15 +35,30 @@ select.sglt2 <- aggr %>% dplyr::filter(Project == "SGLT2" & Agg == "Yes") %>% ar
 sequencing.info <- aggr %>% dplyr::filter(Project == "STARR" &  Status.counts == "Original" & 
                                      ! Agg %in% c("Hf test", "FZ test", "Bar test") &
                                      sample_id %in% select.starrs) %>% arrange(sample_id) %>% select(all_of(select.cols))
-xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/Sequencing Files.xlsx", row.names=FALSE)
+xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/Sequencing Files_STARR.xlsx", row.names=FALSE)
+
+# SGLT2
+sequencing.info <- aggr %>% dplyr::filter(Project == "SGLT2" &  Status.counts == "Original" & 
+                                     ! Agg %in% c("Hf test", "FZ test", "Bar test") &
+                                     sample_id %in% select.sglt2) %>% arrange(sample_id) %>% select(all_of(select.cols))
+xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/Sequencing Files_SGLT2.xlsx", row.names=FALSE)
 
 # STARR & SGLT2
 sequencing.info <- aggr %>% dplyr::filter(Project %in% c("STARR", "SGLT2") &  Status.counts == "Original" & 
                                      ! Agg %in% c("Hf test", "FZ test", "Bar test") &
                                      sample_id %in% c(select.starrs, select.sglt2)) %>% arrange(sample_id) %>% select(all_of(select.cols))
-xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/Sequencing Files_combine.xlsx", row.names=FALSE)
-
+xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/Sequencing Files_combine.xlsx", row.names=FALSE)
 ```
+
+```{r}
+rm(sequencing.info)
+```
+
+
+
+
+
+
 
 # STARR 
 ```{r}
@@ -73,38 +88,46 @@ starr.samples.all$dbc12_overwt <- as.character(starr.samples.all$dbc12_overwt)
 saveRDS(starr.samples.all, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.all.subject.info.rds")
 ```
 
-# STARR_All single nuclei samples
+## STARR_All single nuclei samples
 ```{r}
 starr.sn.all <- starr.samples.all %>% dplyr::filter( SingleNuclei == "Yes") %>% arrange(id) %>% select(all_of(starr.samples.cols)) 
 table(starr.sn.all$Age_Group) 
 table(starr.sn.all$dbc4_diabetes)
-# write.csv(starr.sn.all, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.all.subject.info.csv", row.names=FALSE)
 xlsx::write.xlsx(starr.sn.all, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.all.subject.info.xlsx", sheetName = "STARR", row.names=FALSE)
 saveRDS(starr.sn.all, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.all.subject.info.rds")
 ```
 
-# STARR_single nuclei and sequencing ready samples
+## STARR_single nuclei and sequencing ready samples
 ```{r}
 STARR.agg <- readRDS(file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.sn.aggr.info.rds") %>% rename(Status.counts = Status)
 intersect(colnames(starr.samples.all), colnames(STARR.agg))
 starr.sn <- STARR.agg %>% left_join(starr.samples.all, by = c("sample_id" = "id")) %>% arrange(Agg.List) # %>% select(all_of(starr.samples.cols)) 
 table(starr.sn$Age_Group) 
 table(starr.sn$dbc12_overwt)
-# write.csv(starr.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.subject.info.csv", row.names=FALSE)
 xlsx::write.xlsx(starr.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.aggr.combine.info.xlsx", sheetName = "STARR", row.names=FALSE)
 saveRDS(starr.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.aggr.combine.info.rds")
 ```
+
+
+
+
+
+
+
+
+
 
 
 # SGLT2_All single nuclei samples
 ```{r}
 sglt2.samples.all <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/SGLT2iAndAging-Test1Csh_DATA_LABELS_Final.xlsx") %>% rename(dbc12_overwt = Diabetes)
 colnames(sglt2.samples.all)
-sglt2.samples.cols <- c("id", "SingleNuclei", "Record ID: 766-", "Age at Consent", "Age (years)", "Group Assignment:",
-                        "Gender" , "Event Name" , "Height (inches)" , "Weight (pounds)",  "BMI", "Glucose" , "A1c Value", "dbc12_overwt",
-                        "Blood Pressure Systolic", "Blood Pressure Diastolic", 
-                        "Cholesterol, Total" , "triglycerides" , "HDL", "LDL" )
+c("id", "SingleNuclei", "Record ID: 766-", "Age at Consent", "Age (years)", "Group Assignment:",
+  "Gender" , "Event Name" , "Height (inches)" , "Weight (pounds)",  "BMI", "Glucose" , "A1c Value", "dbc12_overwt",
+  "Blood Pressure Systolic", "Blood Pressure Diastolic", 
+  "Cholesterol, Total" , "triglycerides" , "HDL", "LDL" )
 
+# adjust columns
 sglt2.samples.all <- sglt2.samples.all %>% 
   rename( Age = `Age at Consent` 
   )%>% 
@@ -112,10 +135,13 @@ sglt2.samples.all <- sglt2.samples.all %>%
          Status = ifelse(BMI >= 30, "Obese",
                          ifelse(BMI >= 25 & BMI <30, "Overweight",
                                 ifelse(BMI >= 18.5 & BMI <25, "Lean", "NA"))),
-         patient_id = paste0("766", `Record ID: 766-`)
+         patient_id = paste0("766", `Record ID: 766-`),
+         Group = ifelse(`Group Assignment:` == "Drug - dapagliflozin", "D",
+                        ifelse(`Group Assignment:` == "Nutritional counseling", "C", "NA"))
   )
 select.sglt2 <- sglt2.samples.all %>% dplyr::filter(SingleNuclei == "Yes") %>% arrange(id) %>% pull(patient_id) %>% unique()
 
+# adjust and combine parameters between V1, V5, V11.
 sglt2.V1.cols <- c("id", "Record ID: 766-", "patient_id", "Event Name" , 
                    "Race","Gender",
                    "Age", "Age_Group",
@@ -126,7 +152,7 @@ sglt2.sn.V1 <- sglt2.samples.all %>% dplyr::filter(`Event Name` == "Visit 1") %>
   )
 
 sglt2.V5.cols <- c("id", "Record ID: 766-","patient_id", "Event Name" , 
-                   "SingleNuclei", "Group Assignment:", 
+                   "SingleNuclei", "Group Assignment:", "Group",
                     "Height (inches)" , "Weight (pounds)",  "BMI", "Status"
                    )
 sglt2.sn.V5 <- sglt2.samples.all %>% dplyr::filter(`Event Name` == "Visit 5",  SingleNuclei == "Yes") %>% arrange(id) %>% select(all_of(sglt2.V5.cols)) 
@@ -138,20 +164,28 @@ sglt2.V11.cols <- c("id", "Record ID: 766-","patient_id", "Event Name" ,
                    "Glucose" , "A1c Value")
 sglt2.sn.V11 <- sglt2.samples.all %>% dplyr::filter(`Event Name` == "Visit 11",  SingleNuclei == "Yes") %>% arrange(id) %>% select(all_of(sglt2.V11.cols)) 
 sglt2.sn.V11 <- sglt2.sn.V11 %>% left_join(sglt2.sn.V1 %>% select(!all_of(c("Glucose" , "A1c Value"))) , by = c("Record ID: 766-", "patient_id")) %>%
-  left_join(sglt2.sn.V5 %>% select(all_of(c("patient_id" , "Group Assignment:"))), by = c("patient_id"))
+  left_join(sglt2.sn.V5 %>% select(all_of(c("patient_id" , "Group Assignment:", "Group"))), by = c("patient_id"))
 
-sglt2.sn.all <- sglt2.sn.V11 %>% full_join(sglt2.sn.basal, by = intersect(colnames(sglt2.sn.V11),  colnames(sglt2.sn.basal)) ) %>% arrange(patient_id)
+# combine final
+sglt2.sn.all <- sglt2.sn.V11 %>% full_join(sglt2.sn.basal, by = intersect(colnames(sglt2.sn.V11),  colnames(sglt2.sn.basal)) ) %>% arrange(patient_id) %>%
+  select(!one_of(c("Group Assignment:")))
 sglt2.sn.all$BMI <- as.numeric(sglt2.sn.all$BMI)
 sglt2.sn.all$dbc12_overwt <- as.character(sglt2.sn.all$dbc12_overwt)
 
 table(sglt2.sn.all$Age_Group) 
 table(sglt2.sn.all$dbc12_overwt)
-# write.csv(sglt2.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/sglt2.sn.subject.info.csv", row.names=FALSE)
+
+# save result
 xlsx::write.xlsx(sglt2.sn.all, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/sglt2.sn.all.subject.info.xlsx", sheetName = "SGLT2", row.names=FALSE)
 saveRDS(sglt2.sn.all, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/sglt2.sn.all.subject.info.rds")
 ```
 
-# SGLT2_single nuclei and sequencing ready samples
+
+```{r}
+rm(sglt2.sn.V1, sglt2.sn.V5, sglt2.sn.V11, sglt2.sn.basal, sglt2.samples.all)
+```
+
+## SGLT2_single nuclei and sequencing ready samples
 ```{r}
 # SGLT2.agg <- readRDS(file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.sn.aggr.info.rds") %>% rename(Status.counts = Status)
 library(readr)
@@ -161,9 +195,18 @@ SGLT2.sn <- SGLT2.agg %>% left_join(sglt2.sn.all, by = c("sample_id" = "id")) %>
 table(SGLT2.sn$Age_Group) 
 table(SGLT2.sn$dbc12_overwt)
 table(SGLT2.sn$`Event Name`)
-xlsx::write.xlsx(SGLT2.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/SGLT2.sn.aggr.combine.info.xlsx", sheetName = "SGLT2", row.names=FALSE)
+xlsx::write.xlsx(as.data.frame(SGLT2.sn), file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/SGLT2.sn.aggr.combine.info.xlsx", sheetName = "SGLT2", row.names=FALSE, append = FALSE)
 saveRDS(SGLT2.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/SGLT2.sn.aggr.combine.info.rds")
 ```
+
+```{r}
+rm(SGLT2.agg)
+```
+
+
+
+
+
 
 # STARR_SGLT2_combine single nuclei and sequencing ready samples
 ```{r}
