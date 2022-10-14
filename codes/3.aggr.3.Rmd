@@ -35,6 +35,10 @@ cellranger aggr --id=Aggr_1010 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_f
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=Aggr_1011 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_1011.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Aggr_1013 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_1013.csv
 ```
 
 
