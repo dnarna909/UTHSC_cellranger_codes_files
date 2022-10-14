@@ -148,7 +148,7 @@ sglt2.V1.cols <- c("id", "Record ID: 766-", "patient_id", "Event Name" ,
                    #"Height (inches)" , "Weight (pounds)",  "BMI", "Status",
                    "Glucose" , "A1c Value", "dbc12_overwt")
 sglt2.sn.V1 <- sglt2.samples.all %>% dplyr::filter(`Event Name` == "Visit 1") %>% arrange(id) %>% select(all_of(sglt2.V1.cols)) %>% 
-  rename( id.V1 = id, `Event Name_V1` = `Event Name`,
+  rename( id.V1 = id, `Event Name_V1` = `Event Name`
   )
 
 sglt2.V5.cols <- c("id", "Record ID: 766-","patient_id", "Event Name" , 
@@ -187,9 +187,9 @@ rm(sglt2.sn.V1, sglt2.sn.V5, sglt2.sn.V11, sglt2.sn.basal, sglt2.samples.all)
 
 ## SGLT2_single nuclei and sequencing ready samples
 ```{r}
-# SGLT2.agg <- readRDS(file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.sn.aggr.info.rds") %>% rename(Status.counts = Status)
+SGLT2.agg <- readRDS(file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final.rds") %>% rename(Status.counts = Status)
 library(readr)
-SGLT2.agg <- read_csv("/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final_20.csv") %>% rename(Status.counts = Status)
+# SGLT2.agg <- read_csv("/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final_20.csv") %>% rename(Status.counts = Status)
 intersect(colnames(sglt2.sn.all), colnames(SGLT2.agg)) # should be character(0)
 SGLT2.sn <- SGLT2.agg %>% left_join(sglt2.sn.all, by = c("sample_id" = "id")) %>% arrange(Agg.List) # %>% select(all_of(starr.samples.cols)) 
 table(SGLT2.sn$Age_Group) 
