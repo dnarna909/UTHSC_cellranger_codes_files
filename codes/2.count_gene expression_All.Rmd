@@ -1828,7 +1828,7 @@ cellranger count --id=STARR_075_2nd \
 ```
 
 
-
+# SequencingFiles_6 -------------------------------------------------------------------------------------------------------------------
 ## 20220801_L8_fastq
 ```{bash}
 cd /home/jianie/yard/run_cellranger_count
@@ -2100,6 +2100,7 @@ cellranger count --id=76662_V5 \
 # Total time: 1 hr
 ```
 
+# SequencingFiles_7 -------------------------------------------------------------------------------------------------------------------
 ## 20220926_L12_fastq_UTSA
 ```{bash}
 cd /home/jianie/yard/run_cellranger_count
@@ -2288,4 +2289,20 @@ cellranger count --id=STARR_083_2nd \
 ```
 
 
+## 20221107_L19_fastq
+```{bash}
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_081_2nd \
+--fastqs=/media/jianie/SequencingFiles_7/20220926_L16_fastq_dual/ \
+--sample=STARR_081 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project STARR_081
+# Total time: 1 hr
+```
 
