@@ -2294,7 +2294,7 @@ cellranger count --id=STARR_083_2nd \
 cd /home/jianie/yard/run_cellranger_count
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger count --id=STARR_081_2nd \
---fastqs=/media/jianie/SequencingFiles_7/20220926_L16_fastq_dual/ \
+--fastqs=/media/jianie/SequencingFiles_7/20221107_L19_fastq/ \
 --sample=STARR_081 \
 --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
 --include-introns=TRUE \
