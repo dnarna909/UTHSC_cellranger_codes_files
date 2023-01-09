@@ -146,3 +146,22 @@ cellranger aggr --id=Masternak_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_co
 # 2022-04-14 17:58:55 Shutting down.
 
 ```
+
+
+# He sijia Project
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=He_sijia_aggr --csv=/media/jianie/SijiaHe/Aggregation_24samples.csv
+
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=He_sijia_aggr_F --csv=/media/jianie/SijiaHe/Aggregation_F.csv
+
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=He_sijia_aggr_M --csv=/media/jianie/SijiaHe/Aggregation_M.csv
+```
+
