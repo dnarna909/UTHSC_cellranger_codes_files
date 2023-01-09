@@ -10,8 +10,8 @@ memory.limit(size = 80000000)
 Disk <- c("D:/")
 
 # set parameters for Sample Information
-sample.info.disk <- "/media/jianie/DATA/"
-# sample.info.disk <- "C:/Users/niej/Documents/"
+# sample.info.disk <- "/media/jianie/DATA/"
+sample.info.disk <- "C:/Users/niej/Documents/"
 sample.info.path <- "UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/"
 
 sample.file.name1 <- "sglt2.sn.all.subject.info.rds"
@@ -151,4 +151,83 @@ png(file=paste0(sample.info.disk, sample.info.path, "/", "All_PatientInfor_A1c_G
 p2
 dev.off()
 
+
+
+# SGLT2
+df <- patient
+p <- ggplot(df, aes(x = Age, y = BMI)) + 
+  geom_point(aes(
+     shape= `Event Name`
+    , color=patient_id
+    )
+             # , size = ifelse(df$dbc4_diabetes.factor == 2, 4, 2)
+             ) +
+  labs(title="Patients distribution", y = "Body mass index", x = "Age (years)") +  
+  ylim(min(df$BMI), max(df$BMI)+1) + xlim(30, max(df$Age)+1) + 
+  theme_classic() +
+  theme(panel.border = element_rect(linetype = "solid", fill = NA, colour = "black"),
+        axis.title.x = element_text(color = "black", size = 13, face = "plain"),
+        axis.title.y = element_text(color = "black", size = 13, face = "plain"),
+        axis.text.x = element_text(color = "black", size = 11.5, face = "plain", angle = 0, hjust = 1),
+        plot.title = element_text(color = "black", size = 14, face = "bold", hjust = 0.5),
+        legend.text = element_text(color = "black", size = 10.5, face = "plain"),
+        #legend.position = c(0.9, 0.8),
+        legend.position = c(.11, .61),
+        #legend.position = "none",
+        #legend.justification = c("left", "bottom"),
+        #legend.box.just = "left",
+        legend.spacing.y = unit(0.15, 'cm') ,
+        legend.key.size = unit(0.45, "cm"),
+        legend.background = element_rect( fill = "grey98", color = "grey98", size = 1)
+  ) + 
+  geom_vline(xintercept = 66, color = "black", linetype="dashed", size=0.2) +
+  geom_vline(xintercept = 45, color = "black", linetype="dashed", size=0.2) +
+  geom_hline(yintercept = 29.9, color = "black", linetype="dashed", size=0.2) +
+  geom_hline(yintercept = 24.9, color = "black", linetype="dashed", size=0.2) + 
+  geom_text(aes(color=patient_id),
+            label= substr(df$sample_id, 6,9),#df$Group,  
+            nudge_x=0.5, nudge_y=0.5,
+            check_overlap=F
+  ) + facet_wrap("Group")
+p
+png(file=paste0(sample.info.disk, sample.info.path, "/", "SGLT2_PatientInfor_Age_BMI_distribution.png"), 
+    width=8, height=4, units = "in", res = 300)
+p
+dev.off()
+
+# A1c_Glucose
+p2 <- ggplot(df , aes(x = `A1c Value`, y = Glucose)) + 
+  geom_point(aes(color=SingleNuclei, shape = Gender), size = ifelse(df$dbc4_diabetes.factor == 2, 4, 2)) +
+  labs(title="Patients distribution", y = "Fasting Glucose (mg/dL)", x= "Hemoglobin A1C (%)") + # , y = "BMI", y = "BMI" 
+  ylim(min(df$Glucose), max(df$Glucose)) + xlim(min(df$`A1c Value`), max(df$`A1c Value`)) + 
+  theme_classic() +
+  theme(panel.border = element_rect(linetype = "solid", fill = NA, colour = "black"),
+        axis.title.x = element_text(color = "black", size = 13, face = "plain"),
+        axis.title.y = element_text(color = "black", size = 13, face = "plain"),
+        axis.text.x = element_text(color = "black", size = 11.5, face = "plain", angle = 0, hjust = 1),
+        plot.title = element_text(color = "black", size = 14, face = "bold", hjust = 0.5),
+        legend.text = element_text(color = "black", size = 10.5, face = "plain"),
+        #legend.position = c(0.9, 0.8),
+        legend.position = c(.11, .812),
+        #legend.position = "none",
+        #legend.justification = c("left", "bottom"),
+        #legend.box.just = "left",
+        legend.spacing.y = unit(0.15, 'cm') ,
+        legend.key.size = unit(0.45, "cm"),
+        legend.background = element_rect( fill = "grey98", color = "grey98", size = 1)
+  ) + 
+  geom_vline(xintercept = 5.7, color = "black", linetype="dashed", size=0.2) +
+  geom_vline(xintercept = 6.4, color = "black", linetype="dashed", size=0.2) +
+  geom_hline(yintercept = 100, color = "black", linetype="dashed", size=0.2) +
+  geom_hline(yintercept = 125, color = "black", linetype="dashed", size=0.2) + 
+  geom_text(aes(color=SingleNuclei), 
+            label= df$Group, #substr(df$subject_id, 7,9),
+            nudge_x=0.1, nudge_y=0.2, 
+            check_overlap=F
+  )
+p2
+png(file=paste0(sample.info.disk, sample.info.path, "/", "SGLT2_PatientInfor_A1c_Glucose_distribution.png"), 
+    width=8, height=8, units = "in", res = 300)
+p2
+dev.off()
 
