@@ -183,6 +183,20 @@ saveRDS(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFile
 
 ```
 
+
+STARR & SGLT2_lowest project
+```{r}
+STARR2 <- df.all3[which((df.all3$Project == "STARR" | df.all3$sample_id %in% c("76664_V11")) & 
+                         df.all3$Agg == "Yes") , ]
+STARR2 <- STARR2 %>% arrange(sample_id)
+write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest.agg.csv", row.names=FALSE)
+# xlsx::write.xlsx(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/STARR.SGLT2.agg.xlsx", sheetName = "STARR", row.names=FALSE)
+xlsx::write.xlsx(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest.xlsx", sheetName = "STARR.SGLT2", row.names=FALSE)
+saveRDS(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest.rds")
+
+```
+
+
 STARR Barshop GCCRI compare
 ```{r}
 cols2 = c("sample_id", "molecule_h5", "sample_id_ori2", "Counts_List")
