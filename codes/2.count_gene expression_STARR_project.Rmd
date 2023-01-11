@@ -1857,9 +1857,59 @@ cellranger count --id=STARR_083_2_combine_force18268 \
 
 
 
-
+## 20221107_L21_fastq combine
 ```{bash}
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_087_2_combine \
+--fastqs=/media/jianie/SequencingFiles_7/20220926_L17_fastq/,/media/jianie/SequencingFiles_7/20221107_L21_fastq/ \
+--sample=STARR_087 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project STARR_087
 
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_099_2_combine \
+--fastqs=/media/jianie/SequencingFiles_7/20220926_L17_fastq/,/media/jianie/SequencingFiles_7/20221107_L21_fastq/ \
+--sample=STARR_099 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project STARR_099
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_093_2_combine \
+--fastqs=/media/jianie/SequencingFiles_7/20220926_L18_fastq/,/media/jianie/SequencingFiles_7/20221107_L21_fastq/ \
+--sample=STARR_093 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project STARR_093
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_098_2_combine \
+--fastqs=/media/jianie/SequencingFiles_7/20220926_L18_fastq/,/media/jianie/SequencingFiles_7/20221107_L21_fastq/ \
+--sample=STARR_098 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project STARR_098
 ```
 
 

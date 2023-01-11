@@ -39,6 +39,10 @@ cellranger aggr --id=Aggr_1011 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_f
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=Aggr_1013 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_1013.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Aggr_1013 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_0111.csv
 ```
 
 
@@ -163,5 +167,13 @@ cellranger aggr --id=He_sijia_aggr_F --csv=/media/jianie/SijiaHe/Aggregation_F.c
 cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=He_sijia_aggr_M --csv=/media/jianie/SijiaHe/Aggregation_M.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=He_sijia_aggr_F_M6 --csv=/media/jianie/SijiaHe/Aggregation_F_M6.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=He_sijia_aggr_M_F1 --csv=/media/jianie/SijiaHe/Aggregation_M_F1.csv
 ```
 
