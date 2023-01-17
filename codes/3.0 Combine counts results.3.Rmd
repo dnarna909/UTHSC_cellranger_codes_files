@@ -166,7 +166,7 @@ STARR2 <- df.all3[which((df.all3$Project == "STARR" | df.all3$sample_id %in% c("
                                                                               "76647_V5", "76649_V5", "76656_V5", "76658_V5",
                                                                               "76660_V5", "76661_V5", "76662_V5", "76664_V5")) & 
                          df.all3$Agg == "Yes") , ]
-STARR2 <- STARR2 %>% arrange(sample_id)
+STARR2 <- STARR2 %>% arrange(sample_id)%>% mutate(Agg.List = 1:n() )
 write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.V5.agg.csv", row.names=FALSE)
 xlsx::write.xlsx(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/STARR.SGLT2.V5.agg.xlsx", sheetName = "STARR", row.names=FALSE)
 saveRDS(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.V5.agg.rds")
@@ -175,7 +175,7 @@ saveRDS(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFile
 STARR & SGLT2 project
 ```{r}
 STARR2 <- df.all3[which(df.all3$Project %in% c("SGLT2", "STARR") & df.all3$Agg == "Yes") , ]
-STARR2 <- STARR2 %>% arrange(sample_id)
+STARR2 <- STARR2 %>% arrange(sample_id)%>% mutate(Agg.List = 1:n() )
 write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.agg.csv", row.names=FALSE)
 # xlsx::write.xlsx(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/STARR.SGLT2.agg.xlsx", sheetName = "STARR", row.names=FALSE)
 xlsx::write.xlsx(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.xlsx", sheetName = "STARR.SGLT2", row.names=FALSE)
@@ -186,13 +186,33 @@ saveRDS(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFile
 
 STARR & SGLT2_lowest project
 ```{r}
+df.all3 <- df.all3 %>% arrange(sample_id)
+
 STARR2 <- df.all3[which((df.all3$Project == "STARR" | df.all3$sample_id %in% c("76664_V11")) & 
                          df.all3$Agg == "Yes") , ]
-STARR2 <- STARR2 %>% arrange(sample_id)
+STARR2 <- STARR2 %>% arrange(sample_id)%>% mutate(Agg.List = 1:n() )
 write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest.agg.csv", row.names=FALSE)
 # xlsx::write.xlsx(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/STARR.SGLT2.agg.xlsx", sheetName = "STARR", row.names=FALSE)
 xlsx::write.xlsx(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest.xlsx", sheetName = "STARR.SGLT2", row.names=FALSE)
 saveRDS(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest.rds")
+
+
+STARR2 <- rbind(df.all3[which(df.all3$Project == "STARR" & df.all3$Agg == "Yes") , ][1:14, ], 
+                df.all3[which((df.all3$sample_id %in% c("76664_V11")) & df.all3$Agg == "Yes") , ])
+STARR2 <- STARR2 %>% arrange(sample_id)%>% mutate(Agg.List = 1:n() )
+write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest.agg_15.csv", row.names=FALSE)
+# xlsx::write.xlsx(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/STARR.SGLT2.agg.xlsx", sheetName = "STARR", row.names=FALSE)
+xlsx::write.xlsx(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest_15.xlsx", sheetName = "STARR.SGLT2", row.names=FALSE)
+saveRDS(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest_15.rds")
+
+STARR <- df.all3[which(df.all3$Project == "STARR" & df.all3$Agg == "Yes") , ]
+STARR2 <- rbind(STARR[15:nrow(STARR), ], 
+                df.all3[which((df.all3$sample_id %in% c("76664_V11")) & df.all3$Agg == "Yes") , ])
+STARR2 <- STARR2 %>% arrange(sample_id)%>% mutate(Agg.List = 1:n() )
+write.csv(STARR2[cols], file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest.agg_15_n.csv", row.names=FALSE)
+# xlsx::write.xlsx(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/2022-08-18 Prepare for UTSA/STARR.SGLT2.agg.xlsx", sheetName = "STARR", row.names=FALSE)
+xlsx::write.xlsx(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest_15_n.xlsx", sheetName = "STARR.SGLT2", row.names=FALSE)
+saveRDS(STARR2, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest_15_n.rds")
 
 ```
 

@@ -114,6 +114,18 @@ cellranger aggr --id=STARR_SGLT2_aggr_lowest --csv=/media/jianie/DATA/UTHSC_cell
 ```
 
 
+STARR & SGLT2_lowest project
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_SGLT2_aggr_lowest_15 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest.agg_15.csv
+
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_SGLT2_aggr_lowest_15_n --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest.agg_15_n.csv
+
+```
 
 
 ## STARR Barshop GCCRI compare
