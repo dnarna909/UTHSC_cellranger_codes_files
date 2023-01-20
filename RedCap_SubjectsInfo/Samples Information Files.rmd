@@ -82,6 +82,7 @@ starr.samples.cols <- c("id", "SingleNuclei", "record_id", "recruited_from",
                         "Age" ,"Age_Group",
                         "Height (inches)" , "Weight (pounds)", "BMI", "Status",
                         "Glucose" ,  "A1c Value", "fasting", "dbc4_diabetes")
+
 starr.samples.all$BMI <- as.numeric(starr.samples.all$BMI)
 starr.samples.all$dbc12_overwt <- as.character(starr.samples.all$dbc12_overwt)
 

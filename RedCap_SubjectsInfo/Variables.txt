@@ -1,0 +1,31 @@
+Fat (g) / Tissue (g) = Tissue (%Fat) = Fat (g) / [Fat (g) + Lean (g)]
+Fat (g) / T-Mass (kg) = Region (%Fat) = Fat (g) / [Fat (g) + Lean (g) + BMC (g)]
+
+
+Fat (g) + Lean (g) = Tissue (g) 
+Lean (g) + BMC (g) = Fat Free (g)
+Fat (g) + Fat Free (g) = T-Mass (kg) or Fat (g) + Lean (g) + BMC (g) = T-Mass (kg) 
+
+BMC (g): Bone Mineral Content. This is amount of bone tissue your skeleton (or a section of it) currently has. This value is expressed in grams (g).
+Fat Free (g): The sum of lean mass and bone mineral content yields your Fat Free Mass. 
+
+Bone density Z-score chart
+This table shows the meanings of different Z-scores:
+
+Z-score	Meaning
++1–2	Bone density is higher than in others of the same age, sex, and body size.
+0	Bone density is the same as in others of the same age, sex, and body size.
+-1	Bone density is lower than in others of the same age, sex, and body size.
+-2	Doctors consider scores higher than this to be normal.
+-2.5	This score or lower indicatesTrusted Source secondary osteoporosis.
+
+
+T-scores versus Z-scores
+T-scores reflect how bone density compares with that of a typical, young, healthy person, whereas Z-scores use the bone density of those with similar characteristics for comparison.
+
+Healthcare professionals may provide DEXA scan results via T-scores and Z-scores. T-scores reveal how high or low a person’s bone density is compared with that of a typical healthy 30-year-old. The lower the scores, the lower the bone density.
+
+T-score	Meaning
+-1.0 or higher	normal
+-1.0 to -2.5	osteopenia, which indicates that the bone mass is low but not low enough to classify as osteoporosis
+-2.5 or below	osteoporosis
