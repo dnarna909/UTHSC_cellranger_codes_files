@@ -189,7 +189,7 @@ cellranger count --id=Rapa_Mar_combine \
 cellranger count --id=10X30901 \
 --fastqs=/media/jianie/Seagate_SequencingFiles_1/20210114_UTA_NovaSeq_L3_fastq/outs/fastq_path/HTJ3WDSXY/ \
 --sample=10X30901 \
---transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--transcriptome=/media/jianie/DATA/refdata/Cjacchus_012021 \
 --expect-cells=10000 \
 --r1-length 26 \
 --r2-length 91 \
@@ -200,12 +200,15 @@ cellranger count --id=10X30901 \
 cellranger count --id=10X30941b \
 --fastqs=/media/jianie/Seagate_SequencingFiles_1/20210114_UTA_NovaSeq_L3_fastq/outs/fastq_path/HTJ3WDSXY/ \
 --sample=10X30941b \
---transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--transcriptome=/media/jianie/DATA/refdata/Cjacchus_012021 \
 --expect-cells=10000 \
 --r1-length 26 \
 --r2-length 91 \
 --chemistry threeprime \
 --project 10X30941b
+
+
+
 
 cellranger count --id=Norton \
 --fastqs=/media/jianie/Seagate_SequencingFiles_1/20210114_UTA_NovaSeq_L3_fastq/outs/fastq_path/HTJ3WDSXY/ \
@@ -216,6 +219,27 @@ cellranger count --id=Norton \
 --r2-length 91 \
 --chemistry threeprime \
 --project Norton
+
+
+cellranger count --id=Evie \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210114_UTA_NovaSeq_L3_fastq/outs/fastq_path/HTJ3WDSXY/ \
+--sample=Evie \
+--transcriptome=/media/jianie/DATA/refdata/Cjacchus_012021 \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 91 \
+--chemistry threeprime \
+--project Evie
+
+cellranger count --id=Olaf \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20210114_UTA_NovaSeq_L3_fastq/outs/fastq_path/HTJ3WDSXY/ \
+--sample=Olaf \
+--transcriptome=/media/jianie/DATA/refdata/Cjacchus_012021 \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 91 \
+--chemistry threeprime \
+--project Olaf
 ```
 
 # combine
