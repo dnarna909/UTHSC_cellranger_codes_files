@@ -267,6 +267,8 @@ cellranger count --id=Evie_force9956 \
 --r2-length 91 \
 --chemistry threeprime \
 --project Evie
+#' 5hrs
+
 
 cellranger count --id=Olaf \
 --fastqs=/media/jianie/Seagate_SequencingFiles_1/20210114_UTA_NovaSeq_L3_fastq/outs/fastq_path/HTJ3WDSXY/ \
@@ -289,6 +291,7 @@ cellranger count --id=Olaf_force7791 \
 --r2-length 91 \
 --chemistry threeprime \
 --project Olaf
+#' 5hrs
 ```
 
 # combine
@@ -342,6 +345,7 @@ cellranger count --id=Norton_combine_force12500 \
 --r2-length 90 \
 --chemistry threeprime \
 --project Norton
+#' 7hrs
 ```
 
 # Seagate_SequencingFiles_2 -----------------------------------------------------------------------------------------------------------
