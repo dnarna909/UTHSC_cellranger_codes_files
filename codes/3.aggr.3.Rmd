@@ -64,6 +64,11 @@ cd /home/jianie/yard/run_cellranger_aggr
 export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
 cellranger aggr --id=Agg_Marmoset0128 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_0128.csv
 
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Agg_Marmoset0206 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_0206.csv
+
+
 ```
 
 
