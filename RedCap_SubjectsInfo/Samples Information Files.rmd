@@ -29,6 +29,7 @@ aggr <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentS
 ```{r}
 select.cols <- c("Counts_List","SQ_List","Sequencing_Date", "Lane","sample_id","sample_id_ori","Agg","Status.counts","Project","AnalysisDate","Done","Sequencing_Type" )
 select.starrs <- aggr %>% dplyr::filter(Project == "STARR" & Agg == "Yes") %>% arrange(sample_id) %>% pull(sample_id)
+select.starrs2 <- aggr %>% dplyr::filter(Project == "STARR" & Agg_43 == "Yes") %>% arrange(sample_id) %>% pull(sample_id)
 select.sglt2 <- aggr %>% dplyr::filter(Project == "SGLT2" & Agg == "Yes") %>% arrange(sample_id) %>% pull(sample_id)
 
 # STARR
@@ -36,6 +37,12 @@ sequencing.info <- aggr %>% dplyr::filter(Project == "STARR" &  Status.counts ==
                                      ! Agg %in% c("Hf test", "FZ test", "Bar test") &
                                      sample_id %in% select.starrs) %>% arrange(sample_id) %>% select(all_of(select.cols))
 xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/Sequencing Files_STARR.xlsx", row.names=FALSE)
+
+sequencing.info <- aggr %>% dplyr::filter(Project == "STARR" &  Status.counts == "Original" & 
+                                     ! Agg %in% c("Hf test", "FZ test", "Bar test") &
+                                     sample_id %in% select.starrs2) %>% arrange(sample_id) %>% select(all_of(select.cols))
+xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/Sequencing Files_STARR_43.xlsx", row.names=FALSE)
+
 
 # SGLT2
 sequencing.info <- aggr %>% dplyr::filter(Project == "SGLT2" &  Status.counts == "Original" & 
@@ -46,15 +53,13 @@ xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_co
 # STARR & SGLT2
 sequencing.info <- aggr %>% dplyr::filter(Project %in% c("STARR", "SGLT2") &  Status.counts == "Original" & 
                                      ! Agg %in% c("Hf test", "FZ test", "Bar test") &
-                                     sample_id %in% c(select.starrs, select.sglt2)) %>% arrange(sample_id) %>% select(all_of(select.cols))
+                                     sample_id %in% c(select.starrs2, select.sglt2)) %>% arrange(sample_id) %>% select(all_of(select.cols))
 xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/Sequencing Files_combine.xlsx", row.names=FALSE)
 ```
 
 ```{r}
 rm(sequencing.info)
 ```
-
-
 
 
 
