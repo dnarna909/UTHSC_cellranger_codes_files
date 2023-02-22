@@ -22,21 +22,258 @@ for (package in packageList) {
 
 
 ```{r}
-aggr <- rio::import("/media/jianie/DATA/UTHSC_cellranger_codes_files/ExperimentSummaryFiles/Form 3_cellranger_counts_summary.xlsx") %>% rename(Status.counts = Status)
+# Disk <- c("/media/jianie/Extreme SSD1/") 
+Disk <- c("D:/")
+file.folder <- c("08_STARR Patient from Redcap")
+basic.file <- "STARR-AllLabTest_DATA_2023-01-24_1405.csv"
+
+# Disk2 <- c("/media/jianie/DATA/") 
+Disk2 <- c("C:/Users/niej/Documents/")
+file.folder2 <- c("UTHSC_cellranger_codes_files/RedCap_SubjectsInfo")
+basic.file2 <- "STARR-BaselineCharacterist_DATA_Final2.xlsx"
+
+
+file.folder3 <- c("UTHSC_cellranger_codes_files/ExperimentSummaryFiles")
+basic.file3 <- "Form 3_cellranger_counts_summary.xlsx"
+
+
+file.folder4 <- c("UTHSC_cellranger_codes_files/AggrFiles")
+basic.file4 <- "STARR.sn.aggr.info.rds"
+
+#Project.folder <- c("2022-08-15 SGLT2 STARR Plasma measurement")
 ```
+
+# STARR
+```{r}
+# basic file from redcap 1: download from online --------------------------------------------------
+STARR.samples.basic <- rio::import(paste0(Disk, file.folder, "/", basic.file)) %>% 
+  mutate(record_id = replace(record_id, record_id == "STRA00100", "STRA0100"),
+         record_id = replace(record_id, record_id == "STRA00101", "STRA0101"),
+         record_id = toupper(record_id)) %>% 
+  arrange(record_id) %>% 
+  as.data.frame() %>% 
+  rename_with(make.names) %>% 
+  rename(Age = `age`, 
+         `Height_inches` =  height, 
+         `Weight_pounds` = weight, 
+         BMI = bmi, 
+         Glucose = glucose, 
+         `A1c_Value`= hemoglobin_a1c)%>%  
+  mutate(Age_Group = ifelse(Age >= 65, "Older", ifelse(Age <65 & Age >= 45, "Middle", "Young")),
+         Gender = ifelse(sex == 1, "Female", "Male"),
+         Status = ifelse(BMI >= 30, "Obese",
+                         ifelse(BMI >= 25 & BMI <30, "Overweight",
+                                ifelse(BMI >= 18.5 & BMI <25, "Lean", "NA")))
+  )
+# dbc4_diabetes
+# 0	I DON'T HAVE THIS CONDITION 0
+# 1	NOT AT ALL 1
+# 2	2: diabetes
+# 3	3
+# 4	4
+# 5	A LOT 5
+
+# dbc12_overwt
+# 0	I DON'T HAVE THIS CONDITION 0
+# 1	NOT AT ALL 1
+# 2	2
+# 3	3
+# 4	4
+# 5	A LOT 5
+colnames(STARR.samples.basic)
+
+# basic file from redcap 2: personal record --------------------------------------------------
+STARR.samples.basic1 <- rio::import(paste0(Disk2, file.folder2, "/", basic.file2)) 
+colnames(STARR.samples.basic1)
+# # sapply(sglt2.samples.basic, class)
+intersect(colnames(STARR.samples.basic), colnames(STARR.samples.basic1))
+
+# merge files
+STARR.samples <- STARR.samples.basic %>% 
+  full_join(STARR.samples.basic1, 
+            by = intersect(colnames(STARR.samples.basic), colnames(STARR.samples.basic1))) %>% 
+  dplyr::rename(sample_id = id) 
+colnames(STARR.samples)
+
+# file from sequencing: generate from counts excel file --------------------------------------------------
+samples.basic3 <- rio::import(paste0(Disk2, file.folder3, "/", basic.file3)) %>%
+  dplyr::rename(Status.counts = Status)
+colnames(samples.basic3)
+intersect(colnames(STARR.samples), colnames(samples.basic3))
+
+# merge files
+STARR.samples <- STARR.samples %>% 
+  full_join(samples.basic3 %>% 
+              dplyr::filter(Project == "STARR"), 
+            by = intersect(colnames(STARR.samples), colnames(samples.basic3)))
+colnames(STARR.samples)
+
+# file from aggregation: generate from aggregation --------------------------------------------------
+Aggreg <- readRDS(file = paste0(Disk2, file.folder4, "/", basic.file4)) %>% 
+  rename(Status.counts = Status) 
+Aggreg$Aggr.Number <- paste0("Sample", stringr::str_pad(Aggreg$Agg.List, 2, pad = "0"))
+Aggreg$Aggr.Sample <- paste0("STARR")
+intersect(colnames(STARR.samples), colnames(Aggreg))
+
+# merge files
+STARR.samples <- STARR.samples %>% 
+  full_join(Aggreg, 
+            by = intersect(colnames(STARR.samples), colnames(Aggreg)))
+colnames(STARR.samples)
+
+
+# final covert columns
+STARR.samples.basic$BMI <- as.numeric(STARR.samples.basic$BMI)
+STARR.samples.basic$dbc12_overwt <- as.character(STARR.samples.basic$dbc12_overwt)
+STARR.samples.basic$dbc4_diabetes <- as.character(STARR.samples.basic$dbc4_diabetes)
+
+# save
+saveRDS(STARR.samples.basic, file = paste0(Disk2, file.folder2, "STARR.all.subject.info.rds"))
+
+
+```
+
+## STARR_All single nuclei samples
+```{r}
+df <- STARR.samples %>% 
+  dplyr::filter( Use == "Yes" & Agg == "Yes")
+table(df$SingleNuclei, df$Agg)
+table(df$Use, df$Agg)
+table(df$Age_Group) 
+table(df$dbc4_diabetes)
+xlsx::write.xlsx(df, file = paste0(Disk2, file.folder2, "STARR.sn.all.subject.info.xlsx"),
+                  sheetName = "STARR", row.names=FALSE)
+saveRDS(df, file = paste0(Disk2, file.folder2, "STARR.sn.all.subject.info.rds"))
+
+
+```
+## STARR_single nuclei and sequencing ready samples
+```{r}
+STARR.agg <- readRDS(file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.sn.aggr.info.rds") %>% rename(Status.counts = Status)
+intersect(colnames(starr.samples.all), colnames(STARR.agg))
+starr.sn <- STARR.agg %>% left_join(starr.samples.all, by = c("sample_id" = "id")) %>% arrange(Agg.List) # %>% select(all_of(starr.samples.cols)) 
+table(starr.sn$Age_Group) 
+table(starr.sn$dbc12_overwt)
+xlsx::write.xlsx(starr.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.aggr.combine.info.xlsx", sheetName = "STARR", row.names=FALSE)
+saveRDS(starr.sn, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/STARR.sn.aggr.combine.info.rds")
+```
+
+
+```{r}
+c("id", "SingleNuclei", "Record ID: 766-", "Age at Consent", "Age (years)", "Group Assignment:",
+  "Gender" , "Event Name" , "Height (inches)" , "Weight (pounds)",  "BMI", "Glucose" , "A1c Value", 
+  "dbc12_overwt", 
+  "Blood Pressure Systolic", "Blood Pressure Diastolic", 
+  "Cholesterol, Total" , "triglycerides" , "HDL", "LDL" )
+  
+  select(!one_of(c("Complete?", "Date:"))) %>%%>%
+  rename(dbc12_overwt = Diabetes) %>%
+  as.data.frame() %>%
+  rename_with(make.names) %>%
+  select(one_of(c("id", "SingleNuclei", "AdiposeTissue", "Plasma", "Finished",
+                  "Record.ID..766.", "Event.Name_Orig", "Event.Name"))
+  )
+  select(!one_of(c("Complete?", "Date:"))) %>% 
+  rename(dbc12_overwt = Diabetes, 
+         X.30.Glucose.1 = `-30 Glucose`, 
+         X.30.Insulin.1 = `-30 Insulin`) %>% 
+  as.data.frame() %>% 
+  rename_with(make.names)
+colnames(STARR.samples.basic)
+
+```
+
+
+
+```{r}
+# Disk <- c("/media/jianie/Extreme SSD1/") 
+Disk <- c("D:/")
+# Disk3 <- c("C:/Users/niej/Desktop/")
+Disk3 <- c("D:/")
+Project.folder <- c("2022-08-15 SGLT2 STARR Plasma measurement")
+file.folder <- c("07_SGLT2 from redcap")
+```
+
+# SGLT2
+```{r}
+# basic file from redcap 1 --------------------------------------------------
+# Disk2 <- c("/media/jianie/DATA/") 
+Disk2 <- c("C:/Users/niej/Documents/")
+basic.file <- "SGLT2iAndAging-Test1Csh_DATA_LABELS_Final.csv"
+sglt2.samples.basic1 <- rio::import(paste0(Disk2,
+                                           "UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/",
+                                           basic.file)) %>%
+  select(!one_of(c("Complete?", "Date:"))) %>%
+  rename(dbc12_overwt = Diabetes) %>%
+  as.data.frame() %>%
+  rename_with(make.names) %>%
+  select(one_of(c("id", "SingleNuclei", "AdiposeTissue", "Plasma", "Finished",
+                  "Record.ID..766.", "Event.Name_Orig", "Event.Name"))
+  )
+colnames(sglt2.samples.basic1)
+# # sapply(sglt2.samples.basic, class)
+c("id", "SingleNuclei", "Record ID: 766-", "Age at Consent", "Age (years)", "Group Assignment:",
+  "Gender" , "Event Name" , "Height (inches)" , "Weight (pounds)",  "BMI", "Glucose" , "A1c Value", 
+  "dbc12_overwt", 
+  "Blood Pressure Systolic", "Blood Pressure Diastolic", 
+  "Cholesterol, Total" , "triglycerides" , "HDL", "LDL" )
+
+
+# basic file from redcap 2 --------------------------------------------------
+# Disk2 <- c("/media/jianie/DATA/") 
+basic.file <- "SGLT2iAndAging-AllLabTest_DATA_LABELS_2022-09-29_1706.csv"
+sglt2.samples.basic <- rio::import(paste0(Disk3, file.folder, "/",
+                                          basic.file)) %>% 
+  select(!one_of(c("Complete?", "Date:"))) %>% 
+  rename(dbc12_overwt = Diabetes, 
+         X.30.Glucose.1 = `-30 Glucose`, 
+         X.30.Insulin.1 = `-30 Insulin`) %>% 
+  as.data.frame() %>% 
+  rename_with(make.names)
+colnames(sglt2.samples.basic)
+intersect(colnames(sglt2.samples.basic), colnames(sglt2.samples.basic1))
+# Diabetes
+# yesno
+# 1	Yes
+# 0	No
+
+
+sglt2.samples.basic <- sglt2.samples.basic %>% 
+  full_join(sglt2.samples.basic1, 
+            by = intersect(colnames(sglt2.samples.basic), colnames(sglt2.samples.basic1)))
+
+# combine -------------------------------------------------------------------
+merge.cols <- intersect(colnames(data.mean), colnames(sglt2.samples.basic))
+sglt2.samples.all <- sglt2.samples.basic %>% 
+  left_join(data.mean, by = merge.cols) %>% 
+  rename_with(make.names)
+colnames(sglt2.samples.all)
+
+```
+
+
 
 # Generate sequencing form
 ```{r}
+<<<<<<< HEAD
 select.cols <- c("Counts_List","SQ_List","Sequencing_Date", "Lane","sample_id","sample_id_ori","Agg","Status.counts","Project","AnalysisDate","Done","Sequencing_Type" )
 select.starrs <- aggr %>% dplyr::filter(Project == "STARR" & Agg == "Yes") %>% arrange(sample_id) %>% pull(sample_id)
 select.starrs2 <- aggr %>% dplyr::filter(Project == "STARR" & Agg_43 == "Yes") %>% arrange(sample_id) %>% pull(sample_id)
 select.sglt2 <- aggr %>% dplyr::filter(Project == "SGLT2" & Agg == "Yes") %>% arrange(sample_id) %>% pull(sample_id)
+=======
+select.sequencing.cols <- c("Counts_List","SQ_List","Sequencing_Date", "Lane","sample_id","sample_id_ori","Agg","Status.counts","Project","AnalysisDate","Done","Sequencing_Type" )
+>>>>>>> 2772705fed8e1d608581d148bf93f27ec5bc56b4
 
 # STARR
-sequencing.info <- aggr %>% dplyr::filter(Project == "STARR" &  Status.counts == "Original" & 
-                                     ! Agg %in% c("Hf test", "FZ test", "Bar test") &
-                                     sample_id %in% select.starrs) %>% arrange(sample_id) %>% select(all_of(select.cols))
-xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/Sequencing Files_STARR.xlsx", row.names=FALSE)
+select.starrs <- samples.basic3 %>% dplyr::filter(Project == "STARR" & Agg == "Yes") %>% arrange(sample_id) %>% pull(sample_id)
+sequencing.info <- samples.basic3 %>% 
+  dplyr::filter(Project == "STARR" &  
+                  Status.counts == "Original" & 
+                  ! Agg %in% c("Hf test", "FZ test", "Bar test") &
+                  sample_id %in% select.starrs) %>% 
+  arrange(sample_id) %>% 
+  select(all_of(select.sequencing.cols))
+xlsx::write.xlsx(sequencing.info, file = paste0(Disk2, file.folder2, "/", "Sequencing Files_STARR.xlsx"), row.names=FALSE)
 
 sequencing.info <- aggr %>% dplyr::filter(Project == "STARR" &  Status.counts == "Original" & 
                                      ! Agg %in% c("Hf test", "FZ test", "Bar test") &
@@ -45,20 +282,39 @@ xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_co
 
 
 # SGLT2
-sequencing.info <- aggr %>% dplyr::filter(Project == "SGLT2" &  Status.counts == "Original" & 
+select.sglt2 <- samples.basic3 %>% dplyr::filter(Project == "SGLT2" & Agg == "Yes") %>% arrange(sample_id) %>% pull(sample_id)
+sequencing.info <- samples.basic3 %>% 
+  dplyr::filter(Project == "SGLT2" &  
+                  Status.counts == "Original" & 
                                      ! Agg %in% c("Hf test", "FZ test", "Bar test") &
-                                     sample_id %in% select.sglt2) %>% arrange(sample_id) %>% select(all_of(select.cols))
-xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/Sequencing Files_SGLT2.xlsx", row.names=FALSE)
+                                     sample_id %in% select.sglt2) %>% 
+  arrange(sample_id) %>% 
+  select(all_of(select.sequencing.cols))
+xlsx::write.xlsx(sequencing.info, file = paste0(Disk2, file.folder2, "/", "Sequencing Files_SGLT2.xlsx"), row.names=FALSE)
 
 # STARR & SGLT2
-sequencing.info <- aggr %>% dplyr::filter(Project %in% c("STARR", "SGLT2") &  Status.counts == "Original" & 
+select.starrs <- samples.basic3 %>% dplyr::filter(Project == "STARR" & Agg_43 == "Yes") %>% arrange(sample_id) %>% pull(sample_id)
+select.sglt2 <- samples.basic3 %>% dplyr::filter(Project == "SGLT2" & Agg_43 == "Yes") %>% arrange(sample_id) %>% pull(sample_id)
+
+sequencing.info <- samples.basic3 %>% 
+  dplyr::filter(Project %in% c("STARR", "SGLT2") &  
+                  Status.counts == "Original" & 
                                      ! Agg %in% c("Hf test", "FZ test", "Bar test") &
+<<<<<<< HEAD
                                      sample_id %in% c(select.starrs2, select.sglt2)) %>% arrange(sample_id) %>% select(all_of(select.cols))
 xlsx::write.xlsx(sequencing.info, file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/RedCap_SubjectsInfo/Sequencing Files_combine.xlsx", row.names=FALSE)
+=======
+                                     sample_id %in% c(select.starrs, select.sglt2)) %>% 
+  arrange(sample_id) %>% 
+  select(all_of(select.sequencing.cols))
+xlsx::write.xlsx(sequencing.info, file = paste0(Disk2, file.folder2, "/", "Sequencing Files_SGLT2_STARR.xlsx"), row.names=FALSE)
+>>>>>>> 2772705fed8e1d608581d148bf93f27ec5bc56b4
 ```
 
+
 ```{r}
-rm(sequencing.info)
+rm(select.sequencing.cols, select.starrs, select.sglt2, sequencing.info)
+
 ```
 
 
