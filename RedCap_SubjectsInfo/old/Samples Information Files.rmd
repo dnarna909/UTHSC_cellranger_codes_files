@@ -20,15 +20,15 @@ for (package in packageList) {
 }
 ```
 
-
+# STARR
 ```{r}
-# Disk <- c("/media/jianie/Extreme SSD1/") 
-Disk <- c("D:/")
+Disk <- c("/media/jianie/Extreme SSD1/") 
+# Disk <- c("D:/")
 file.folder <- c("08_STARR Patient from Redcap")
 basic.file <- "STARR-AllLabTest_DATA_2023-01-24_1405.csv"
 
-# Disk2 <- c("/media/jianie/DATA/") 
-Disk2 <- c("C:/Users/niej/Documents/")
+Disk2 <- c("/media/jianie/DATA/") 
+# Disk2 <- c("C:/Users/niej/Documents/")
 file.folder2 <- c("UTHSC_cellranger_codes_files/RedCap_SubjectsInfo")
 basic.file2 <- "STARR-BaselineCharacterist_DATA_Final2.xlsx"
 
@@ -44,8 +44,8 @@ basic.file4 <- "STARR.sn.aggr.info.rds"
 ```
 
 # STARR
-```{r}
 # basic file from redcap 1: download from online --------------------------------------------------
+```{r}
 STARR.samples.basic <- rio::import(paste0(Disk, file.folder, "/", basic.file)) %>% 
   mutate(record_id = replace(record_id, record_id == "STRA00100", "STRA0100"),
          record_id = replace(record_id, record_id == "STRA00101", "STRA0101"),
@@ -81,8 +81,11 @@ STARR.samples.basic <- rio::import(paste0(Disk, file.folder, "/", basic.file)) %
 # 4	4
 # 5	A LOT 5
 colnames(STARR.samples.basic)
+```
+
 
 # basic file from redcap 2: personal record --------------------------------------------------
+```{r}
 STARR.samples.basic1 <- rio::import(paste0(Disk2, file.folder2, "/", basic.file2)) 
 colnames(STARR.samples.basic1)
 # # sapply(sglt2.samples.basic, class)
@@ -95,7 +98,11 @@ STARR.samples <- STARR.samples.basic %>%
   dplyr::rename(sample_id = id) 
 colnames(STARR.samples)
 
+```
+
+
 # file from sequencing: generate from counts excel file --------------------------------------------------
+```{r}
 samples.basic3 <- rio::import(paste0(Disk2, file.folder3, "/", basic.file3)) %>%
   dplyr::rename(Status.counts = Status)
 colnames(samples.basic3)
@@ -107,8 +114,10 @@ STARR.samples <- STARR.samples %>%
               dplyr::filter(Project == "STARR"), 
             by = intersect(colnames(STARR.samples), colnames(samples.basic3)))
 colnames(STARR.samples)
+```
 
 # file from aggregation: generate from aggregation --------------------------------------------------
+```{r}
 Aggreg <- readRDS(file = paste0(Disk2, file.folder4, "/", basic.file4)) %>% 
   rename(Status.counts = Status) 
 Aggreg$Aggr.Number <- paste0("Sample", stringr::str_pad(Aggreg$Agg.List, 2, pad = "0"))
@@ -120,8 +129,10 @@ STARR.samples <- STARR.samples %>%
   full_join(Aggreg, 
             by = intersect(colnames(STARR.samples), colnames(Aggreg)))
 colnames(STARR.samples)
+```
 
 
+```{r}
 # final covert columns
 STARR.samples.basic$BMI <- as.numeric(STARR.samples.basic$BMI)
 STARR.samples.basic$dbc12_overwt <- as.character(STARR.samples.basic$dbc12_overwt)
@@ -129,11 +140,9 @@ STARR.samples.basic$dbc4_diabetes <- as.character(STARR.samples.basic$dbc4_diabe
 
 # save
 saveRDS(STARR.samples.basic, file = paste0(Disk2, file.folder2, "STARR.all.subject.info.rds"))
-
-
 ```
 
-## STARR_All single nuclei samples
+## STARR_All single nuclei samples:50,000
 ```{r}
 df <- STARR.samples %>% 
   dplyr::filter( Use == "Yes" & Agg == "Yes")
@@ -144,9 +153,9 @@ table(df$dbc4_diabetes)
 xlsx::write.xlsx(df, file = paste0(Disk2, file.folder2, "STARR.sn.all.subject.info.xlsx"),
                   sheetName = "STARR", row.names=FALSE)
 saveRDS(df, file = paste0(Disk2, file.folder2, "STARR.sn.all.subject.info.rds"))
-
-
 ```
+
+
 ## STARR_single nuclei and sequencing ready samples
 ```{r}
 STARR.agg <- readRDS(file = "/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.sn.aggr.info.rds") %>% rename(Status.counts = Status)
