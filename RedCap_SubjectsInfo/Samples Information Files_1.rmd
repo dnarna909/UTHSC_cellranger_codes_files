@@ -229,7 +229,8 @@ rm(df, samples.basic3, STARR.samples.basic1, STARR.samples.basic2)
 Disk1 <- c("/media/jianie/Extreme SSD1/") 
 # Disk1 <- c("D:/")
 file.folder1 <- c("07_SGLT2 from Redcap") # download from online
-basic.file1 <- "SGLT2iAndAging-AllLabTest_DATA_LABELS_2022-09-29_1706.csv"
+# basic.file1 <- "SGLT2iAndAging-AllLabTest_DATA_LABELS_2022-09-29_1706.csv"
+basic.file1 <- "SGLT2iAndAging-AllLabTest_DATA_LABELS_2023-02-24_0934.csv"
 
 Disk2 <- c("/media/jianie/DATA/") 
 # Disk2 <- c("C:/Users/niej/Documents/")
@@ -261,8 +262,10 @@ library("tidyr")
 sglt2.samples.basic1 <- rio::import(paste0(Disk1, file.folder1, "/", basic.file1)) %>% 
   select(!one_of(c("Complete?", "Date:"))) %>% 
   rename(dbc4_diabetes = Diabetes, 
-         X.30.Glucose.1 = `-30 Glucose`, 
-         X.30.Insulin.1 = `-30 Insulin`) %>% 
+         `Visit_Num` = `Visit #`,
+         # X.30.Glucose.1 = `-30 Glucose`, 
+         # X.30.Insulin.1 = `-30 Insulin`
+         ) %>% 
   as.data.frame() %>% 
   rename_with(make.names) %>% 
   mutate(Event.Name1 = stringr::str_split_fixed(Event.Name, " ", 2)[, 2] ) %>%
@@ -397,12 +400,14 @@ for (ss in names(sglt2.combine2)) {
 # combine all patients
 sglt2.combine4 <- bind_rows(sglt2.combine3, .id = "patient_id2")
 
+# merge some basal information between pre and post
 colnames(sglt2.combine4 %>% filter(Pre_Post == "Pre") %>% select_if(is.character))
-cols = c("patient_id" , "Gender" ,"Race", "dbc4_diabetes", 
-  "Group.Assignment." , "Diabetes" , "Age_Group"  , "Status" , "Group")   
+cols = c("patient_id" , "Gender" ,"Race", "dbc4_diabetes", ""
+  "Group.Assignment." # , "Diabetes" , "Age_Group"  , "Status" , "Group"
+  )   
 basal <- sglt2.combine4 %>% filter(Pre_Post == "Pre") %>% select(one_of(cols))
 
-sglt2.combine5 <- sglt2.combine4 %>% select(!one_of(setdiff(cols, "patient_id"))) %>%
+sglt2.combine4 <- sglt2.combine4 %>% select(!one_of(setdiff(cols, "patient_id"))) %>%
   left_join(basal, by = "patient_id")
 
 # adding more colums
@@ -483,6 +488,25 @@ table(sglt2.combine4$Status, sglt2.combine4$SingleNuclei)
 table(sglt2.combine4$dbc4_diabetes)
 table(sglt2.combine4$Diabetes, sglt2.combine4$SingleNuclei)
 table(sglt2.combine4$Group.Assignment.)
+
+# 90 [ethnicity] Ethnicity radio
+# 0 Hispanic or Latino
+# 1 NOT Hispanic or Latino
+# 2 Unknown / Not Reported
+# 
+# Custom alignment: LH
+# 91 [race] Race dropdown
+# 0 American Indian/Alaska Native
+# 1 Asian
+# 2 Native Hawaiian or Other Pacific Islander
+# 3 Black or African American
+# 4 White
+# 5 More Than One Race
+# 6 Unknown / Not Reported
+# 92 [sex] Gender radio
+# 0 Female
+# 1 Male
+
 
 sglt2.samples.final <- sglt2.combine4 
 ```
