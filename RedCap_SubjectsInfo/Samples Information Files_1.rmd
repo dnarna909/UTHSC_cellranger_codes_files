@@ -1,0 +1,595 @@
+---
+title: "Sample information"
+author: "Jia Nie"
+date: "11/3/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+install packages
+```{r package, include=FALSE}
+packageList <- c("rio", "dplyr", "tibble")
+for (package in packageList) {
+  if(!require(package, character.only = TRUE)){
+    install.packages(package); require(package, character.only = TRUE); }
+}
+```
+
+# STARR
+## add files -------------------
+```{r}
+Disk1 <- c("/media/jianie/Extreme SSD1/") 
+# Disk <- c("D:/")
+file.folder1 <- c("08_STARR Patient from Redcap")# download from online
+basic.file1 <- "STARR-AllLabTest_DATA_2023-01-24_1405.csv"
+
+Disk2 <- c("/media/jianie/DATA/") 
+# Disk2 <- c("C:/Users/niej/Documents/")
+file.folder2 <- c("UTHSC_cellranger_codes_files/RedCap_SubjectsInfo") # personal record 
+basic.file2 <- "STARR-BaselineCharacterist_DATA_Final2.xlsx"
+
+Disk3 <- c("/media/jianie/DATA/") 
+# Disk3 <- c("C:/Users/niej/Documents/")
+file.folder3 <- c("UTHSC_cellranger_codes_files/ExperimentSummaryFiles") # generate from counts excel file
+basic.file3 <- "Form 3_cellranger_counts_summary.xlsx"
+
+# Disk4 <- c("/media/jianie/DATA/") 
+# # Disk4 <- c("C:/Users/niej/Documents/") 
+# file.folder4 <- c("UTHSC_cellranger_codes_files/AggrFiles") # aggregation
+# basic.file4 <- "STARR.sn.aggr.info.rds"
+
+
+Disk5 <- c("/media/jianie/Extreme SSD1/") 
+# Disk5 <- c("D:/")
+file.folder5 <- c("2022-08-15 SGLT2 STARR Plasma measurement")
+basic.file5 <- c("All Results.mean.csv")
+```
+
+## basic file from redcap 1: download from online --------------------------------------------------
+```{r}
+STARR.samples.basic1 <- rio::import(paste0(Disk1, file.folder1, "/", basic.file1)) %>% 
+  mutate(record_id = replace(record_id, record_id == "STRA00100", "STRA0100"),
+         record_id = replace(record_id, record_id == "STRA00101", "STRA0101"),
+         record_id = toupper(record_id)) %>% 
+  arrange(record_id) %>% 
+  as.data.frame() %>% 
+  rename_with(make.names) %>% 
+  rename(Age = `age`, 
+         `Height_inches` =  height, 
+         `Weight_pounds` = weight, 
+         BMI = bmi, 
+         Glucose = glucose, 
+         `A1c_Value`= hemoglobin_a1c)%>%  
+  mutate(Age_Group = ifelse(Age >= 60, "Older", ifelse(Age < 60 & Age >= 45, "Middle", "Young")),
+         Gender = ifelse(sex == 1, "Female", "Male"),
+         Status = ifelse(BMI >= 30, "Obese",
+                         ifelse(BMI >= 25 & BMI <30, "Overweight",
+                                ifelse(BMI >= 18.5 & BMI <25, "Lean", 
+                                       ifelse(BMI <18.5, "Underweight", "NA"))))
+  ) %>%
+  mutate(Diabetes = ifelse(dbc4_diabetes == 2, "Yes", "No")) %>% 
+  rename(Blood.Pressure.Systolic = systolic,
+         Blood.Pressure.Diastolic = diastolic, 
+         White.Blood.Cell...WBC = white_blood_cell,                    
+         Red.Blood.Cell...RBC = red_blood_cell,  
+         Hemoglobin = hemoglobin,                         
+         Hematocrit = hematocrit,                       
+         MCV = mcv,                            
+         MCH = mch,      
+         Platelets  = platelets,          
+         Blood.Urea.Nitrogen..BUN. = bun,  
+         Creatinine = creatinine,                
+         Sodium = sodium,
+         Potassium = potassium, 
+         Calcium = calcium,                                  
+         Protein..Total = protein_total,                         
+         Albumin = albumin,              
+         Alkaline.Phosphatase = alkaline_phosphatase,
+         Bilirubin..Total = total_bilirubin,                    
+         AST = ast, 
+         ALT = alt,                     
+         Cholesterol..Total = cholesterol,                       
+         Triglycerides = triglycerides,                               
+         HDL = hdl,
+         LDL = ldl,                                  
+         VLDL = vldl            )%>%
+  mutate(Race = ifelse(race___1 == 2, "Yes", "No"))
+
+table(STARR.samples.basic1$Age_Group)
+table(STARR.samples.basic1$Gender)
+sort(unique(STARR.samples.basic1$BMI))
+table(STARR.samples.basic1$Status)
+table(STARR.samples.basic1$Diabetes)
+
+table(STARR.samples.basic1$dbc4_diabetes)
+# dbc4_diabetes
+# 0	I DON'T HAVE THIS CONDITION 0
+# 1	NOT AT ALL 1
+# 2	2: diabetes
+# 3	3
+# 4	4
+# 5	A LOT 5
+
+table(STARR.samples.basic1$dbc12_overwt)
+# dbc12_overwt
+# 0	I DON'T HAVE THIS CONDITION 0
+# 1	NOT AT ALL 1
+# 2	2
+# 3	3
+# 4	4
+# 5	A LOT 5
+
+table(STARR.samples.basic1$race___1)
+table(STARR.samples.basic1$race___2)
+table(STARR.samples.basic1$race___3)
+table(STARR.samples.basic1$race___4)
+table(STARR.samples.basic1$race___5)
+table(STARR.samples.basic1$race___6)
+table(STARR.samples.basic1$race___7)
+# 37 [race] 2. What is your race? Please indicate all that apply checkbox
+# 1 race___1 American Indian or Alaska Native
+# 2 race___2 Asian
+# 3 race___3 Black or African American
+# 4 race___4 Native Hawaiian or Other Pacific Islander
+# 5 race___5 White
+# 6 race___6 Some other race or origin
+# 7 race___7 DK/REF
+table(STARR.samples.basic1$race___5, STARR.samples.basic1$race___1)
+table(STARR.samples.basic1$ethnicity)
+# 38 [ethnicity] Are you of Hispanic, Latino, or Spanish origin? radio
+# 1 Yes
+# 2 No
+
+colnames(STARR.samples.basic1)
+```
+
+
+## basic file from redcap 2: personal record --------------------------------------------------
+```{r}
+STARR.samples.basic2 <- rio::import(paste0(Disk2, file.folder2, "/", basic.file2)) 
+colnames(STARR.samples.basic2)
+# # sapply(sglt2.samples.basic, class)
+intersect(colnames(STARR.samples.basic1), colnames(STARR.samples.basic2))
+
+# merge files
+STARR.samples <- STARR.samples.basic1 %>% 
+  full_join(STARR.samples.basic2, 
+            by = intersect(colnames(STARR.samples.basic1), colnames(STARR.samples.basic2))) %>% 
+  dplyr::rename(sample_id = id) 
+colnames(STARR.samples)
+```
+
+
+## basic file from sequencing: generate from counts excel file --------------------------------------------------
+```{r}
+# samples.basic3 <- rio::import(paste0(Disk3, file.folder3, "/", basic.file3)) %>%
+#   dplyr::rename(Status.counts = Status)
+# colnames(samples.basic3)
+# intersect(colnames(STARR.samples), colnames(samples.basic3))
+# 
+# # merge files
+# STARR.samples <- STARR.samples %>% 
+#   full_join(samples.basic3 %>%  dplyr::filter(Project == "STARR"), by = intersect(colnames(STARR.samples), colnames(samples.basic3)))
+# colnames(STARR.samples)
+```
+
+## basic file from aggregation: generate from aggregation --------------------------------------------------
+```{r}
+# Aggreg <- readRDS(file = paste0(Disk4, file.folder4, "/", basic.file4)) %>%
+#   rename(Status.counts = Status)
+# Aggreg$Aggr.Number <- paste0("Sample", stringr::str_pad(Aggreg$Agg.List, 2, pad = "0"))
+# Aggreg$Aggr.Sample <- paste0("STARR")
+# intersect(colnames(STARR.samples), colnames(Aggreg))
+# 
+# # merge files
+# STARR.samples <- STARR.samples %>%
+#   full_join(Aggreg,
+#             by = intersect(colnames(STARR.samples), colnames(Aggreg)))
+# colnames(STARR.samples)
+```
+
+## combine all ------------------
+```{r}
+# final covert columns
+STARR.samples$BMI <- as.numeric(STARR.samples$BMI)
+STARR.samples$dbc12_overwt <- as.character(STARR.samples$dbc12_overwt)
+STARR.samples$dbc4_diabetes <- as.character(STARR.samples$dbc4_diabetes)
+STARR.samples$Albumin <- as.numeric(STARR.samples$Albumin)
+
+# save
+saveRDS(STARR.samples, file = paste0(Disk2, file.folder2, "/", "STARR.all.subject.info.rds"))
+```
+
+
+## STARR_All single nuclei samples -------------------
+```{r}
+# df <- STARR.samples %>% dplyr::filter( Use == "Yes" & Agg == "Yes")
+# df <- STARR.samples %>% dplyr::filter( Use == "Yes" & Agg_43 == "Yes")
+# table(df$SingleNuclei, df$Agg_43)
+# table(df$Use, df$Agg_43)
+# table(df$Age_Group) 
+# table(df$dbc4_diabetes)
+# xlsx::write.xlsx(df, file = paste0(Disk2, file.folder2, "/", "STARR.sn.all.subject.info.xlsx"), sheetName = "STARR", row.names=FALSE)
+# saveRDS(df, file = paste0(Disk2, file.folder2, "/", "STARR.sn.all.subject.info.rds"))
+```
+
+```{r}
+rm(df, samples.basic3, STARR.samples.basic1, STARR.samples.basic2)
+```
+
+
+# SGLT2
+## add files -------------
+```{r}
+Disk1 <- c("/media/jianie/Extreme SSD1/") 
+# Disk1 <- c("D:/")
+file.folder1 <- c("07_SGLT2 from Redcap") # download from online
+basic.file1 <- "SGLT2iAndAging-AllLabTest_DATA_LABELS_2022-09-29_1706.csv"
+
+Disk2 <- c("/media/jianie/DATA/") 
+# Disk2 <- c("C:/Users/niej/Documents/")
+file.folder2 <- c("UTHSC_cellranger_codes_files/RedCap_SubjectsInfo")  # download from online by Allison
+basic.file2 <- "SGLT2iAndAging-Test1Csh_DATA_LABELS_Final.csv"
+
+
+Disk3 <- c("/media/jianie/DATA/") 
+# Disk3 <- c("C:/Users/niej/Documents/")
+file.folder3 <- c("UTHSC_cellranger_codes_files/ExperimentSummaryFiles") # generate from counts excel file
+basic.file3 <- "Form 3_cellranger_counts_summary.xlsx"
+
+
+# Disk4 <- c("/media/jianie/DATA/") 
+# # Disk4 <- c("C:/Users/niej/Documents/") 
+# file.folder4 <- c("UTHSC_cellranger_codes_files/AggrFiles") # aggregation
+# basic.file4 <- "STARR.sn.aggr.info.rds"
+
+Disk5 <- c("/media/jianie/Extreme SSD1/") 
+# Disk5 <- c("D:/")
+file.folder5 <- c("2022-08-15 SGLT2 STARR Plasma measurement") # other measurements
+basic.file5 <- c("All Results.mean.csv")
+
+```
+
+## basic file from redcap 1  --------------------------------------------------
+```{r}
+library("tidyr")
+sglt2.samples.basic1 <- rio::import(paste0(Disk1, file.folder1, "/", basic.file1)) %>% 
+  select(!one_of(c("Complete?", "Date:"))) %>% 
+  rename(dbc4_diabetes = Diabetes, 
+         X.30.Glucose.1 = `-30 Glucose`, 
+         X.30.Insulin.1 = `-30 Insulin`) %>% 
+  as.data.frame() %>% 
+  rename_with(make.names) %>% 
+  mutate(Event.Name1 = stringr::str_split_fixed(Event.Name, " ", 2)[, 2] ) %>%
+  mutate(Event.Name2 = stringr::str_split_fixed(Event.Name1, " ", 2)[, 1],
+         Event.Name3 = ifelse(stringr::str_split_fixed(Event.Name1, " ", 2)[, 2] == "",  "",  ".1week")
+  ) %>%
+  mutate(patient_id =   paste0("766", stringr::str_pad( Record.ID..766., 2, pad = "0") ),
+         # Event = readr::parse_number(as.character(Event.Name), na = c("Logs", "Checklists", "Unscheduled Visit", "Repeat Labs"))
+  ) %>%
+  # mutate_at(c('Event'), ~replace_na(., ""))  %>% 
+  mutate(Event_id =  paste0("V", Event.Name2,  ifelse(Event.Name3 == "", "", Event.Name3) ) # paste0("V", stringr::str_pad(Event, 2, pad = "0") )
+  ) %>%
+  mutate(Event_id = replace(Event_id, Event_id == "V", "") ) %>%
+  mutate(sample_id =  paste0(patient_id, ifelse(Event_id == "", "","_") , Event_id) )
+
+colnames(sglt2.samples.basic1)
+table(sglt2.samples.basic1$dbc4_diabetes)
+# dbc4_diabetes
+# 
+# No
+
+# Diabetes
+# yes no
+# 1	Yes
+# 0	No
+```
+
+## basic file from redcap 2 --------------------------------------------------
+```{r}
+sglt2.samples.basic2 <- rio::import(paste0(Disk2, file.folder2, "/", basic.file2)) %>%
+  select(!one_of(c("Complete?", "Date:"))) %>%
+  rename(dbc4_diabetes = Diabetes) %>%
+  as.data.frame() %>%
+  rename_with(make.names) %>% 
+  mutate(Event.Name1 = stringr::str_split_fixed(Event.Name, " ", 2)[, 2] ) %>%
+  mutate(Event.Name2 = stringr::str_split_fixed(Event.Name1, " ", 2)[, 1],
+         Event.Name3 = ifelse(stringr::str_split_fixed(Event.Name1, " ", 2)[, 2] == "",  "",  ".1week")
+  ) %>%
+  mutate(patient_id =   paste0("766", stringr::str_pad( Record.ID..766., 2, pad = "0") ),
+         # Event = readr::parse_number(as.character(Event.Name), na = c("Logs", "Checklists", "Unscheduled Visit", "Repeat Labs"))
+  ) %>%
+  # mutate_at(c('Event'), ~replace_na(., ""))  %>% 
+  mutate(Event_id =  paste0("V", Event.Name2,  ifelse(Event.Name3 == "", "", Event.Name3) ) # paste0("V", stringr::str_pad(Event, 2, pad = "0") )
+  ) %>%
+  mutate(Event_id = replace(Event_id, Event_id == "V", "") ) %>%
+  mutate(sample_id =  paste0(patient_id, ifelse(Event_id == "", "","_") , Event_id) )%>% 
+  rename(Age = `Age..years.`,  # Age.at.Consent, 
+         `Height_inches` =  Height..inches., 
+         `Weight_pounds` =  Weight..pounds., 
+         BMI = BMI, 
+         Glucose = Glucose, 
+         `A1c_Value`= A1c.Value)# 
+  
+intersect(colnames(sglt2.samples.basic1), colnames(sglt2.samples.basic2))
+
+
+merge.cols = c("Event.Name1", "Event.Name2" ,"Event.Name3","patient_id", "Event_id" , "sample_id" , "Record.ID..766.", "Event.Name")
+sglt2.samples <- sglt2.samples.basic1 %>%
+  select(-one_of(setdiff(intersect(colnames(sglt2.samples.basic1), colnames(sglt2.samples.basic2)) , merge.cols )) 
+  )  %>% 
+  full_join(sglt2.samples.basic2, 
+            by = merge.cols)
+```
+
+## combine basic file from redcap 1 and basic file from redcap 2 -----------------------------------
+```{r}
+# change to numeric
+num.cols = c("Fat..g.", "Region...Fat.", "Lean..g.", "Fat.Free..g.", "Albumin", "Bilirubin..Total",
+             "TSH", "Urine.Glucose"    ,         "Urine.Protein"       ,      "Urine.Ketones"   ,        "Urine.Bilirubin",
+             "Urine.Blood"     ,         "Urobilinogen"     ,        "Urine.Nitrite"     ,           "MoCA.Score" ,
+             "Tissue..g." , "BMC..g."  ,"Albumin", "BMI"
+             )
+for (num in num.cols) {
+  sglt2.samples[[num]] <- as.numeric(sglt2.samples[[num]])
+}
+
+# combine based on each visit
+sample_ids <- unique(sglt2.samples$sample_id)
+cols = c('id',  'Event.Name_Orig', 'Event.Name', 'Visit..', 
+'Event.Name1', 'Event.Name2', 'Event.Name3', 'Event_id', 'sample_id')
+sglt2 <- list()
+for (ss in sample_ids) {
+# ss=sample_ids[1]
+sglt2[[stringr::str_split(ss, "_")[[1]][1]]][[ifelse(is.na(stringr::str_split(ss, "_")[[1]][2]), "Others", stringr::str_split(ss, "_")[[1]][2])]] <- sglt2.samples %>% filter(sample_id == ss) %>% mutate_all(~na_if(., '')) %>% select_if(function(x) !(all(is.na(x)) | all(x==""))) %>% select(!one_of(cols))
+# print(ss)
+}
+rm(cols, ss)
+
+# combine based on Pre/Post
+sglt2.combine <- list()
+patient_ids <- unique(sglt2.samples$patient_id)
+pre = c("V1", "V2", "V3", "V4", "V5", "V5.1week")
+post = c("V6", "V7", "V8", "V9", "V10", "V11", "V12")
+for (ss in names(sglt2)) {
+# ss=names(sglt2)[1]
+  if( TRUE %in% (names(sglt2[[ss]]) %in% pre) ) {
+    sglt2.combine[[ss]][["Pre"]] <- bind_rows(sglt2[[ss]][pre], .id = "Event")
+  }
+    if( TRUE %in% (names(sglt2[[ss]]) %in% post) ) {
+      sglt2.combine[[ss]][["Post"]] <- bind_rows(sglt2[[ss]][post], .id = "Event")
+}
+}
+rm(pre, post, ss)
+
+# combine based on Pre/Post
+sglt2.combine2 <- list()
+for (ss in names(sglt2.combine)) {
+  tt.list <- sglt2.combine[[ss]] 
+  if ( length(tt.list) > 1){
+  for (pp in names(tt.list)) {
+    tt <- sglt2.combine[[ss]][[pp]] 
+    n = nrow(tt) + 1
+    myNumCols <- which(unlist(lapply(tt, is.numeric)))
+    myChaCols <- which(unlist(lapply(tt, is.character)))
+    x1 <- colMeans(tt[, myNumCols], na.rm=TRUE)
+    x2 <- apply(tt[, myChaCols], 2, function(x)unique(x[!is.na(x)]))
+    tt[(n), myNumCols] <- x1
+    tt[(n), myChaCols] <- x2
+    sglt2.combine2[[ss]][[pp]]  <- tt[(n),]
+  }
+  print(ss)
+  }
+}
+rm(ss, pp, tt, n, myNumCols, myChaCols, x1, x2 ,tt.list)
+
+# combine Pre and Post
+sglt2.combine3 <- list()
+for (ss in names(sglt2.combine2)) {
+ sglt2.combine3[[ss]] <- bind_rows(sglt2.combine2[[ss]], .id = "Pre_Post")
+}
+
+# combine all patients
+sglt2.combine4 <- bind_rows(sglt2.combine3, .id = "patient_id2")
+
+colnames(sglt2.combine4 %>% filter(Pre_Post == "Pre") %>% select_if(is.character))
+cols = c("patient_id" , "Gender" ,"Race", "dbc4_diabetes", 
+  "Group.Assignment." , "Diabetes" , "Age_Group"  , "Status" , "Group")   
+basal <- sglt2.combine4 %>% filter(Pre_Post == "Pre") %>% select(one_of(cols))
+
+sglt2.combine5 <- sglt2.combine4 %>% select(!one_of(setdiff(cols, "patient_id"))) %>%
+  left_join(basal, by = "patient_id")
+
+# adding more colums
+table(sglt2.combine4$dbc4_diabetes)
+sglt2.prediabetes <- sglt2.combine4 %>% filter(dbc4_diabetes == "No") %>% pull(patient_id)
+sglt2.combine4 <- sglt2.combine4 %>%
+  mutate(Diabetes = ifelse(patient_id %in% sglt2.prediabetes, "No", "Yes"))%>%  
+  mutate(Age_Group = ifelse(Age >= 60, "Older", ifelse(Age <60 & Age >= 45, "Middle", "Young")),
+         # Gender = ifelse(Gender == "Female", "Female", "Male"),
+         Status = ifelse(BMI >= 30, "Obese",
+                         ifelse(BMI >= 25 & BMI <30, "Overweight",
+                                ifelse(BMI >= 18.5 & BMI <25, "Lean", "NA"))),
+         Group = ifelse(`Group.Assignment.` == "Drug - dapagliflozin", "D",
+                        ifelse(`Group.Assignment.` == "Nutritional counseling", "C", "NA")),
+         sample_id = paste0(patient_id, "_", ifelse(Pre_Post == "Pre", "V5", "V11"))
+  )
+
+
+
+# # adjust and combine parameters between V1, V5, V11.
+# sglt2.V1.cols <- c("id", "Record.ID..766.", "patient_id", "Event.Name" ,
+#                    "Race","Gender",
+#                    # "Age", "Age_Group",
+#                    #"Height (inches)" , "Weight (pounds)",  "BMI", "Status",
+#                    "Glucose" , "A1c_Value", "dbc4_diabetes")
+# sglt2.sn.V1 <- sglt2.samples %>% dplyr::filter(`Event.Name` == "Visit 1") %>% arrange(id) %>% select(all_of(sglt2.V1.cols)) %>% 
+#   rename( id.V1 = id, `Event.Name_V1` = `Event.Name`
+#   )
+# 
+# sglt2.V2.cols <- c("id", "Record.ID..766.", "patient_id", "Event.Name" ,
+#                    "Age", "Age_Group"
+# )
+# sglt2.sn.V2 <- sglt2.samples %>% dplyr::filter(`Event.Name` == "Visit 2") %>% arrange(id) %>% select(all_of(sglt2.V2.cols)) %>% 
+#   rename( id.V2 = id, `Event.Name_V2` = `Event.Name`
+#   )
+# 
+# sglt2.V5.cols <- c("id", "Record.ID..766.","patient_id", "Event.Name" ,
+#                    "SingleNuclei", "Group.Assignment.", "Group",
+#                    "Height_inches" , "Weight_pounds",  "BMI", "Status"
+# )
+# sglt2.sn.V5 <- sglt2.samples %>% dplyr::filter(`Event.Name` == "Visit 5") %>% arrange(id) %>% select(all_of(sglt2.V5.cols)) # ,  SingleNuclei == "Yes"
+# sglt2.sn.basal <- sglt2.sn.V5 %>% 
+#   left_join(sglt2.sn.V1, by = c("Record.ID..766.", "patient_id")) %>% 
+#   left_join(sglt2.sn.V2, by = c("Record.ID..766.", "patient_id"))
+# 
+# sglt2.V11.cols <- c("id", "Record.ID..766.","patient_id", "Event.Name" ,
+#                     "SingleNuclei", 
+#                     "Height_inches" , "Weight_pounds",  "BMI", "Status",
+#                     "Glucose" , "A1c_Value")
+# sglt2.sn.V11 <- sglt2.samples %>% dplyr::filter(`Event.Name` == "Visit 11") %>% arrange(id) %>% select(all_of(sglt2.V11.cols)) # ,  SingleNuclei == "Yes"
+# sglt2.sn.V11 <- sglt2.sn.V11 %>% 
+#   left_join(sglt2.sn.V1 %>% select(!all_of(c("Glucose" , "A1c_Value"))) , by = c("Record.ID..766.", "patient_id")) %>%
+#   left_join(sglt2.sn.V2, by = c("Record.ID..766.", "patient_id")) %>%
+#   left_join(sglt2.sn.V5 %>% select(all_of(c("patient_id" , "Group.Assignment.", "Group"))), by = c("patient_id"))
+# 
+# # combine final
+# sglt2.sn.all <- sglt2.sn.V11 %>% 
+#   full_join(sglt2.sn.basal, by = intersect(colnames(sglt2.sn.V11),  colnames(sglt2.sn.basal)) ) %>% 
+#   arrange(patient_id) # %>%
+# # select(!one_of(c("Group.Assignment.")))
+# # sglt2.sn.all$BMI <- as.numeric(sglt2.sn.all$BMI)
+# # sglt2.sn.all$dbc4_diabetes <- as.character(sglt2.sn.all$dbc4_diabetes)
+# 
+# sglt2.samples <- sglt2.samples %>%
+#   select(-one_of(setdiff(intersect(colnames(sglt2.samples), colnames(sglt2.sn.V11)) , "id" ))) %>% 
+#   full_join(sglt2.sn.all, 
+#             by = c("id") ) %>% 
+#   arrange(patient_id)
+
+colnames(sglt2.combine4)
+# # sapply(sglt2.combine4, class)
+table(sglt2.combine4$Age, sglt2.combine4$SingleNuclei)
+table(sglt2.combine4$Age_Group, sglt2.combine4$SingleNuclei)
+table(sglt2.combine4$Gender, sglt2.combine4$SingleNuclei)
+table(sglt2.combine4$BMI)
+sort(unique(sglt2.combine4$BMI))
+table(sglt2.combine4$Status, sglt2.combine4$SingleNuclei)
+table(sglt2.combine4$dbc4_diabetes)
+table(sglt2.combine4$Diabetes, sglt2.combine4$SingleNuclei)
+table(sglt2.combine4$Group.Assignment.)
+
+sglt2.samples.final <- sglt2.combine4 
+```
+
+## compare sglt to STARR
+```{r}
+# "Blood.Pressure.Systolic" "systolic"
+# "Blood.Pressure.Diastolic"   "diastolic" 
+# "White.Blood.Cell...WBC"     "white_blood_cell"                    
+# "Red.Blood.Cell...RBC"     "red_blood_cell"  
+# "Hemoglobin"             "hemoglobin"                         
+# "Hematocrit"              "hematocrit"                       
+# "MCV"                      "mcv"                            
+# "MCH"                      "mch"       
+# "Platelets"            "platelets"          
+# "Blood.Urea.Nitrogen..BUN."    "bun"  
+# "Creatinine"                    "creatinine"                
+#  "Sodium"                   "sodium"
+# "Potassium"                     "potassium" 
+# "Calcium"       "calcium"                                  
+# "Protein..Total"        "protein_total"                         
+# "Albumin"          "albumin"              
+# "Alkaline.Phosphatase"      "alkaline_phosphatase"
+# "Bilirubin..Total"           "total_bilirubin"                    
+# "AST"                   "ast" 
+# "ALT"                       "alt"                  
+# "Cholesterol..Total"      "cholesterol"                       
+# "Triglycerides"     "triglycerides"                               
+# "HDL"           "hdl"
+# "LDL"           "ldl"                                  
+# "VLDL"          "vldl"                                 
+
+# "MCHC"                                           "RDW"                                           
+# "Chloride"                                      
+#    "Manual.eGFR.calculation"                       
+# "Monocyte"                                       "Granulocytes"                                   "Neutrophils"                                   
+#  [61] "Eosinophils"                                    "Basophils"                                      
+#  [73] "CO2"                                           
+# [82] "TSH"                                            "Uric.Acid"                                      "Phosphorus"                                    
+#  [85] "Date.of.lipids"                                 
+#  [91] "PT"                                             "INR"                                            "PTT"                                           
+#  [94] "Urine.pH"                                       "Urine.Glucose"                                  "Urine.Protein"                                 
+#  [97] "Urine.Ketones"                                  "Urine.Bilirubin"                                "Urine.Blood"                                   
+# [100] "Urobilinogen"                                   "Urine.Nitrite"                                  "MoCA.Score"   
+
+```
+
+## basic file from sequencing: generate from counts excel file --------------------------------------------------
+```{r}
+# samples.basic3 <- rio::import(paste0(Disk3, file.folder3, "/", basic.file3)) %>%
+#   dplyr::rename(Status.counts = Status)
+# colnames(samples.basic3)
+# intersect(colnames(sglt2.combine4), colnames(samples.basic3))
+# 
+# # merge files
+# sglt2.samples.final <- sglt2.samples.final %>% 
+#   full_join(samples.basic3 %>% 
+#               dplyr::filter(Project == "SGLT2"), 
+#             by = intersect(colnames(sglt2.combine4), colnames(samples.basic3)))
+# colnames(STARR.samples)
+```
+
+## basic file from lab: lab measurements --------------------------------------------------
+```{r}
+samples.basic5 <- rio::import(file = paste0(Disk5, file.folder5, "/", basic.file5)) # %>%
+  # rename(sample_id = id)
+intersect(colnames(sglt2.samples.final), colnames(samples.basic5))
+
+# merge files
+sglt2.samples.final <- sglt2.samples.final %>%
+  left_join(samples.basic5,
+            by = intersect(colnames(sglt2.samples.final), colnames(samples.basic5)))
+colnames(sglt2.samples.final)
+```
+
+
+
+## combine all ------------------
+```{r}
+# final covert columns
+# sglt2.samples.final$BMI <- as.numeric(sglt2.samples.final$BMI)
+sglt2.samples.final$dbc4_diabetes <- as.character(sglt2.samples.final$dbc4_diabetes)
+# sglt2.samples.final$Albumin <- as.numeric(sglt2.samples.final$Albumin)
+
+# save
+saveRDS(sglt2.samples.final, file = paste0(Disk2, file.folder2, "/",  "SGLT2.all.subject.info.rds"))
+```
+
+
+## sglt2_All single nuclei samples -------------------
+```{r}
+# df <- sglt2.samples.final %>% dplyr::filter( Agg == "Yes")
+# table(df$SingleNuclei, df$Agg)
+# table(df$Age_Group) 
+# table(df$dbc4_diabetes)
+# xlsx::write.xlsx(df, file = paste0(Disk2, file.folder2, "/", "SGLT2.sn.all.subject.info.xlsx"),
+#                 # sheetName = "sglt2", row.names=FALSE)
+# saveRDS(df, file = paste0(Disk2, file.folder2, "/", "SGLT2.sn.all.subject.info.rds"))
+```
+
+```{r}
+rm(samples.basic3, sglt2.prediabetes, sglt2.samples.basic2, sglt2.samples.basic1, sglt2.sn.all, sglt2.sn.basal,
+   sglt2.sn.V1, sglt2.sn.V11, sglt2.sn.V2, sglt2.sn.V5, sglt2.V1.cols, sglt2.V11.cols, sglt2.V2.cols, sglt2.V5.cols, df,
+   num, num.cols, merge.cols)
+```
+
+```{r}
+sessionInfo()
+```
+
