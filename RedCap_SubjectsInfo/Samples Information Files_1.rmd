@@ -62,17 +62,24 @@ STARR.samples.basic1 <- rio::import(paste0(Disk1, file.folder1, "/", basic.file1
   rename(Age = `age`, 
          `Height_inches` =  height, 
          `Weight_pounds` = weight, 
-         BMI = bmi, 
+         # BMI = bmi, 
          Glucose = glucose, 
-         `A1c_Value`= hemoglobin_a1c)%>%  
+         A1c_Value= hemoglobin_a1c)%>%  
+  mutate(         BMI = 703*Weight_pounds/(Height_inches^2) )%>%
   mutate(Age_Group = ifelse(Age >= 60, "Older", ifelse(Age < 60 & Age >= 45, "Middle", "Young")),
          Gender = ifelse(sex == 1, "Female", "Male"),
+         Prediabetes1 = ifelse(A1c_Value >= 5.7 & A1c_Value <= 6.4, "PreD", 
+                               ifelse(A1c_Value > 6.4, "Diabetes", "No" )),
+         Prediabetes2 = ifelse(Glucose >= 100 & Glucose <= 125, "PreD", 
+                               ifelse(Glucose > 125, "Diabetes", "No" )),
          Status = ifelse(BMI >= 30, "Obese",
                          ifelse(BMI >= 25 & BMI <30, "Overweight",
                                 ifelse(BMI >= 18.5 & BMI <25, "Lean", 
                                        ifelse(BMI <18.5, "Underweight", "NA"))))
   ) %>%
-  mutate(Diabetes = ifelse(dbc4_diabetes == 2, "Yes", "No")) %>% 
+  mutate(Diabetes = ifelse(dbc4_diabetes == 2, "Yes", "No"),
+         Ethnicity = ifelse(ethnicity == 1, "Hispanic or Latino", "NOT Hispanic or Latino")
+  ) %>% 
   rename(Blood.Pressure.Systolic = systolic,
          Blood.Pressure.Diastolic = diastolic, 
          White.Blood.Cell...WBC = white_blood_cell,                    
@@ -97,8 +104,10 @@ STARR.samples.basic1 <- rio::import(paste0(Disk1, file.folder1, "/", basic.file1
          Triglycerides = triglycerides,                               
          HDL = hdl,
          LDL = ldl,                                  
-         VLDL = vldl            )%>%
-  mutate(Race = ifelse(race___1 == 2, "Yes", "No"))
+         VLDL = vldl          
+         #,  Ethnicity = ethnicity
+  )%>%
+   mutate(Race = ifelse(race___5 == 1, "White", "No"))
 
 table(STARR.samples.basic1$Age_Group)
 table(STARR.samples.basic1$Gender)
@@ -193,6 +202,19 @@ colnames(STARR.samples)
 # colnames(STARR.samples)
 ```
 
+## basic file from lab: lab measurements --------------------------------------------------
+```{r}
+samples.basic5 <- rio::import(file = paste0(Disk5, file.folder5, "/", basic.file5)) # %>%
+# rename(sample_id = id)
+intersect(colnames(STARR.samples), colnames(samples.basic5))
+
+# merge files
+STARR.samples <- STARR.samples %>%
+  left_join(samples.basic5,
+            by = intersect(colnames(STARR.samples), colnames(samples.basic5)))
+colnames(STARR.samples)
+```
+
 ## combine all ------------------
 ```{r}
 # final covert columns
@@ -200,7 +222,8 @@ STARR.samples$BMI <- as.numeric(STARR.samples$BMI)
 STARR.samples$dbc12_overwt <- as.character(STARR.samples$dbc12_overwt)
 STARR.samples$dbc4_diabetes <- as.character(STARR.samples$dbc4_diabetes)
 STARR.samples$Albumin <- as.numeric(STARR.samples$Albumin)
-
+STARR.samples$Group <- "Notreatment"
+STARR.samples$Pre_Post <- "Notreatment"
 # save
 saveRDS(STARR.samples, file = paste0(Disk2, file.folder2, "/", "STARR.all.subject.info.rds"))
 ```
@@ -229,8 +252,9 @@ rm(df, samples.basic3, STARR.samples.basic1, STARR.samples.basic2)
 Disk1 <- c("/media/jianie/Extreme SSD1/") 
 # Disk1 <- c("D:/")
 file.folder1 <- c("07_SGLT2 from Redcap") # download from online
-# basic.file1 <- "SGLT2iAndAging-AllLabTest_DATA_LABELS_2022-09-29_1706.csv"
-basic.file1 <- "SGLT2iAndAging-AllLabTest_DATA_LABELS_2023-02-24_0934.csv"
+basic.file1 <- "SGLT2iAndAging-AllLabTest_DATA_LABELS_2022-09-29_1706.csv"
+# basic.file1 <- "SGLT2iAndAging-AllLabTest_DATA_LABELS_2023-02-24_0934.csv"
+basic.file1.1 <- "SGLT2iAndAging_DATA_LABELS_2023-02-24_0951.csv"
 
 Disk2 <- c("/media/jianie/DATA/") 
 # Disk2 <- c("C:/Users/niej/Documents/")
@@ -262,10 +286,10 @@ library("tidyr")
 sglt2.samples.basic1 <- rio::import(paste0(Disk1, file.folder1, "/", basic.file1)) %>% 
   select(!one_of(c("Complete?", "Date:"))) %>% 
   rename(dbc4_diabetes = Diabetes, 
-         `Visit_Num` = `Visit #`,
-         # X.30.Glucose.1 = `-30 Glucose`, 
-         # X.30.Insulin.1 = `-30 Insulin`
-         ) %>% 
+         # `Visit_Num` = `Visit #`,
+         X.30.Glucose.1 = `-30 Glucose`,
+         X.30.Insulin.1 = `-30 Insulin`
+  ) %>% 
   as.data.frame() %>% 
   rename_with(make.names) %>% 
   mutate(Event.Name1 = stringr::str_split_fixed(Event.Name, " ", 2)[, 2] ) %>%
@@ -279,7 +303,14 @@ sglt2.samples.basic1 <- rio::import(paste0(Disk1, file.folder1, "/", basic.file1
   mutate(Event_id =  paste0("V", Event.Name2,  ifelse(Event.Name3 == "", "", Event.Name3) ) # paste0("V", stringr::str_pad(Event, 2, pad = "0") )
   ) %>%
   mutate(Event_id = replace(Event_id, Event_id == "V", "") ) %>%
-  mutate(sample_id =  paste0(patient_id, ifelse(Event_id == "", "","_") , Event_id) )
+  mutate(sample_id =  paste0(patient_id, ifelse(Event_id == "", "","_") , Event_id) ) %>%
+  left_join(
+    rio::import(paste0(Disk1, file.folder1, "/", basic.file1.1)) %>% 
+      select(one_of(c("Record ID: 766-", "Event Name", "Ethnicity"))) %>%
+      as.data.frame() %>% 
+      rename_with(make.names) %>% 
+      as.data.frame() , 
+    by = c("Record.ID..766.", "Event.Name"))
 
 colnames(sglt2.samples.basic1)
 table(sglt2.samples.basic1$dbc4_diabetes)
@@ -317,8 +348,20 @@ sglt2.samples.basic2 <- rio::import(paste0(Disk2, file.folder2, "/", basic.file2
          `Weight_pounds` =  Weight..pounds., 
          BMI = BMI, 
          Glucose = Glucose, 
-         `A1c_Value`= A1c.Value)# 
-  
+         `A1c_Value`= A1c.Value)%>%  
+  mutate(BMI = 703*Weight_pounds/(Height_inches^2)) %>%  
+  mutate(
+    Age_Group = ifelse(Age >= 60, "Older", ifelse(Age <60 & Age >= 45, "Middle", "Young")),
+    # Gender = ifelse(Gender == "Female", "Female", "Male"),
+    Prediabetes1 = ifelse(A1c_Value >= 5.7 & A1c_Value <= 6.4, "PreD", 
+                          ifelse(A1c_Value > 6.4, "Diabetes","No" )),
+    Prediabetes2 = ifelse(Glucose >= 100 & Glucose <= 125, "PreD", 
+                          ifelse(Glucose > 125, "Diabetes", "No" )),
+    Status = ifelse(BMI >= 30, "Obese",
+                    ifelse(BMI >= 25 & BMI <30, "Overweight",
+                           ifelse(BMI >= 18.5 & BMI <25, "Lean", "NA")))
+  )
+
 intersect(colnames(sglt2.samples.basic1), colnames(sglt2.samples.basic2))
 
 
@@ -337,7 +380,7 @@ num.cols = c("Fat..g.", "Region...Fat.", "Lean..g.", "Fat.Free..g.", "Albumin", 
              "TSH", "Urine.Glucose"    ,         "Urine.Protein"       ,      "Urine.Ketones"   ,        "Urine.Bilirubin",
              "Urine.Blood"     ,         "Urobilinogen"     ,        "Urine.Nitrite"     ,           "MoCA.Score" ,
              "Tissue..g." , "BMC..g."  ,"Albumin", "BMI"
-             )
+)
 for (num in num.cols) {
   sglt2.samples[[num]] <- as.numeric(sglt2.samples[[num]])
 }
@@ -345,12 +388,12 @@ for (num in num.cols) {
 # combine based on each visit
 sample_ids <- unique(sglt2.samples$sample_id)
 cols = c('id',  'Event.Name_Orig', 'Event.Name', 'Visit..', 
-'Event.Name1', 'Event.Name2', 'Event.Name3', 'Event_id', 'sample_id')
+         'Event.Name1', 'Event.Name2', 'Event.Name3', 'Event_id', 'sample_id')
 sglt2 <- list()
 for (ss in sample_ids) {
-# ss=sample_ids[1]
-sglt2[[stringr::str_split(ss, "_")[[1]][1]]][[ifelse(is.na(stringr::str_split(ss, "_")[[1]][2]), "Others", stringr::str_split(ss, "_")[[1]][2])]] <- sglt2.samples %>% filter(sample_id == ss) %>% mutate_all(~na_if(., '')) %>% select_if(function(x) !(all(is.na(x)) | all(x==""))) %>% select(!one_of(cols))
-# print(ss)
+  # ss=sample_ids[1]
+  sglt2[[stringr::str_split(ss, "_")[[1]][1]]][[ifelse(is.na(stringr::str_split(ss, "_")[[1]][2]), "Others", stringr::str_split(ss, "_")[[1]][2])]] <- sglt2.samples %>% dplyr::filter(sample_id == ss) %>% mutate_all(~na_if(., '')) %>% select_if(function(x) !(all(is.na(x)) | all(x==""))) %>% select(!one_of(cols))
+  # print(ss)
 }
 rm(cols, ss)
 
@@ -360,13 +403,13 @@ patient_ids <- unique(sglt2.samples$patient_id)
 pre = c("V1", "V2", "V3", "V4", "V5", "V5.1week")
 post = c("V6", "V7", "V8", "V9", "V10", "V11", "V12")
 for (ss in names(sglt2)) {
-# ss=names(sglt2)[1]
+  # ss=names(sglt2)[1]
   if( TRUE %in% (names(sglt2[[ss]]) %in% pre) ) {
     sglt2.combine[[ss]][["Pre"]] <- bind_rows(sglt2[[ss]][pre], .id = "Event")
   }
-    if( TRUE %in% (names(sglt2[[ss]]) %in% post) ) {
-      sglt2.combine[[ss]][["Post"]] <- bind_rows(sglt2[[ss]][post], .id = "Event")
-}
+  if( TRUE %in% (names(sglt2[[ss]]) %in% post) ) {
+    sglt2.combine[[ss]][["Post"]] <- bind_rows(sglt2[[ss]][post], .id = "Event")
+  }
 }
 rm(pre, post, ss)
 
@@ -375,18 +418,18 @@ sglt2.combine2 <- list()
 for (ss in names(sglt2.combine)) {
   tt.list <- sglt2.combine[[ss]] 
   if ( length(tt.list) > 1){
-  for (pp in names(tt.list)) {
-    tt <- sglt2.combine[[ss]][[pp]] 
-    n = nrow(tt) + 1
-    myNumCols <- which(unlist(lapply(tt, is.numeric)))
-    myChaCols <- which(unlist(lapply(tt, is.character)))
-    x1 <- colMeans(tt[, myNumCols], na.rm=TRUE)
-    x2 <- apply(tt[, myChaCols], 2, function(x)unique(x[!is.na(x)]))
-    tt[(n), myNumCols] <- x1
-    tt[(n), myChaCols] <- x2
-    sglt2.combine2[[ss]][[pp]]  <- tt[(n),]
-  }
-  print(ss)
+    for (pp in names(tt.list)) {
+      tt <- sglt2.combine[[ss]][[pp]] 
+      n = nrow(tt) + 1
+      myNumCols <- which(unlist(lapply(tt, is.numeric)))
+      myChaCols <- which(unlist(lapply(tt, is.character)))
+      x1 <- colMeans(tt[, myNumCols], na.rm=TRUE)
+      x2 <- apply(tt[, myChaCols], 2, function(x)unique(x[!is.na(x)]))
+      tt[(n), myNumCols] <- x1
+      tt[(n), myChaCols] <- x2
+      sglt2.combine2[[ss]][[pp]]  <- tt[(n),]
+    }
+    print(ss)
   }
 }
 rm(ss, pp, tt, n, myNumCols, myChaCols, x1, x2 ,tt.list)
@@ -394,35 +437,42 @@ rm(ss, pp, tt, n, myNumCols, myChaCols, x1, x2 ,tt.list)
 # combine Pre and Post
 sglt2.combine3 <- list()
 for (ss in names(sglt2.combine2)) {
- sglt2.combine3[[ss]] <- bind_rows(sglt2.combine2[[ss]], .id = "Pre_Post")
+  sglt2.combine3[[ss]] <- bind_rows(sglt2.combine2[[ss]], .id = "Pre_Post")
 }
 
 # combine all patients
 sglt2.combine4 <- bind_rows(sglt2.combine3, .id = "patient_id2")
+```
 
+
+```{r}
 # merge some basal information between pre and post
-colnames(sglt2.combine4 %>% filter(Pre_Post == "Pre") %>% select_if(is.character))
-cols = c("patient_id" , "Gender" ,"Race", "dbc4_diabetes", ""
-  "Group.Assignment." # , "Diabetes" , "Age_Group"  , "Status" , "Group"
-  )   
-basal <- sglt2.combine4 %>% filter(Pre_Post == "Pre") %>% select(one_of(cols))
-
+colnames(sglt2.combine4 %>% dplyr::filter(Pre_Post == "Pre") %>% select_if(is.character))
+cols = c("patient_id" , "Gender" ,"Race", "dbc4_diabetes", "Ethnicity",
+         "Group.Assignment." , "Age_Group"  , "Status" ,"Prediabetes1", "Prediabetes2" # , "Diabetes"  , "Group"
+)   
+basal <- sglt2.combine4 %>% dplyr::filter(Pre_Post == "Pre") %>% select(one_of(cols))
 sglt2.combine4 <- sglt2.combine4 %>% select(!one_of(setdiff(cols, "patient_id"))) %>%
   left_join(basal, by = "patient_id")
 
 # adding more colums
 table(sglt2.combine4$dbc4_diabetes)
-sglt2.prediabetes <- sglt2.combine4 %>% filter(dbc4_diabetes == "No") %>% pull(patient_id)
+sglt2.prediabetes <- sglt2.combine4 %>% dplyr::filter(dbc4_diabetes == "No") %>% pull(patient_id)
 sglt2.combine4 <- sglt2.combine4 %>%
   mutate(Diabetes = ifelse(patient_id %in% sglt2.prediabetes, "No", "Yes"))%>%  
-  mutate(Age_Group = ifelse(Age >= 60, "Older", ifelse(Age <60 & Age >= 45, "Middle", "Young")),
-         # Gender = ifelse(Gender == "Female", "Female", "Male"),
-         Status = ifelse(BMI >= 30, "Obese",
-                         ifelse(BMI >= 25 & BMI <30, "Overweight",
-                                ifelse(BMI >= 18.5 & BMI <25, "Lean", "NA"))),
-         Group = ifelse(`Group.Assignment.` == "Drug - dapagliflozin", "D",
-                        ifelse(`Group.Assignment.` == "Nutritional counseling", "C", "NA")),
-         sample_id = paste0(patient_id, "_", ifelse(Pre_Post == "Pre", "V5", "V11"))
+  mutate(
+    # Age_Group = ifelse(Age >= 60, "Older", ifelse(Age <60 & Age >= 45, "Middle", "Young")),
+    # # Gender = ifelse(Gender == "Female", "Female", "Male"),
+    # Prediabetes1 = ifelse(A1c_Value >= 5.7 & A1c_Value <= 6.4, "Pre", 
+    #                       ifelse(A1c_Value > 6.4, "Diabetes","No" )),
+    # Prediabetes2 = ifelse(Glucose >= 100 & Glucose <= 125, "Pre", 
+    #                       ifelse(Glucose > 125, "Diabetes", "No" )),
+    # Status = ifelse(BMI >= 30, "Obese",
+    #                 ifelse(BMI >= 25 & BMI <30, "Overweight",
+    #                        ifelse(BMI >= 18.5 & BMI <25, "Lean", "NA"))),
+    Group = ifelse(`Group.Assignment.` == "Drug - dapagliflozin", "SGLT2i",
+                   ifelse(`Group.Assignment.` == "Nutritional counseling", "NUT", NA)),
+    sample_id = paste0(patient_id, "_", ifelse(Pre_Post == "Pre", "V5", "V11"))
   )
 
 
@@ -572,7 +622,7 @@ sglt2.samples.final <- sglt2.combine4
 ## basic file from lab: lab measurements --------------------------------------------------
 ```{r}
 samples.basic5 <- rio::import(file = paste0(Disk5, file.folder5, "/", basic.file5)) # %>%
-  # rename(sample_id = id)
+# rename(sample_id = id)
 intersect(colnames(sglt2.samples.final), colnames(samples.basic5))
 
 # merge files

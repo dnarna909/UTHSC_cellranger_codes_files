@@ -211,17 +211,24 @@ basic.file5 &lt;- c(&quot;All Results.mean.csv&quot;)</code></pre>
   rename(Age = `age`, 
          `Height_inches` =  height, 
          `Weight_pounds` = weight, 
-         BMI = bmi, 
+         # BMI = bmi, 
          Glucose = glucose, 
-         `A1c_Value`= hemoglobin_a1c)%&gt;%  
+         A1c_Value= hemoglobin_a1c)%&gt;%  
+  mutate(         BMI = 703*Weight_pounds/(Height_inches^2) )%&gt;%
   mutate(Age_Group = ifelse(Age &gt;= 60, &quot;Older&quot;, ifelse(Age &lt; 60 &amp; Age &gt;= 45, &quot;Middle&quot;, &quot;Young&quot;)),
          Gender = ifelse(sex == 1, &quot;Female&quot;, &quot;Male&quot;),
+         Prediabetes1 = ifelse(A1c_Value &gt;= 5.7 &amp; A1c_Value &lt;= 6.4, &quot;PreD&quot;, 
+                               ifelse(A1c_Value &gt; 6.4, &quot;Diabetes&quot;, &quot;No&quot; )),
+         Prediabetes2 = ifelse(Glucose &gt;= 100 &amp; Glucose &lt;= 125, &quot;PreD&quot;, 
+                               ifelse(Glucose &gt; 125, &quot;Diabetes&quot;, &quot;No&quot; )),
          Status = ifelse(BMI &gt;= 30, &quot;Obese&quot;,
                          ifelse(BMI &gt;= 25 &amp; BMI &lt;30, &quot;Overweight&quot;,
                                 ifelse(BMI &gt;= 18.5 &amp; BMI &lt;25, &quot;Lean&quot;, 
                                        ifelse(BMI &lt;18.5, &quot;Underweight&quot;, &quot;NA&quot;))))
   ) %&gt;%
-  mutate(Diabetes = ifelse(dbc4_diabetes == 2, &quot;Yes&quot;, &quot;No&quot;)) %&gt;% 
+  mutate(Diabetes = ifelse(dbc4_diabetes == 2, &quot;Yes&quot;, &quot;No&quot;),
+         Ethnicity = ifelse(ethnicity == 1, &quot;Hispanic or Latino&quot;, &quot;NOT Hispanic or Latino&quot;)
+  ) %&gt;% 
   rename(Blood.Pressure.Systolic = systolic,
          Blood.Pressure.Diastolic = diastolic, 
          White.Blood.Cell...WBC = white_blood_cell,                    
@@ -246,7 +253,10 @@ basic.file5 &lt;- c(&quot;All Results.mean.csv&quot;)</code></pre>
          Triglycerides = triglycerides,                               
          HDL = hdl,
          LDL = ldl,                                  
-         VLDL = vldl            )
+         VLDL = vldl          
+         #,  Ethnicity = ethnicity
+  )%&gt;%
+   mutate(Race = ifelse(race___5 == 1, &quot;White&quot;, &quot;No&quot;))
 
 table(STARR.samples.basic1$Age_Group)</code></pre>
 <pre><code>## 
@@ -303,6 +313,56 @@ table(STARR.samples.basic1$dbc12_overwt)</code></pre>
 # 3 3
 # 4 4
 # 5 A LOT 5
+
+table(STARR.samples.basic1$race___1)</code></pre>
+<pre><code>## 
+##   0   1 
+## 114   3</code></pre>
+<pre class="r"><code>table(STARR.samples.basic1$race___2)</code></pre>
+<pre><code>## 
+##   0   1 
+## 114   3</code></pre>
+<pre class="r"><code>table(STARR.samples.basic1$race___3)</code></pre>
+<pre><code>## 
+##   0   1 
+## 111   6</code></pre>
+<pre class="r"><code>table(STARR.samples.basic1$race___4)</code></pre>
+<pre><code>## 
+##   0   1 
+## 116   1</code></pre>
+<pre class="r"><code>table(STARR.samples.basic1$race___5)</code></pre>
+<pre><code>## 
+##  0  1 
+## 18 99</code></pre>
+<pre class="r"><code>table(STARR.samples.basic1$race___6)</code></pre>
+<pre><code>## 
+##   0   1 
+## 109   8</code></pre>
+<pre class="r"><code>table(STARR.samples.basic1$race___7)</code></pre>
+<pre><code>## 
+##   0 
+## 117</code></pre>
+<pre class="r"><code># 37 [race] 2. What is your race? Please indicate all that apply checkbox
+# 1 race___1 American Indian or Alaska Native
+# 2 race___2 Asian
+# 3 race___3 Black or African American
+# 4 race___4 Native Hawaiian or Other Pacific Islander
+# 5 race___5 White
+# 6 race___6 Some other race or origin
+# 7 race___7 DK/REF
+table(STARR.samples.basic1$race___5, STARR.samples.basic1$race___1)</code></pre>
+<pre><code>##    
+##      0  1
+##   0 16  2
+##   1 98  1</code></pre>
+<pre class="r"><code>table(STARR.samples.basic1$ethnicity)</code></pre>
+<pre><code>## 
+##  1  2 
+## 43 66</code></pre>
+<pre class="r"><code># 38 [ethnicity] Are you of Hispanic, Latino, or Spanish origin? radio
+# 1 Yes
+# 2 No
+
 colnames(STARR.samples.basic1)</code></pre>
 <pre><code>##  [1] &quot;record_id&quot;                 &quot;recruited_from&quot;           
 ##  [3] &quot;Age&quot;                       &quot;sex&quot;                      
@@ -329,13 +389,15 @@ colnames(STARR.samples.basic1)</code></pre>
 ## [45] &quot;VLDL&quot;                      &quot;A1c_Value&quot;                
 ## [47] &quot;skin_biopsy&quot;               &quot;fat_biopsy&quot;               
 ## [49] &quot;biopsy_complication&quot;       &quot;Weight_pounds&quot;            
-## [51] &quot;Height_inches&quot;             &quot;BMI&quot;                      
+## [51] &quot;Height_inches&quot;             &quot;bmi&quot;                      
 ## [53] &quot;Blood.Pressure.Systolic&quot;   &quot;Blood.Pressure.Diastolic&quot; 
 ## [55] &quot;fasting&quot;                   &quot;dbc4_diabetes&quot;            
 ## [57] &quot;dbc1_hbp&quot;                  &quot;dbc2_chol&quot;                
-## [59] &quot;dbc12_overwt&quot;              &quot;Age_Group&quot;                
-## [61] &quot;Gender&quot;                    &quot;Status&quot;                   
-## [63] &quot;Diabetes&quot;</code></pre>
+## [59] &quot;dbc12_overwt&quot;              &quot;BMI&quot;                      
+## [61] &quot;Age_Group&quot;                 &quot;Gender&quot;                   
+## [63] &quot;Prediabetes1&quot;              &quot;Prediabetes2&quot;             
+## [65] &quot;Status&quot;                    &quot;Diabetes&quot;                 
+## [67] &quot;Ethnicity&quot;                 &quot;Race&quot;</code></pre>
 </div>
 <div id="basic-file-from-redcap-2-personal-record" class="section level2">
 <h2>basic file from redcap 2: personal record ————————————————–</h2>
@@ -376,14 +438,17 @@ colnames(STARR.samples)</code></pre>
 ## [45] &quot;VLDL&quot;                      &quot;A1c_Value&quot;                
 ## [47] &quot;skin_biopsy&quot;               &quot;fat_biopsy&quot;               
 ## [49] &quot;biopsy_complication&quot;       &quot;Weight_pounds&quot;            
-## [51] &quot;Height_inches&quot;             &quot;BMI&quot;                      
+## [51] &quot;Height_inches&quot;             &quot;bmi&quot;                      
 ## [53] &quot;Blood.Pressure.Systolic&quot;   &quot;Blood.Pressure.Diastolic&quot; 
 ## [55] &quot;fasting&quot;                   &quot;dbc4_diabetes&quot;            
 ## [57] &quot;dbc1_hbp&quot;                  &quot;dbc2_chol&quot;                
-## [59] &quot;dbc12_overwt&quot;              &quot;Age_Group&quot;                
-## [61] &quot;Gender&quot;                    &quot;Status&quot;                   
-## [63] &quot;Diabetes&quot;                  &quot;sample_id&quot;                
-## [65] &quot;SingleNuclei&quot;              &quot;Use&quot;</code></pre>
+## [59] &quot;dbc12_overwt&quot;              &quot;BMI&quot;                      
+## [61] &quot;Age_Group&quot;                 &quot;Gender&quot;                   
+## [63] &quot;Prediabetes1&quot;              &quot;Prediabetes2&quot;             
+## [65] &quot;Status&quot;                    &quot;Diabetes&quot;                 
+## [67] &quot;Ethnicity&quot;                 &quot;Race&quot;                     
+## [69] &quot;sample_id&quot;                 &quot;SingleNuclei&quot;             
+## [71] &quot;Use&quot;</code></pre>
 </div>
 <div id="basic-file-from-sequencing-generate-from-counts-excel-file" class="section level2">
 <h2>basic file from sequencing: generate from counts excel file ————————————————–</h2>
@@ -411,6 +476,67 @@ colnames(STARR.samples)</code></pre>
 #             by = intersect(colnames(STARR.samples), colnames(Aggreg)))
 # colnames(STARR.samples)</code></pre>
 </div>
+<div id="basic-file-from-lab-lab-measurements" class="section level2">
+<h2>basic file from lab: lab measurements ————————————————–</h2>
+<pre class="r"><code>samples.basic5 &lt;- rio::import(file = paste0(Disk5, file.folder5, &quot;/&quot;, basic.file5)) # %&gt;%
+# rename(sample_id = id)
+intersect(colnames(STARR.samples), colnames(samples.basic5))</code></pre>
+<pre><code>## [1] &quot;sample_id&quot;</code></pre>
+<pre class="r"><code># merge files
+STARR.samples &lt;- STARR.samples %&gt;%
+  left_join(samples.basic5,
+            by = intersect(colnames(STARR.samples), colnames(samples.basic5)))
+colnames(STARR.samples)</code></pre>
+<pre><code>##  [1] &quot;record_id&quot;                 &quot;recruited_from&quot;           
+##  [3] &quot;Age&quot;                       &quot;sex&quot;                      
+##  [5] &quot;race___1&quot;                  &quot;race___2&quot;                 
+##  [7] &quot;race___3&quot;                  &quot;race___4&quot;                 
+##  [9] &quot;race___5&quot;                  &quot;race___6&quot;                 
+## [11] &quot;race___7&quot;                  &quot;ethnicity&quot;                
+## [13] &quot;education&quot;                 &quot;marital_status&quot;           
+## [15] &quot;diabetes_doctor&quot;           &quot;diabetes_medicine&quot;        
+## [17] &quot;diabetes_medicine_rx&quot;      &quot;cholesterol_doctor&quot;       
+## [19] &quot;cholesterol_medication&quot;    &quot;hbp_doctor&quot;               
+## [21] &quot;hbp_medicine&quot;              &quot;White.Blood.Cell...WBC&quot;   
+## [23] &quot;Red.Blood.Cell...RBC&quot;      &quot;Hemoglobin&quot;               
+## [25] &quot;Hematocrit&quot;                &quot;MCV&quot;                      
+## [27] &quot;MCH&quot;                       &quot;Platelets&quot;                
+## [29] &quot;Glucose&quot;                   &quot;Blood.Urea.Nitrogen..BUN.&quot;
+## [31] &quot;Creatinine&quot;                &quot;Sodium&quot;                   
+## [33] &quot;Potassium&quot;                 &quot;Calcium&quot;                  
+## [35] &quot;Protein..Total&quot;            &quot;Albumin&quot;                  
+## [37] &quot;Alkaline.Phosphatase&quot;      &quot;Bilirubin..Total&quot;         
+## [39] &quot;AST&quot;                       &quot;ALT&quot;                      
+## [41] &quot;Cholesterol..Total&quot;        &quot;Triglycerides&quot;            
+## [43] &quot;HDL&quot;                       &quot;LDL&quot;                      
+## [45] &quot;VLDL&quot;                      &quot;A1c_Value&quot;                
+## [47] &quot;skin_biopsy&quot;               &quot;fat_biopsy&quot;               
+## [49] &quot;biopsy_complication&quot;       &quot;Weight_pounds&quot;            
+## [51] &quot;Height_inches&quot;             &quot;bmi&quot;                      
+## [53] &quot;Blood.Pressure.Systolic&quot;   &quot;Blood.Pressure.Diastolic&quot; 
+## [55] &quot;fasting&quot;                   &quot;dbc4_diabetes&quot;            
+## [57] &quot;dbc1_hbp&quot;                  &quot;dbc2_chol&quot;                
+## [59] &quot;dbc12_overwt&quot;              &quot;BMI&quot;                      
+## [61] &quot;Age_Group&quot;                 &quot;Gender&quot;                   
+## [63] &quot;Prediabetes1&quot;              &quot;Prediabetes2&quot;             
+## [65] &quot;Status&quot;                    &quot;Diabetes&quot;                 
+## [67] &quot;Ethnicity&quot;                 &quot;Race&quot;                     
+## [69] &quot;sample_id&quot;                 &quot;SingleNuclei&quot;             
+## [71] &quot;Use&quot;                       &quot;V1&quot;                       
+## [73] &quot;SampleName&quot;                &quot;MeasureDate&quot;              
+## [75] &quot;Sample&quot;                    &quot;TopLabel&quot;                 
+## [77] &quot;id&quot;                        &quot;Plate&quot;                    
+## [79] &quot;Insulin&quot;                   &quot;FFA&quot;                      
+## [81] &quot;TNF.alpha&quot;                 &quot;IL.6&quot;                     
+## [83] &quot;IL.8.CXCL8&quot;                &quot;VEGF&quot;                     
+## [85] &quot;IL.7&quot;                      &quot;CCL3.MIP.1alpha&quot;          
+## [87] &quot;CCL4.MIP.1&quot;                &quot;RAGE.AGER&quot;                
+## [89] &quot;SOST.Sclerostin&quot;           &quot;ADAMTS13&quot;                 
+## [91] &quot;Osteropontin.OPN&quot;          &quot;ICAM.1.CD54&quot;              
+## [93] &quot;IL.15&quot;                     &quot;GDF.15&quot;                   
+## [95] &quot;TNF.RI.TNFRSF1A&quot;           &quot;Fas.TNFRSF6.CD95&quot;         
+## [97] &quot;GDNF&quot;                      &quot;ActivinA&quot;</code></pre>
+</div>
 <div id="combine-all" class="section level2">
 <h2>combine all ——————</h2>
 <pre class="r"><code># final covert columns
@@ -418,7 +544,8 @@ STARR.samples$BMI &lt;- as.numeric(STARR.samples$BMI)
 STARR.samples$dbc12_overwt &lt;- as.character(STARR.samples$dbc12_overwt)
 STARR.samples$dbc4_diabetes &lt;- as.character(STARR.samples$dbc4_diabetes)
 STARR.samples$Albumin &lt;- as.numeric(STARR.samples$Albumin)
-
+STARR.samples$Group &lt;- &quot;Notreatment&quot;
+STARR.samples$Pre_Post &lt;- &quot;Notreatment&quot;
 # save
 saveRDS(STARR.samples, file = paste0(Disk2, file.folder2, &quot;/&quot;, &quot;STARR.all.subject.info.rds&quot;))</code></pre>
 </div>
@@ -447,6 +574,8 @@ saveRDS(STARR.samples, file = paste0(Disk2, file.folder2, &quot;/&quot;, &quot;S
 # Disk1 &lt;- c(&quot;D:/&quot;)
 file.folder1 &lt;- c(&quot;07_SGLT2 from Redcap&quot;) # download from online
 basic.file1 &lt;- &quot;SGLT2iAndAging-AllLabTest_DATA_LABELS_2022-09-29_1706.csv&quot;
+# basic.file1 &lt;- &quot;SGLT2iAndAging-AllLabTest_DATA_LABELS_2023-02-24_0934.csv&quot;
+basic.file1.1 &lt;- &quot;SGLT2iAndAging_DATA_LABELS_2023-02-24_0951.csv&quot;
 
 Disk2 &lt;- c(&quot;/media/jianie/DATA/&quot;) 
 # Disk2 &lt;- c(&quot;C:/Users/niej/Documents/&quot;)
@@ -476,8 +605,10 @@ basic.file5 &lt;- c(&quot;All Results.mean.csv&quot;)</code></pre>
 sglt2.samples.basic1 &lt;- rio::import(paste0(Disk1, file.folder1, &quot;/&quot;, basic.file1)) %&gt;% 
   select(!one_of(c(&quot;Complete?&quot;, &quot;Date:&quot;))) %&gt;% 
   rename(dbc4_diabetes = Diabetes, 
-         X.30.Glucose.1 = `-30 Glucose`, 
-         X.30.Insulin.1 = `-30 Insulin`) %&gt;% 
+         # `Visit_Num` = `Visit #`,
+         X.30.Glucose.1 = `-30 Glucose`,
+         X.30.Insulin.1 = `-30 Insulin`
+  ) %&gt;% 
   as.data.frame() %&gt;% 
   rename_with(make.names) %&gt;% 
   mutate(Event.Name1 = stringr::str_split_fixed(Event.Name, &quot; &quot;, 2)[, 2] ) %&gt;%
@@ -491,7 +622,14 @@ sglt2.samples.basic1 &lt;- rio::import(paste0(Disk1, file.folder1, &quot;/&quot;
   mutate(Event_id =  paste0(&quot;V&quot;, Event.Name2,  ifelse(Event.Name3 == &quot;&quot;, &quot;&quot;, Event.Name3) ) # paste0(&quot;V&quot;, stringr::str_pad(Event, 2, pad = &quot;0&quot;) )
   ) %&gt;%
   mutate(Event_id = replace(Event_id, Event_id == &quot;V&quot;, &quot;&quot;) ) %&gt;%
-  mutate(sample_id =  paste0(patient_id, ifelse(Event_id == &quot;&quot;, &quot;&quot;,&quot;_&quot;) , Event_id) )
+  mutate(sample_id =  paste0(patient_id, ifelse(Event_id == &quot;&quot;, &quot;&quot;,&quot;_&quot;) , Event_id) ) %&gt;%
+  left_join(
+    rio::import(paste0(Disk1, file.folder1, &quot;/&quot;, basic.file1.1)) %&gt;% 
+      select(one_of(c(&quot;Record ID: 766-&quot;, &quot;Event Name&quot;, &quot;Ethnicity&quot;))) %&gt;%
+      as.data.frame() %&gt;% 
+      rename_with(make.names) %&gt;% 
+      as.data.frame() , 
+    by = c(&quot;Record.ID..766.&quot;, &quot;Event.Name&quot;))
 
 colnames(sglt2.samples.basic1)</code></pre>
 <pre><code>##   [1] &quot;Record.ID..766.&quot;                               
@@ -606,11 +744,12 @@ colnames(sglt2.samples.basic1)</code></pre>
 ## [110] &quot;Event.Name3&quot;                                   
 ## [111] &quot;patient_id&quot;                                    
 ## [112] &quot;Event_id&quot;                                      
-## [113] &quot;sample_id&quot;</code></pre>
+## [113] &quot;sample_id&quot;                                     
+## [114] &quot;Ethnicity&quot;</code></pre>
 <pre class="r"><code>table(sglt2.samples.basic1$dbc4_diabetes)</code></pre>
 <pre><code>## 
 ##      No 
-## 378  37</code></pre>
+## 969  37</code></pre>
 <pre class="r"><code># dbc4_diabetes
 # 
 # No
@@ -644,8 +783,20 @@ colnames(sglt2.samples.basic1)</code></pre>
          `Weight_pounds` =  Weight..pounds., 
          BMI = BMI, 
          Glucose = Glucose, 
-         `A1c_Value`= A1c.Value)# 
-  
+         `A1c_Value`= A1c.Value)%&gt;%  
+  mutate(BMI = 703*Weight_pounds/(Height_inches^2)) %&gt;%  
+  mutate(
+    Age_Group = ifelse(Age &gt;= 60, &quot;Older&quot;, ifelse(Age &lt;60 &amp; Age &gt;= 45, &quot;Middle&quot;, &quot;Young&quot;)),
+    # Gender = ifelse(Gender == &quot;Female&quot;, &quot;Female&quot;, &quot;Male&quot;),
+    Prediabetes1 = ifelse(A1c_Value &gt;= 5.7 &amp; A1c_Value &lt;= 6.4, &quot;PreD&quot;, 
+                          ifelse(A1c_Value &gt; 6.4, &quot;Diabetes&quot;,&quot;No&quot; )),
+    Prediabetes2 = ifelse(Glucose &gt;= 100 &amp; Glucose &lt;= 125, &quot;PreD&quot;, 
+                          ifelse(Glucose &gt; 125, &quot;Diabetes&quot;, &quot;No&quot; )),
+    Status = ifelse(BMI &gt;= 30, &quot;Obese&quot;,
+                    ifelse(BMI &gt;= 25 &amp; BMI &lt;30, &quot;Overweight&quot;,
+                           ifelse(BMI &gt;= 18.5 &amp; BMI &lt;25, &quot;Lean&quot;, &quot;NA&quot;)))
+  )
+
 intersect(colnames(sglt2.samples.basic1), colnames(sglt2.samples.basic2))</code></pre>
 <pre><code>##  [1] &quot;Record.ID..766.&quot;                              
 ##  [2] &quot;Event.Name&quot;                                   
@@ -747,7 +898,7 @@ num.cols = c(&quot;Fat..g.&quot;, &quot;Region...Fat.&quot;, &quot;Lean..g.&quot
              &quot;TSH&quot;, &quot;Urine.Glucose&quot;    ,         &quot;Urine.Protein&quot;       ,      &quot;Urine.Ketones&quot;   ,        &quot;Urine.Bilirubin&quot;,
              &quot;Urine.Blood&quot;     ,         &quot;Urobilinogen&quot;     ,        &quot;Urine.Nitrite&quot;     ,           &quot;MoCA.Score&quot; ,
              &quot;Tissue..g.&quot; , &quot;BMC..g.&quot;  ,&quot;Albumin&quot;, &quot;BMI&quot;
-             )
+)
 for (num in num.cols) {
   sglt2.samples[[num]] &lt;- as.numeric(sglt2.samples[[num]])
 }</code></pre>
@@ -787,12 +938,12 @@ for (num in num.cols) {
 <pre class="r"><code># combine based on each visit
 sample_ids &lt;- unique(sglt2.samples$sample_id)
 cols = c(&#39;id&#39;,  &#39;Event.Name_Orig&#39;, &#39;Event.Name&#39;, &#39;Visit..&#39;, 
-&#39;Event.Name1&#39;, &#39;Event.Name2&#39;, &#39;Event.Name3&#39;, &#39;Event_id&#39;, &#39;sample_id&#39;)
+         &#39;Event.Name1&#39;, &#39;Event.Name2&#39;, &#39;Event.Name3&#39;, &#39;Event_id&#39;, &#39;sample_id&#39;)
 sglt2 &lt;- list()
 for (ss in sample_ids) {
-# ss=sample_ids[1]
-sglt2[[stringr::str_split(ss, &quot;_&quot;)[[1]][1]]][[ifelse(is.na(stringr::str_split(ss, &quot;_&quot;)[[1]][2]), &quot;Others&quot;, stringr::str_split(ss, &quot;_&quot;)[[1]][2])]] &lt;- sglt2.samples %&gt;% filter(sample_id == ss) %&gt;% mutate_all(~na_if(., &#39;&#39;)) %&gt;% select_if(function(x) !(all(is.na(x)) | all(x==&quot;&quot;))) %&gt;% select(!one_of(cols))
-# print(ss)
+  # ss=sample_ids[1]
+  sglt2[[stringr::str_split(ss, &quot;_&quot;)[[1]][1]]][[ifelse(is.na(stringr::str_split(ss, &quot;_&quot;)[[1]][2]), &quot;Others&quot;, stringr::str_split(ss, &quot;_&quot;)[[1]][2])]] &lt;- sglt2.samples %&gt;% dplyr::filter(sample_id == ss) %&gt;% mutate_all(~na_if(., &#39;&#39;)) %&gt;% select_if(function(x) !(all(is.na(x)) | all(x==&quot;&quot;))) %&gt;% select(!one_of(cols))
+  # print(ss)
 }</code></pre>
 <pre><code>## Warning: Unknown columns: `Visit..`, `Event.Name1`, `Event.Name2`,
 ## `Event.Name3`, `Event_id`</code></pre>
@@ -1209,13 +1360,13 @@ patient_ids &lt;- unique(sglt2.samples$patient_id)
 pre = c(&quot;V1&quot;, &quot;V2&quot;, &quot;V3&quot;, &quot;V4&quot;, &quot;V5&quot;, &quot;V5.1week&quot;)
 post = c(&quot;V6&quot;, &quot;V7&quot;, &quot;V8&quot;, &quot;V9&quot;, &quot;V10&quot;, &quot;V11&quot;, &quot;V12&quot;)
 for (ss in names(sglt2)) {
-# ss=names(sglt2)[1]
+  # ss=names(sglt2)[1]
   if( TRUE %in% (names(sglt2[[ss]]) %in% pre) ) {
     sglt2.combine[[ss]][[&quot;Pre&quot;]] &lt;- bind_rows(sglt2[[ss]][pre], .id = &quot;Event&quot;)
   }
-    if( TRUE %in% (names(sglt2[[ss]]) %in% post) ) {
-      sglt2.combine[[ss]][[&quot;Post&quot;]] &lt;- bind_rows(sglt2[[ss]][post], .id = &quot;Event&quot;)
-}
+  if( TRUE %in% (names(sglt2[[ss]]) %in% post) ) {
+    sglt2.combine[[ss]][[&quot;Post&quot;]] &lt;- bind_rows(sglt2[[ss]][post], .id = &quot;Event&quot;)
+  }
 }
 rm(pre, post, ss)
 
@@ -1224,24 +1375,26 @@ sglt2.combine2 &lt;- list()
 for (ss in names(sglt2.combine)) {
   tt.list &lt;- sglt2.combine[[ss]] 
   if ( length(tt.list) &gt; 1){
-  for (pp in names(tt.list)) {
-    tt &lt;- sglt2.combine[[ss]][[pp]] 
-    n = nrow(tt) + 1
-    myNumCols &lt;- which(unlist(lapply(tt, is.numeric)))
-    myChaCols &lt;- which(unlist(lapply(tt, is.character)))
-    x1 &lt;- colMeans(tt[, myNumCols], na.rm=TRUE)
-    x2 &lt;- apply(tt[, myChaCols], 2, function(x)unique(x[!is.na(x)]))
-    tt[(n), myNumCols] &lt;- x1
-    tt[(n), myChaCols] &lt;- x2
-    sglt2.combine2[[ss]][[pp]]  &lt;- tt[(n),]
-  }
-  print(ss)
+    for (pp in names(tt.list)) {
+      tt &lt;- sglt2.combine[[ss]][[pp]] 
+      n = nrow(tt) + 1
+      myNumCols &lt;- which(unlist(lapply(tt, is.numeric)))
+      myChaCols &lt;- which(unlist(lapply(tt, is.character)))
+      x1 &lt;- colMeans(tt[, myNumCols], na.rm=TRUE)
+      x2 &lt;- apply(tt[, myChaCols], 2, function(x)unique(x[!is.na(x)]))
+      tt[(n), myNumCols] &lt;- x1
+      tt[(n), myChaCols] &lt;- x2
+      sglt2.combine2[[ss]][[pp]]  &lt;- tt[(n),]
+    }
+    print(ss)
   }
 }</code></pre>
 <pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
 ## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows</code></pre>
 <pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
 ## c(&quot;V6&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
+## c(&quot;V6&quot;, : replacement element 3 has 2 rows to replace 1 rows</code></pre>
 <pre><code>## [1] &quot;76601&quot;</code></pre>
 <pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
 ## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows</code></pre>
@@ -1267,12 +1420,13 @@ for (ss in names(sglt2.combine)) {
 
 ## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
 ## c(&quot;V1&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
+## c(&quot;V6&quot;, : replacement element 4 has 2 rows to replace 1 rows</code></pre>
 <pre><code>## [1] &quot;76636&quot;</code></pre>
 <pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
-## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows
-
-## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
-## c(&quot;V1&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
+## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
+## c(&quot;V6&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
 <pre><code>## [1] &quot;76638&quot;</code></pre>
 <pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
 ## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows
@@ -1292,30 +1446,34 @@ for (ss in names(sglt2.combine)) {
 
 ## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
 ## c(&quot;V1&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
+## c(&quot;V6&quot;, : replacement element 3 has 2 rows to replace 1 rows</code></pre>
 <pre><code>## [1] &quot;76647&quot;</code></pre>
 <pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
-## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows
-
-## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
-## c(&quot;V1&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
+## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
+## c(&quot;V6&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
+## c(&quot;V6&quot;, : replacement element 4 has 2 rows to replace 1 rows</code></pre>
 <pre><code>## [1] &quot;76648&quot;</code></pre>
 <pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
-## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows
-
-## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
-## c(&quot;V1&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
+## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
+## c(&quot;V6&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
+## c(&quot;V6&quot;, : replacement element 3 has 2 rows to replace 1 rows</code></pre>
 <pre><code>## [1] &quot;76649&quot;</code></pre>
 <pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
-## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows
-
-## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
-## c(&quot;V1&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
+## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
+## c(&quot;V6&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
 <pre><code>## [1] &quot;76650&quot;</code></pre>
 <pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
-## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows
-
-## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
-## c(&quot;V1&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
+## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
+## c(&quot;V1&quot;, : replacement element 14 has 2 rows to replace 1 rows</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
+## c(&quot;V6&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
 <pre><code>## [1] &quot;76652&quot;</code></pre>
 <pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
 ## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows
@@ -1360,39 +1518,67 @@ for (ss in names(sglt2.combine)) {
 ## c(&quot;V1&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
 <pre><code>## [1] &quot;76664&quot;</code></pre>
 <pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
-## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows
-
-## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
-## c(&quot;V1&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
+## c(&quot;V1&quot;, : replacement element 1 has 6 rows to replace 1 rows</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
+## c(&quot;V1&quot;, : replacement element 13 has 2 rows to replace 1 rows</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, (n), myChaCols, value = list(Event =
+## c(&quot;V6&quot;, : replacement element 1 has 7 rows to replace 1 rows</code></pre>
 <pre><code>## [1] &quot;76667&quot;</code></pre>
 <pre class="r"><code>rm(ss, pp, tt, n, myNumCols, myChaCols, x1, x2 ,tt.list)
 
 # combine Pre and Post
 sglt2.combine3 &lt;- list()
 for (ss in names(sglt2.combine2)) {
- sglt2.combine3[[ss]] &lt;- bind_rows(sglt2.combine2[[ss]], .id = &quot;Pre_Post&quot;)
+  sglt2.combine3[[ss]] &lt;- bind_rows(sglt2.combine2[[ss]], .id = &quot;Pre_Post&quot;)
 }
 
 # combine all patients
-sglt2.combine4 &lt;- bind_rows(sglt2.combine3, .id = &quot;patient_id2&quot;)
-
+sglt2.combine4 &lt;- bind_rows(sglt2.combine3, .id = &quot;patient_id2&quot;)</code></pre>
+<pre class="r"><code># merge some basal information between pre and post
+colnames(sglt2.combine4 %&gt;% dplyr::filter(Pre_Post == &quot;Pre&quot;) %&gt;% select_if(is.character))</code></pre>
+<pre><code>##  [1] &quot;patient_id2&quot;                 &quot;Pre_Post&quot;                   
+##  [3] &quot;Event&quot;                       &quot;OGTT.Date..Time&quot;            
+##  [5] &quot;X.30.Glucose.1&quot;              &quot;OGTT.Result&quot;                
+##  [7] &quot;patient_id&quot;                  &quot;Ethnicity&quot;                  
+##  [9] &quot;Plasma&quot;                      &quot;Gender&quot;                     
+## [11] &quot;Race&quot;                        &quot;dbc4_diabetes&quot;              
+## [13] &quot;Date.of.lipids&quot;              &quot;Prediabetes1&quot;               
+## [15] &quot;Prediabetes2&quot;                &quot;Status&quot;                     
+## [17] &quot;Date&quot;                        &quot;Age_Group&quot;                  
+## [19] &quot;AdiposeTissue&quot;               &quot;Finished&quot;                   
+## [21] &quot;Was.subject.randomized.&quot;     &quot;Group.Assignment.&quot;          
+## [23] &quot;Date.randomized&quot;             &quot;Complete.1&quot;                 
+## [25] &quot;Date.1&quot;                      &quot;SingleNuclei&quot;               
+## [27] &quot;Uric.Acid&quot;                   &quot;Phosphorus&quot;                 
+## [29] &quot;X.30.Insulin.1&quot;              &quot;X.30.Free.Fatty.Acids..FFA.&quot;</code></pre>
+<pre class="r"><code>cols = c(&quot;patient_id&quot; , &quot;Gender&quot; ,&quot;Race&quot;, &quot;dbc4_diabetes&quot;, &quot;Ethnicity&quot;,
+         &quot;Group.Assignment.&quot; , &quot;Age_Group&quot;  , &quot;Status&quot; ,&quot;Prediabetes1&quot;, &quot;Prediabetes2&quot; # , &quot;Diabetes&quot;  , &quot;Group&quot;
+)   
+basal &lt;- sglt2.combine4 %&gt;% dplyr::filter(Pre_Post == &quot;Pre&quot;) %&gt;% select(one_of(cols))
+sglt2.combine4 &lt;- sglt2.combine4 %&gt;% select(!one_of(setdiff(cols, &quot;patient_id&quot;))) %&gt;%
+  left_join(basal, by = &quot;patient_id&quot;)
 
 # adding more colums
 table(sglt2.combine4$dbc4_diabetes)</code></pre>
 <pre><code>## 
 ## No 
-## 23</code></pre>
-<pre class="r"><code>sglt2.prediabetes &lt;- sglt2.combine4 %&gt;% filter(dbc4_diabetes == &quot;No&quot;) %&gt;% pull(patient_id)
+## 46</code></pre>
+<pre class="r"><code>sglt2.prediabetes &lt;- sglt2.combine4 %&gt;% dplyr::filter(dbc4_diabetes == &quot;No&quot;) %&gt;% pull(patient_id)
 sglt2.combine4 &lt;- sglt2.combine4 %&gt;%
   mutate(Diabetes = ifelse(patient_id %in% sglt2.prediabetes, &quot;No&quot;, &quot;Yes&quot;))%&gt;%  
-  mutate(Age_Group = ifelse(Age &gt;= 60, &quot;Older&quot;, ifelse(Age &lt;60 &amp; Age &gt;= 45, &quot;Middle&quot;, &quot;Young&quot;)),
-         # Gender = ifelse(Gender == &quot;Female&quot;, &quot;Female&quot;, &quot;Male&quot;),
-         Status = ifelse(BMI &gt;= 30, &quot;Obese&quot;,
-                         ifelse(BMI &gt;= 25 &amp; BMI &lt;30, &quot;Overweight&quot;,
-                                ifelse(BMI &gt;= 18.5 &amp; BMI &lt;25, &quot;Lean&quot;, &quot;NA&quot;))),
-         Group = ifelse(`Group.Assignment.` == &quot;Drug - dapagliflozin&quot;, &quot;D&quot;,
-                        ifelse(`Group.Assignment.` == &quot;Nutritional counseling&quot;, &quot;C&quot;, &quot;NA&quot;)),
-         sample_id = paste0(patient_id, &quot;_&quot;, ifelse(Pre_Post == &quot;Pre&quot;, &quot;V5&quot;, &quot;V11&quot;))
+  mutate(
+    # Age_Group = ifelse(Age &gt;= 60, &quot;Older&quot;, ifelse(Age &lt;60 &amp; Age &gt;= 45, &quot;Middle&quot;, &quot;Young&quot;)),
+    # # Gender = ifelse(Gender == &quot;Female&quot;, &quot;Female&quot;, &quot;Male&quot;),
+    # Prediabetes1 = ifelse(A1c_Value &gt;= 5.7 &amp; A1c_Value &lt;= 6.4, &quot;Pre&quot;, 
+    #                       ifelse(A1c_Value &gt; 6.4, &quot;Diabetes&quot;,&quot;No&quot; )),
+    # Prediabetes2 = ifelse(Glucose &gt;= 100 &amp; Glucose &lt;= 125, &quot;Pre&quot;, 
+    #                       ifelse(Glucose &gt; 125, &quot;Diabetes&quot;, &quot;No&quot; )),
+    # Status = ifelse(BMI &gt;= 30, &quot;Obese&quot;,
+    #                 ifelse(BMI &gt;= 25 &amp; BMI &lt;30, &quot;Overweight&quot;,
+    #                        ifelse(BMI &gt;= 18.5 &amp; BMI &lt;25, &quot;Lean&quot;, &quot;NA&quot;))),
+    Group = ifelse(`Group.Assignment.` == &quot;Drug - dapagliflozin&quot;, &quot;SGLT2i&quot;,
+                   ifelse(`Group.Assignment.` == &quot;Nutritional counseling&quot;, &quot;NUT&quot;, NA)),
+    sample_id = paste0(patient_id, &quot;_&quot;, ifelse(Pre_Post == &quot;Pre&quot;, &quot;V5&quot;, &quot;V11&quot;))
   )
 
 
@@ -1467,88 +1653,91 @@ colnames(sglt2.combine4)</code></pre>
 ##  [17] &quot;patient_id&quot;                                    
 ##  [18] &quot;Plasma&quot;                                        
 ##  [19] &quot;Age.at.Consent&quot;                                
-##  [20] &quot;Gender&quot;                                        
-##  [21] &quot;Race&quot;                                          
-##  [22] &quot;Height_inches&quot;                                 
-##  [23] &quot;Weight_pounds&quot;                                 
-##  [24] &quot;BMI&quot;                                           
-##  [25] &quot;Blood.Pressure.Systolic&quot;                       
-##  [26] &quot;Blood.Pressure.Diastolic&quot;                      
-##  [27] &quot;Heart.Rate..bpm.&quot;                              
-##  [28] &quot;Respirations.per.minute&quot;                       
-##  [29] &quot;Temperature..F.&quot;                               
-##  [30] &quot;dbc4_diabetes&quot;                                 
-##  [31] &quot;White.Blood.Cell...WBC&quot;                        
-##  [32] &quot;Red.Blood.Cell...RBC&quot;                          
-##  [33] &quot;Hemoglobin&quot;                                    
-##  [34] &quot;Hematocrit&quot;                                    
-##  [35] &quot;Monocyte&quot;                                      
-##  [36] &quot;Granulocytes&quot;                                  
-##  [37] &quot;Neutrophils&quot;                                   
-##  [38] &quot;Eosinophils&quot;                                   
-##  [39] &quot;Basophils&quot;                                     
-##  [40] &quot;MCV&quot;                                           
-##  [41] &quot;MCH&quot;                                           
-##  [42] &quot;MCHC&quot;                                          
-##  [43] &quot;RDW&quot;                                           
-##  [44] &quot;Platelets&quot;                                     
-##  [45] &quot;A1c_Value&quot;                                     
-##  [46] &quot;Glucose&quot;                                       
-##  [47] &quot;Blood.Urea.Nitrogen..BUN.&quot;                     
-##  [48] &quot;Creatinine&quot;                                    
-##  [49] &quot;Sodium&quot;                                        
-##  [50] &quot;Potassium&quot;                                     
-##  [51] &quot;Chloride&quot;                                      
-##  [52] &quot;CO2&quot;                                           
-##  [53] &quot;Calcium&quot;                                       
-##  [54] &quot;Protein..Total&quot;                                
-##  [55] &quot;Albumin&quot;                                       
-##  [56] &quot;Alkaline.Phosphatase&quot;                          
-##  [57] &quot;Bilirubin..Total&quot;                              
-##  [58] &quot;AST&quot;                                           
-##  [59] &quot;ALT&quot;                                           
-##  [60] &quot;Manual.eGFR.calculation&quot;                       
-##  [61] &quot;TSH&quot;                                           
-##  [62] &quot;Date.of.lipids&quot;                                
-##  [63] &quot;Cholesterol..Total&quot;                            
-##  [64] &quot;Triglycerides&quot;                                 
-##  [65] &quot;HDL&quot;                                           
-##  [66] &quot;LDL&quot;                                           
-##  [67] &quot;VLDL&quot;                                          
-##  [68] &quot;PT&quot;                                            
-##  [69] &quot;INR&quot;                                           
-##  [70] &quot;PTT&quot;                                           
-##  [71] &quot;Urine.pH&quot;                                      
-##  [72] &quot;MoCA.Score&quot;                                    
-##  [73] &quot;Age..years.&quot;                                   
-##  [74] &quot;Date&quot;                                          
-##  [75] &quot;Age&quot;                                           
-##  [76] &quot;Tissue...Fat.&quot;                                 
-##  [77] &quot;T.Mass..kg.&quot;                                   
-##  [78] &quot;Region...Fat.&quot;                                 
-##  [79] &quot;Tissue..g.&quot;                                    
-##  [80] &quot;Fat..g.&quot;                                       
-##  [81] &quot;Lean..g.&quot;                                      
-##  [82] &quot;BMC..g.&quot;                                       
-##  [83] &quot;Fat.Free..g.&quot;                                  
-##  [84] &quot;AdiposeTissue&quot;                                 
-##  [85] &quot;Finished&quot;                                      
-##  [86] &quot;Was.subject.randomized.&quot;                       
-##  [87] &quot;Group.Assignment.&quot;                             
-##  [88] &quot;Date.randomized&quot;                               
-##  [89] &quot;Complete.1&quot;                                    
-##  [90] &quot;Date.1&quot;                                        
-##  [91] &quot;Z.Score&quot;                                       
-##  [92] &quot;SingleNuclei&quot;                                  
-##  [93] &quot;Uric.Acid&quot;                                     
-##  [94] &quot;Phosphorus&quot;                                    
-##  [95] &quot;X.30.Insulin.1&quot;                                
-##  [96] &quot;X.30.Free.Fatty.Acids..FFA.&quot;                   
-##  [97] &quot;Diabetes&quot;                                      
+##  [20] &quot;Height_inches&quot;                                 
+##  [21] &quot;Weight_pounds&quot;                                 
+##  [22] &quot;BMI&quot;                                           
+##  [23] &quot;Blood.Pressure.Systolic&quot;                       
+##  [24] &quot;Blood.Pressure.Diastolic&quot;                      
+##  [25] &quot;Heart.Rate..bpm.&quot;                              
+##  [26] &quot;Respirations.per.minute&quot;                       
+##  [27] &quot;Temperature..F.&quot;                               
+##  [28] &quot;White.Blood.Cell...WBC&quot;                        
+##  [29] &quot;Red.Blood.Cell...RBC&quot;                          
+##  [30] &quot;Hemoglobin&quot;                                    
+##  [31] &quot;Hematocrit&quot;                                    
+##  [32] &quot;Monocyte&quot;                                      
+##  [33] &quot;Granulocytes&quot;                                  
+##  [34] &quot;Neutrophils&quot;                                   
+##  [35] &quot;Eosinophils&quot;                                   
+##  [36] &quot;Basophils&quot;                                     
+##  [37] &quot;MCV&quot;                                           
+##  [38] &quot;MCH&quot;                                           
+##  [39] &quot;MCHC&quot;                                          
+##  [40] &quot;RDW&quot;                                           
+##  [41] &quot;Platelets&quot;                                     
+##  [42] &quot;A1c_Value&quot;                                     
+##  [43] &quot;Glucose&quot;                                       
+##  [44] &quot;Blood.Urea.Nitrogen..BUN.&quot;                     
+##  [45] &quot;Creatinine&quot;                                    
+##  [46] &quot;Sodium&quot;                                        
+##  [47] &quot;Potassium&quot;                                     
+##  [48] &quot;Chloride&quot;                                      
+##  [49] &quot;CO2&quot;                                           
+##  [50] &quot;Calcium&quot;                                       
+##  [51] &quot;Protein..Total&quot;                                
+##  [52] &quot;Albumin&quot;                                       
+##  [53] &quot;Alkaline.Phosphatase&quot;                          
+##  [54] &quot;Bilirubin..Total&quot;                              
+##  [55] &quot;AST&quot;                                           
+##  [56] &quot;ALT&quot;                                           
+##  [57] &quot;Manual.eGFR.calculation&quot;                       
+##  [58] &quot;TSH&quot;                                           
+##  [59] &quot;Date.of.lipids&quot;                                
+##  [60] &quot;Cholesterol..Total&quot;                            
+##  [61] &quot;Triglycerides&quot;                                 
+##  [62] &quot;HDL&quot;                                           
+##  [63] &quot;LDL&quot;                                           
+##  [64] &quot;VLDL&quot;                                          
+##  [65] &quot;PT&quot;                                            
+##  [66] &quot;INR&quot;                                           
+##  [67] &quot;PTT&quot;                                           
+##  [68] &quot;Urine.pH&quot;                                      
+##  [69] &quot;MoCA.Score&quot;                                    
+##  [70] &quot;Age..years.&quot;                                   
+##  [71] &quot;Date&quot;                                          
+##  [72] &quot;Age&quot;                                           
+##  [73] &quot;Tissue...Fat.&quot;                                 
+##  [74] &quot;T.Mass..kg.&quot;                                   
+##  [75] &quot;Region...Fat.&quot;                                 
+##  [76] &quot;Tissue..g.&quot;                                    
+##  [77] &quot;Fat..g.&quot;                                       
+##  [78] &quot;Lean..g.&quot;                                      
+##  [79] &quot;BMC..g.&quot;                                       
+##  [80] &quot;Fat.Free..g.&quot;                                  
+##  [81] &quot;AdiposeTissue&quot;                                 
+##  [82] &quot;Finished&quot;                                      
+##  [83] &quot;Was.subject.randomized.&quot;                       
+##  [84] &quot;Date.randomized&quot;                               
+##  [85] &quot;Complete.1&quot;                                    
+##  [86] &quot;Date.1&quot;                                        
+##  [87] &quot;Z.Score&quot;                                       
+##  [88] &quot;SingleNuclei&quot;                                  
+##  [89] &quot;Uric.Acid&quot;                                     
+##  [90] &quot;Phosphorus&quot;                                    
+##  [91] &quot;X.30.Insulin.1&quot;                                
+##  [92] &quot;X.30.Free.Fatty.Acids..FFA.&quot;                   
+##  [93] &quot;Gender&quot;                                        
+##  [94] &quot;Race&quot;                                          
+##  [95] &quot;dbc4_diabetes&quot;                                 
+##  [96] &quot;Ethnicity&quot;                                     
+##  [97] &quot;Group.Assignment.&quot;                             
 ##  [98] &quot;Age_Group&quot;                                     
 ##  [99] &quot;Status&quot;                                        
-## [100] &quot;Group&quot;                                         
-## [101] &quot;sample_id&quot;</code></pre>
+## [100] &quot;Prediabetes1&quot;                                  
+## [101] &quot;Prediabetes2&quot;                                  
+## [102] &quot;Diabetes&quot;                                      
+## [103] &quot;Group&quot;                                         
+## [104] &quot;sample_id&quot;</code></pre>
 <pre class="r"><code># # sapply(sglt2.combine4, class)
 table(sglt2.combine4$Age, sglt2.combine4$SingleNuclei)</code></pre>
 <pre><code>##       
@@ -1600,39 +1789,39 @@ table(sglt2.combine4$Age, sglt2.combine4$SingleNuclei)</code></pre>
 <pre class="r"><code>table(sglt2.combine4$Gender, sglt2.combine4$SingleNuclei)</code></pre>
 <pre><code>##         
 ##          Yes
-##   Female   3
-##   Male     9</code></pre>
+##   Female   5
+##   Male    18</code></pre>
 <pre class="r"><code>table(sglt2.combine4$BMI)</code></pre>
 <pre><code>## 
-##          28.5175           29.784          30.0425          30.1825 
+## 29.4466908275032 29.7849533887629 30.1602811418685 30.2979022241642 
 ##                1                1                1                1 
-##           30.298           30.434           30.585          31.0975 
+## 30.4267554063358  30.435219428845 30.6223779296875 31.0943067551055 
 ##                1                1                1                1 
-##          31.5475            31.68          31.7025            31.75 
+## 31.4725613225682 31.6446804604195 31.7022525248031 31.7492434553722 
 ##                1                1                1                1 
-## 31.8166666666667           32.136 32.1866666666667          32.5975 
+## 32.0934104225852 32.1367084775086 32.1865071614583 32.3162825033844 
 ##                1                1                1                1 
-##          32.6825          32.7275          32.7325           32.748 
+##  32.480872891436 32.7258125570186 32.7317253426498 32.7478806228374 
 ##                1                1                1                1 
-## 33.1466666666667          33.1475            33.29          33.4625 
+## 32.8692869097176 33.2011286224048 33.2569187326074 33.2903404550056 
 ##                1                1                1                1 
-##           33.848            34.05          34.1125           34.234 
+## 33.3851532522705 33.8499427978305 33.8576297233289 33.9099670410156 
 ##                1                1                1                1 
-##           34.625           34.672          34.8075           35.186 
+## 34.0318354591837 34.2356776211039 34.6251580858406 34.6737629023582 
 ##                1                1                1                1 
-##          35.2325          35.3175          35.7975           35.798 
+## 35.1840843944803 35.2649880121477 35.5446975324547 35.5645402453929 
 ##                1                1                1                1 
-##           36.272          36.4175          36.9125          36.9975 
+## 35.7960659841244 36.2736777987818 36.4149373380942 36.9110410852966 
 ##                1                1                1                1 
-##            37.05           40.046          40.2425              Inf 
+## 36.9517296523862 37.0540690350214 40.0476599544563 40.1619047765295 
 ##                1                1                1                1</code></pre>
 <pre class="r"><code>sort(unique(sglt2.combine4$BMI))</code></pre>
-<pre><code>##  [1] 28.51750 29.78400 30.04250 30.18250 30.29800 30.43400 30.58500 31.09750
-##  [9] 31.54750 31.68000 31.70250 31.75000 31.81667 32.13600 32.18667 32.59750
-## [17] 32.68250 32.72750 32.73250 32.74800 33.14667 33.14750 33.29000 33.46250
-## [25] 33.84800 34.05000 34.11250 34.23400 34.62500 34.67200 34.80750 35.18600
-## [33] 35.23250 35.31750 35.79750 35.79800 36.27200 36.41750 36.91250 36.99750
-## [41] 37.05000 40.04600 40.24250      Inf</code></pre>
+<pre><code>##  [1] 29.44669 29.78495 30.16028 30.29790 30.42676 30.43522 30.62238 31.09431
+##  [9] 31.47256 31.64468 31.70225 31.74924 32.09341 32.13671 32.18651 32.31628
+## [17] 32.48087 32.72581 32.73173 32.74788 32.86929 33.20113 33.25692 33.29034
+## [25] 33.38515 33.84994 33.85763 33.90997 34.03184 34.23568 34.62516 34.67376
+## [33] 35.18408 35.26499 35.54470 35.56454 35.79607 36.27368 36.41494 36.91104
+## [41] 36.95173 37.05407 40.04766 40.16190</code></pre>
 <pre class="r"><code>table(sglt2.combine4$Status, sglt2.combine4$SingleNuclei)</code></pre>
 <pre><code>##             
 ##              Yes
@@ -1641,7 +1830,7 @@ table(sglt2.combine4$Age, sglt2.combine4$SingleNuclei)</code></pre>
 <pre class="r"><code>table(sglt2.combine4$dbc4_diabetes)</code></pre>
 <pre><code>## 
 ## No 
-## 23</code></pre>
+## 46</code></pre>
 <pre class="r"><code>table(sglt2.combine4$Diabetes, sglt2.combine4$SingleNuclei)</code></pre>
 <pre><code>##     
 ##      Yes
@@ -1649,8 +1838,27 @@ table(sglt2.combine4$Age, sglt2.combine4$SingleNuclei)</code></pre>
 <pre class="r"><code>table(sglt2.combine4$Group.Assignment.)</code></pre>
 <pre><code>## 
 ##   Drug - dapagliflozin Nutritional counseling 
-##                     11                     11</code></pre>
-<pre class="r"><code>sglt2.samples.final &lt;- sglt2.combine4 </code></pre>
+##                     22                     22</code></pre>
+<pre class="r"><code># 90 [ethnicity] Ethnicity radio
+# 0 Hispanic or Latino
+# 1 NOT Hispanic or Latino
+# 2 Unknown / Not Reported
+# 
+# Custom alignment: LH
+# 91 [race] Race dropdown
+# 0 American Indian/Alaska Native
+# 1 Asian
+# 2 Native Hawaiian or Other Pacific Islander
+# 3 Black or African American
+# 4 White
+# 5 More Than One Race
+# 6 Unknown / Not Reported
+# 92 [sex] Gender radio
+# 0 Female
+# 1 Male
+
+
+sglt2.samples.final &lt;- sglt2.combine4 </code></pre>
 </div>
 <div id="compare-sglt-to-starr" class="section level2">
 <h2>compare sglt to STARR</h2>
@@ -1707,10 +1915,10 @@ table(sglt2.combine4$Age, sglt2.combine4$SingleNuclei)</code></pre>
 #             by = intersect(colnames(sglt2.combine4), colnames(samples.basic3)))
 # colnames(STARR.samples)</code></pre>
 </div>
-<div id="basic-file-from-lab-lab-measurements" class="section level2">
+<div id="basic-file-from-lab-lab-measurements-1" class="section level2">
 <h2>basic file from lab: lab measurements ————————————————–</h2>
 <pre class="r"><code>samples.basic5 &lt;- rio::import(file = paste0(Disk5, file.folder5, &quot;/&quot;, basic.file5)) # %&gt;%
-  # rename(sample_id = id)
+# rename(sample_id = id)
 intersect(colnames(sglt2.samples.final), colnames(samples.basic5))</code></pre>
 <pre><code>## [1] &quot;sample_id&quot;</code></pre>
 <pre class="r"><code># merge files
@@ -1737,115 +1945,118 @@ colnames(sglt2.samples.final)</code></pre>
 ##  [17] &quot;patient_id&quot;                                    
 ##  [18] &quot;Plasma&quot;                                        
 ##  [19] &quot;Age.at.Consent&quot;                                
-##  [20] &quot;Gender&quot;                                        
-##  [21] &quot;Race&quot;                                          
-##  [22] &quot;Height_inches&quot;                                 
-##  [23] &quot;Weight_pounds&quot;                                 
-##  [24] &quot;BMI&quot;                                           
-##  [25] &quot;Blood.Pressure.Systolic&quot;                       
-##  [26] &quot;Blood.Pressure.Diastolic&quot;                      
-##  [27] &quot;Heart.Rate..bpm.&quot;                              
-##  [28] &quot;Respirations.per.minute&quot;                       
-##  [29] &quot;Temperature..F.&quot;                               
-##  [30] &quot;dbc4_diabetes&quot;                                 
-##  [31] &quot;White.Blood.Cell...WBC&quot;                        
-##  [32] &quot;Red.Blood.Cell...RBC&quot;                          
-##  [33] &quot;Hemoglobin&quot;                                    
-##  [34] &quot;Hematocrit&quot;                                    
-##  [35] &quot;Monocyte&quot;                                      
-##  [36] &quot;Granulocytes&quot;                                  
-##  [37] &quot;Neutrophils&quot;                                   
-##  [38] &quot;Eosinophils&quot;                                   
-##  [39] &quot;Basophils&quot;                                     
-##  [40] &quot;MCV&quot;                                           
-##  [41] &quot;MCH&quot;                                           
-##  [42] &quot;MCHC&quot;                                          
-##  [43] &quot;RDW&quot;                                           
-##  [44] &quot;Platelets&quot;                                     
-##  [45] &quot;A1c_Value&quot;                                     
-##  [46] &quot;Glucose&quot;                                       
-##  [47] &quot;Blood.Urea.Nitrogen..BUN.&quot;                     
-##  [48] &quot;Creatinine&quot;                                    
-##  [49] &quot;Sodium&quot;                                        
-##  [50] &quot;Potassium&quot;                                     
-##  [51] &quot;Chloride&quot;                                      
-##  [52] &quot;CO2&quot;                                           
-##  [53] &quot;Calcium&quot;                                       
-##  [54] &quot;Protein..Total&quot;                                
-##  [55] &quot;Albumin&quot;                                       
-##  [56] &quot;Alkaline.Phosphatase&quot;                          
-##  [57] &quot;Bilirubin..Total&quot;                              
-##  [58] &quot;AST&quot;                                           
-##  [59] &quot;ALT&quot;                                           
-##  [60] &quot;Manual.eGFR.calculation&quot;                       
-##  [61] &quot;TSH&quot;                                           
-##  [62] &quot;Date.of.lipids&quot;                                
-##  [63] &quot;Cholesterol..Total&quot;                            
-##  [64] &quot;Triglycerides&quot;                                 
-##  [65] &quot;HDL&quot;                                           
-##  [66] &quot;LDL&quot;                                           
-##  [67] &quot;VLDL&quot;                                          
-##  [68] &quot;PT&quot;                                            
-##  [69] &quot;INR&quot;                                           
-##  [70] &quot;PTT&quot;                                           
-##  [71] &quot;Urine.pH&quot;                                      
-##  [72] &quot;MoCA.Score&quot;                                    
-##  [73] &quot;Age..years.&quot;                                   
-##  [74] &quot;Date&quot;                                          
-##  [75] &quot;Age&quot;                                           
-##  [76] &quot;Tissue...Fat.&quot;                                 
-##  [77] &quot;T.Mass..kg.&quot;                                   
-##  [78] &quot;Region...Fat.&quot;                                 
-##  [79] &quot;Tissue..g.&quot;                                    
-##  [80] &quot;Fat..g.&quot;                                       
-##  [81] &quot;Lean..g.&quot;                                      
-##  [82] &quot;BMC..g.&quot;                                       
-##  [83] &quot;Fat.Free..g.&quot;                                  
-##  [84] &quot;AdiposeTissue&quot;                                 
-##  [85] &quot;Finished&quot;                                      
-##  [86] &quot;Was.subject.randomized.&quot;                       
-##  [87] &quot;Group.Assignment.&quot;                             
-##  [88] &quot;Date.randomized&quot;                               
-##  [89] &quot;Complete.1&quot;                                    
-##  [90] &quot;Date.1&quot;                                        
-##  [91] &quot;Z.Score&quot;                                       
-##  [92] &quot;SingleNuclei&quot;                                  
-##  [93] &quot;Uric.Acid&quot;                                     
-##  [94] &quot;Phosphorus&quot;                                    
-##  [95] &quot;X.30.Insulin.1&quot;                                
-##  [96] &quot;X.30.Free.Fatty.Acids..FFA.&quot;                   
-##  [97] &quot;Diabetes&quot;                                      
+##  [20] &quot;Height_inches&quot;                                 
+##  [21] &quot;Weight_pounds&quot;                                 
+##  [22] &quot;BMI&quot;                                           
+##  [23] &quot;Blood.Pressure.Systolic&quot;                       
+##  [24] &quot;Blood.Pressure.Diastolic&quot;                      
+##  [25] &quot;Heart.Rate..bpm.&quot;                              
+##  [26] &quot;Respirations.per.minute&quot;                       
+##  [27] &quot;Temperature..F.&quot;                               
+##  [28] &quot;White.Blood.Cell...WBC&quot;                        
+##  [29] &quot;Red.Blood.Cell...RBC&quot;                          
+##  [30] &quot;Hemoglobin&quot;                                    
+##  [31] &quot;Hematocrit&quot;                                    
+##  [32] &quot;Monocyte&quot;                                      
+##  [33] &quot;Granulocytes&quot;                                  
+##  [34] &quot;Neutrophils&quot;                                   
+##  [35] &quot;Eosinophils&quot;                                   
+##  [36] &quot;Basophils&quot;                                     
+##  [37] &quot;MCV&quot;                                           
+##  [38] &quot;MCH&quot;                                           
+##  [39] &quot;MCHC&quot;                                          
+##  [40] &quot;RDW&quot;                                           
+##  [41] &quot;Platelets&quot;                                     
+##  [42] &quot;A1c_Value&quot;                                     
+##  [43] &quot;Glucose&quot;                                       
+##  [44] &quot;Blood.Urea.Nitrogen..BUN.&quot;                     
+##  [45] &quot;Creatinine&quot;                                    
+##  [46] &quot;Sodium&quot;                                        
+##  [47] &quot;Potassium&quot;                                     
+##  [48] &quot;Chloride&quot;                                      
+##  [49] &quot;CO2&quot;                                           
+##  [50] &quot;Calcium&quot;                                       
+##  [51] &quot;Protein..Total&quot;                                
+##  [52] &quot;Albumin&quot;                                       
+##  [53] &quot;Alkaline.Phosphatase&quot;                          
+##  [54] &quot;Bilirubin..Total&quot;                              
+##  [55] &quot;AST&quot;                                           
+##  [56] &quot;ALT&quot;                                           
+##  [57] &quot;Manual.eGFR.calculation&quot;                       
+##  [58] &quot;TSH&quot;                                           
+##  [59] &quot;Date.of.lipids&quot;                                
+##  [60] &quot;Cholesterol..Total&quot;                            
+##  [61] &quot;Triglycerides&quot;                                 
+##  [62] &quot;HDL&quot;                                           
+##  [63] &quot;LDL&quot;                                           
+##  [64] &quot;VLDL&quot;                                          
+##  [65] &quot;PT&quot;                                            
+##  [66] &quot;INR&quot;                                           
+##  [67] &quot;PTT&quot;                                           
+##  [68] &quot;Urine.pH&quot;                                      
+##  [69] &quot;MoCA.Score&quot;                                    
+##  [70] &quot;Age..years.&quot;                                   
+##  [71] &quot;Date&quot;                                          
+##  [72] &quot;Age&quot;                                           
+##  [73] &quot;Tissue...Fat.&quot;                                 
+##  [74] &quot;T.Mass..kg.&quot;                                   
+##  [75] &quot;Region...Fat.&quot;                                 
+##  [76] &quot;Tissue..g.&quot;                                    
+##  [77] &quot;Fat..g.&quot;                                       
+##  [78] &quot;Lean..g.&quot;                                      
+##  [79] &quot;BMC..g.&quot;                                       
+##  [80] &quot;Fat.Free..g.&quot;                                  
+##  [81] &quot;AdiposeTissue&quot;                                 
+##  [82] &quot;Finished&quot;                                      
+##  [83] &quot;Was.subject.randomized.&quot;                       
+##  [84] &quot;Date.randomized&quot;                               
+##  [85] &quot;Complete.1&quot;                                    
+##  [86] &quot;Date.1&quot;                                        
+##  [87] &quot;Z.Score&quot;                                       
+##  [88] &quot;SingleNuclei&quot;                                  
+##  [89] &quot;Uric.Acid&quot;                                     
+##  [90] &quot;Phosphorus&quot;                                    
+##  [91] &quot;X.30.Insulin.1&quot;                                
+##  [92] &quot;X.30.Free.Fatty.Acids..FFA.&quot;                   
+##  [93] &quot;Gender&quot;                                        
+##  [94] &quot;Race&quot;                                          
+##  [95] &quot;dbc4_diabetes&quot;                                 
+##  [96] &quot;Ethnicity&quot;                                     
+##  [97] &quot;Group.Assignment.&quot;                             
 ##  [98] &quot;Age_Group&quot;                                     
 ##  [99] &quot;Status&quot;                                        
-## [100] &quot;Group&quot;                                         
-## [101] &quot;sample_id&quot;                                     
-## [102] &quot;V1&quot;                                            
-## [103] &quot;SampleName&quot;                                    
-## [104] &quot;MeasureDate&quot;                                   
-## [105] &quot;Sample&quot;                                        
-## [106] &quot;TopLabel&quot;                                      
-## [107] &quot;id&quot;                                            
-## [108] &quot;Plate&quot;                                         
-## [109] &quot;Insulin&quot;                                       
-## [110] &quot;FFA&quot;                                           
-## [111] &quot;TNF.alpha&quot;                                     
-## [112] &quot;IL.6&quot;                                          
-## [113] &quot;IL.8.CXCL8&quot;                                    
-## [114] &quot;VEGF&quot;                                          
-## [115] &quot;IL.7&quot;                                          
-## [116] &quot;CCL3.MIP.1alpha&quot;                               
-## [117] &quot;CCL4.MIP.1&quot;                                    
-## [118] &quot;RAGE.AGER&quot;                                     
-## [119] &quot;SOST.Sclerostin&quot;                               
-## [120] &quot;ADAMTS13&quot;                                      
-## [121] &quot;Osteropontin.OPN&quot;                              
-## [122] &quot;ICAM.1.CD54&quot;                                   
-## [123] &quot;IL.15&quot;                                         
-## [124] &quot;GDF.15&quot;                                        
-## [125] &quot;TNF.RI.TNFRSF1A&quot;                               
-## [126] &quot;Fas.TNFRSF6.CD95&quot;                              
-## [127] &quot;GDNF&quot;                                          
-## [128] &quot;ActivinA&quot;</code></pre>
+## [100] &quot;Prediabetes1&quot;                                  
+## [101] &quot;Prediabetes2&quot;                                  
+## [102] &quot;Diabetes&quot;                                      
+## [103] &quot;Group&quot;                                         
+## [104] &quot;sample_id&quot;                                     
+## [105] &quot;V1&quot;                                            
+## [106] &quot;SampleName&quot;                                    
+## [107] &quot;MeasureDate&quot;                                   
+## [108] &quot;Sample&quot;                                        
+## [109] &quot;TopLabel&quot;                                      
+## [110] &quot;id&quot;                                            
+## [111] &quot;Plate&quot;                                         
+## [112] &quot;Insulin&quot;                                       
+## [113] &quot;FFA&quot;                                           
+## [114] &quot;TNF.alpha&quot;                                     
+## [115] &quot;IL.6&quot;                                          
+## [116] &quot;IL.8.CXCL8&quot;                                    
+## [117] &quot;VEGF&quot;                                          
+## [118] &quot;IL.7&quot;                                          
+## [119] &quot;CCL3.MIP.1alpha&quot;                               
+## [120] &quot;CCL4.MIP.1&quot;                                    
+## [121] &quot;RAGE.AGER&quot;                                     
+## [122] &quot;SOST.Sclerostin&quot;                               
+## [123] &quot;ADAMTS13&quot;                                      
+## [124] &quot;Osteropontin.OPN&quot;                              
+## [125] &quot;ICAM.1.CD54&quot;                                   
+## [126] &quot;IL.15&quot;                                         
+## [127] &quot;GDF.15&quot;                                        
+## [128] &quot;TNF.RI.TNFRSF1A&quot;                               
+## [129] &quot;Fas.TNFRSF6.CD95&quot;                              
+## [130] &quot;GDNF&quot;                                          
+## [131] &quot;ActivinA&quot;</code></pre>
 </div>
 <div id="combine-all-1" class="section level2">
 <h2>combine all ——————</h2>
