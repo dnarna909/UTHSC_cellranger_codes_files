@@ -918,22 +918,6 @@ for (num in num.cols) {
 
 ## Warning: NAs introduced by coercion
 
-## Warning: NAs introduced by coercion
-
-## Warning: NAs introduced by coercion
-
-## Warning: NAs introduced by coercion
-
-## Warning: NAs introduced by coercion
-
-## Warning: NAs introduced by coercion
-
-## Warning: NAs introduced by coercion
-
-## Warning: NAs introduced by coercion
-
-## Warning: NAs introduced by coercion
-
 ## Warning: NAs introduced by coercion</code></pre>
 <pre class="r"><code># combine based on each visit
 sample_ids &lt;- unique(sglt2.samples$sample_id)
@@ -1703,41 +1687,42 @@ colnames(sglt2.combine4)</code></pre>
 ##  [67] &quot;PTT&quot;                                           
 ##  [68] &quot;Urine.pH&quot;                                      
 ##  [69] &quot;MoCA.Score&quot;                                    
-##  [70] &quot;Age..years.&quot;                                   
-##  [71] &quot;Date&quot;                                          
-##  [72] &quot;Age&quot;                                           
-##  [73] &quot;Tissue...Fat.&quot;                                 
-##  [74] &quot;T.Mass..kg.&quot;                                   
-##  [75] &quot;Region...Fat.&quot;                                 
-##  [76] &quot;Tissue..g.&quot;                                    
-##  [77] &quot;Fat..g.&quot;                                       
-##  [78] &quot;Lean..g.&quot;                                      
-##  [79] &quot;BMC..g.&quot;                                       
-##  [80] &quot;Fat.Free..g.&quot;                                  
-##  [81] &quot;AdiposeTissue&quot;                                 
-##  [82] &quot;Finished&quot;                                      
-##  [83] &quot;Was.subject.randomized.&quot;                       
-##  [84] &quot;Date.randomized&quot;                               
-##  [85] &quot;Complete.1&quot;                                    
-##  [86] &quot;Date.1&quot;                                        
-##  [87] &quot;Z.Score&quot;                                       
-##  [88] &quot;SingleNuclei&quot;                                  
-##  [89] &quot;Uric.Acid&quot;                                     
-##  [90] &quot;Phosphorus&quot;                                    
-##  [91] &quot;X.30.Insulin.1&quot;                                
-##  [92] &quot;X.30.Free.Fatty.Acids..FFA.&quot;                   
-##  [93] &quot;Gender&quot;                                        
-##  [94] &quot;Race&quot;                                          
-##  [95] &quot;dbc4_diabetes&quot;                                 
-##  [96] &quot;Ethnicity&quot;                                     
-##  [97] &quot;Group.Assignment.&quot;                             
-##  [98] &quot;Age_Group&quot;                                     
-##  [99] &quot;Status&quot;                                        
-## [100] &quot;Prediabetes1&quot;                                  
-## [101] &quot;Prediabetes2&quot;                                  
-## [102] &quot;Diabetes&quot;                                      
-## [103] &quot;Group&quot;                                         
-## [104] &quot;sample_id&quot;</code></pre>
+##  [70] &quot;Number&quot;                                        
+##  [71] &quot;Age..years.&quot;                                   
+##  [72] &quot;Date&quot;                                          
+##  [73] &quot;Age&quot;                                           
+##  [74] &quot;Tissue...Fat.&quot;                                 
+##  [75] &quot;T.Mass..kg.&quot;                                   
+##  [76] &quot;Region...Fat.&quot;                                 
+##  [77] &quot;Tissue..g.&quot;                                    
+##  [78] &quot;Fat..g.&quot;                                       
+##  [79] &quot;Lean..g.&quot;                                      
+##  [80] &quot;BMC..g.&quot;                                       
+##  [81] &quot;Fat.Free..g.&quot;                                  
+##  [82] &quot;AdiposeTissue&quot;                                 
+##  [83] &quot;Finished&quot;                                      
+##  [84] &quot;Was.subject.randomized.&quot;                       
+##  [85] &quot;Date.randomized&quot;                               
+##  [86] &quot;Complete.1&quot;                                    
+##  [87] &quot;Date.1&quot;                                        
+##  [88] &quot;Z.Score&quot;                                       
+##  [89] &quot;SingleNuclei&quot;                                  
+##  [90] &quot;Uric.Acid&quot;                                     
+##  [91] &quot;Phosphorus&quot;                                    
+##  [92] &quot;X.30.Insulin.1&quot;                                
+##  [93] &quot;X.30.Free.Fatty.Acids..FFA.&quot;                   
+##  [94] &quot;Gender&quot;                                        
+##  [95] &quot;Race&quot;                                          
+##  [96] &quot;dbc4_diabetes&quot;                                 
+##  [97] &quot;Ethnicity&quot;                                     
+##  [98] &quot;Group.Assignment.&quot;                             
+##  [99] &quot;Age_Group&quot;                                     
+## [100] &quot;Status&quot;                                        
+## [101] &quot;Prediabetes1&quot;                                  
+## [102] &quot;Prediabetes2&quot;                                  
+## [103] &quot;Diabetes&quot;                                      
+## [104] &quot;Group&quot;                                         
+## [105] &quot;sample_id&quot;</code></pre>
 <pre class="r"><code># # sapply(sglt2.combine4, class)
 table(sglt2.combine4$Age, sglt2.combine4$SingleNuclei)</code></pre>
 <pre><code>##       
@@ -1803,7 +1788,7 @@ table(sglt2.combine4$Age, sglt2.combine4$SingleNuclei)</code></pre>
 ##                1                1                1                1 
 ##  32.480872891436 32.7258125570186 32.7317253426498 32.7478806228374 
 ##                1                1                1                1 
-## 32.8692869097176 33.2011286224048 33.2569187326074 33.2903404550056 
+## 32.9175505360034 33.2011286224048 33.2569187326074 33.2903404550056 
 ##                1                1                1                1 
 ## 33.3851532522705 33.8499427978305 33.8576297233289 33.9099670410156 
 ##                1                1                1                1 
@@ -1818,7 +1803,7 @@ table(sglt2.combine4$Age, sglt2.combine4$SingleNuclei)</code></pre>
 <pre class="r"><code>sort(unique(sglt2.combine4$BMI))</code></pre>
 <pre><code>##  [1] 29.44669 29.78495 30.16028 30.29790 30.42676 30.43522 30.62238 31.09431
 ##  [9] 31.47256 31.64468 31.70225 31.74924 32.09341 32.13671 32.18651 32.31628
-## [17] 32.48087 32.72581 32.73173 32.74788 32.86929 33.20113 33.25692 33.29034
+## [17] 32.48087 32.72581 32.73173 32.74788 32.91755 33.20113 33.25692 33.29034
 ## [25] 33.38515 33.84994 33.85763 33.90997 34.03184 34.23568 34.62516 34.67376
 ## [33] 35.18408 35.26499 35.54470 35.56454 35.79607 36.27368 36.41494 36.91104
 ## [41] 36.95173 37.05407 40.04766 40.16190</code></pre>
@@ -1995,68 +1980,69 @@ colnames(sglt2.samples.final)</code></pre>
 ##  [67] &quot;PTT&quot;                                           
 ##  [68] &quot;Urine.pH&quot;                                      
 ##  [69] &quot;MoCA.Score&quot;                                    
-##  [70] &quot;Age..years.&quot;                                   
-##  [71] &quot;Date&quot;                                          
-##  [72] &quot;Age&quot;                                           
-##  [73] &quot;Tissue...Fat.&quot;                                 
-##  [74] &quot;T.Mass..kg.&quot;                                   
-##  [75] &quot;Region...Fat.&quot;                                 
-##  [76] &quot;Tissue..g.&quot;                                    
-##  [77] &quot;Fat..g.&quot;                                       
-##  [78] &quot;Lean..g.&quot;                                      
-##  [79] &quot;BMC..g.&quot;                                       
-##  [80] &quot;Fat.Free..g.&quot;                                  
-##  [81] &quot;AdiposeTissue&quot;                                 
-##  [82] &quot;Finished&quot;                                      
-##  [83] &quot;Was.subject.randomized.&quot;                       
-##  [84] &quot;Date.randomized&quot;                               
-##  [85] &quot;Complete.1&quot;                                    
-##  [86] &quot;Date.1&quot;                                        
-##  [87] &quot;Z.Score&quot;                                       
-##  [88] &quot;SingleNuclei&quot;                                  
-##  [89] &quot;Uric.Acid&quot;                                     
-##  [90] &quot;Phosphorus&quot;                                    
-##  [91] &quot;X.30.Insulin.1&quot;                                
-##  [92] &quot;X.30.Free.Fatty.Acids..FFA.&quot;                   
-##  [93] &quot;Gender&quot;                                        
-##  [94] &quot;Race&quot;                                          
-##  [95] &quot;dbc4_diabetes&quot;                                 
-##  [96] &quot;Ethnicity&quot;                                     
-##  [97] &quot;Group.Assignment.&quot;                             
-##  [98] &quot;Age_Group&quot;                                     
-##  [99] &quot;Status&quot;                                        
-## [100] &quot;Prediabetes1&quot;                                  
-## [101] &quot;Prediabetes2&quot;                                  
-## [102] &quot;Diabetes&quot;                                      
-## [103] &quot;Group&quot;                                         
-## [104] &quot;sample_id&quot;                                     
-## [105] &quot;V1&quot;                                            
-## [106] &quot;SampleName&quot;                                    
-## [107] &quot;MeasureDate&quot;                                   
-## [108] &quot;Sample&quot;                                        
-## [109] &quot;TopLabel&quot;                                      
-## [110] &quot;id&quot;                                            
-## [111] &quot;Plate&quot;                                         
-## [112] &quot;Insulin&quot;                                       
-## [113] &quot;FFA&quot;                                           
-## [114] &quot;TNF.alpha&quot;                                     
-## [115] &quot;IL.6&quot;                                          
-## [116] &quot;IL.8.CXCL8&quot;                                    
-## [117] &quot;VEGF&quot;                                          
-## [118] &quot;IL.7&quot;                                          
-## [119] &quot;CCL3.MIP.1alpha&quot;                               
-## [120] &quot;CCL4.MIP.1&quot;                                    
-## [121] &quot;RAGE.AGER&quot;                                     
-## [122] &quot;SOST.Sclerostin&quot;                               
-## [123] &quot;ADAMTS13&quot;                                      
-## [124] &quot;Osteropontin.OPN&quot;                              
-## [125] &quot;ICAM.1.CD54&quot;                                   
-## [126] &quot;IL.15&quot;                                         
-## [127] &quot;GDF.15&quot;                                        
-## [128] &quot;TNF.RI.TNFRSF1A&quot;                               
-## [129] &quot;Fas.TNFRSF6.CD95&quot;                              
-## [130] &quot;GDNF&quot;                                          
-## [131] &quot;ActivinA&quot;</code></pre>
+##  [70] &quot;Number&quot;                                        
+##  [71] &quot;Age..years.&quot;                                   
+##  [72] &quot;Date&quot;                                          
+##  [73] &quot;Age&quot;                                           
+##  [74] &quot;Tissue...Fat.&quot;                                 
+##  [75] &quot;T.Mass..kg.&quot;                                   
+##  [76] &quot;Region...Fat.&quot;                                 
+##  [77] &quot;Tissue..g.&quot;                                    
+##  [78] &quot;Fat..g.&quot;                                       
+##  [79] &quot;Lean..g.&quot;                                      
+##  [80] &quot;BMC..g.&quot;                                       
+##  [81] &quot;Fat.Free..g.&quot;                                  
+##  [82] &quot;AdiposeTissue&quot;                                 
+##  [83] &quot;Finished&quot;                                      
+##  [84] &quot;Was.subject.randomized.&quot;                       
+##  [85] &quot;Date.randomized&quot;                               
+##  [86] &quot;Complete.1&quot;                                    
+##  [87] &quot;Date.1&quot;                                        
+##  [88] &quot;Z.Score&quot;                                       
+##  [89] &quot;SingleNuclei&quot;                                  
+##  [90] &quot;Uric.Acid&quot;                                     
+##  [91] &quot;Phosphorus&quot;                                    
+##  [92] &quot;X.30.Insulin.1&quot;                                
+##  [93] &quot;X.30.Free.Fatty.Acids..FFA.&quot;                   
+##  [94] &quot;Gender&quot;                                        
+##  [95] &quot;Race&quot;                                          
+##  [96] &quot;dbc4_diabetes&quot;                                 
+##  [97] &quot;Ethnicity&quot;                                     
+##  [98] &quot;Group.Assignment.&quot;                             
+##  [99] &quot;Age_Group&quot;                                     
+## [100] &quot;Status&quot;                                        
+## [101] &quot;Prediabetes1&quot;                                  
+## [102] &quot;Prediabetes2&quot;                                  
+## [103] &quot;Diabetes&quot;                                      
+## [104] &quot;Group&quot;                                         
+## [105] &quot;sample_id&quot;                                     
+## [106] &quot;V1&quot;                                            
+## [107] &quot;SampleName&quot;                                    
+## [108] &quot;MeasureDate&quot;                                   
+## [109] &quot;Sample&quot;                                        
+## [110] &quot;TopLabel&quot;                                      
+## [111] &quot;id&quot;                                            
+## [112] &quot;Plate&quot;                                         
+## [113] &quot;Insulin&quot;                                       
+## [114] &quot;FFA&quot;                                           
+## [115] &quot;TNF.alpha&quot;                                     
+## [116] &quot;IL.6&quot;                                          
+## [117] &quot;IL.8.CXCL8&quot;                                    
+## [118] &quot;VEGF&quot;                                          
+## [119] &quot;IL.7&quot;                                          
+## [120] &quot;CCL3.MIP.1alpha&quot;                               
+## [121] &quot;CCL4.MIP.1&quot;                                    
+## [122] &quot;RAGE.AGER&quot;                                     
+## [123] &quot;SOST.Sclerostin&quot;                               
+## [124] &quot;ADAMTS13&quot;                                      
+## [125] &quot;Osteropontin.OPN&quot;                              
+## [126] &quot;ICAM.1.CD54&quot;                                   
+## [127] &quot;IL.15&quot;                                         
+## [128] &quot;GDF.15&quot;                                        
+## [129] &quot;TNF.RI.TNFRSF1A&quot;                               
+## [130] &quot;Fas.TNFRSF6.CD95&quot;                              
+## [131] &quot;GDNF&quot;                                          
+## [132] &quot;ActivinA&quot;</code></pre>
 </div>
 <div id="combine-all-1" class="section level2">
 <h2>combine all ——————</h2>
