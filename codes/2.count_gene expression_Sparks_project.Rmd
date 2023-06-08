@@ -1,0 +1,159 @@
+---
+title: "Untitled"
+author: "Jia Nie"
+date: "11/16/2021"
+output: html_document
+---
+
+# References
+```{bash}
+# References - 2020-A (July 7, 2020)
+cd /media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 # Human
+cd /media/jianie/DATA/refdata/refdata-gex-mm10-2020-A # Mouse
+cd /media/jianie/DATA/refdata/refdata-gex-GRCh38-and-mm10-2020-A # Human & Mouse
+cd /media/jianie/DATA/refdata/Cjacchus_012021 # marmoset from Sean_UTSA
+```
+
+# Set up route
+```{bash}
+mkdir /home/jianie/yard/run_cellranger_count
+```
+
+
+```{bash}
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH # set up the variables
+cellranger count --help
+
+# Example:
+# --id <ID> A unique run id and output folder name [a-zA-Z0-9_-]+
+#  --description <TEXT> Sample description to embed in output files [default: ]
+# --transcriptome <PATH> Path of folder containing 10x-compatible transcriptome reference
+# --fastqs <PATH>...        Path to input FASTQ data
+# --project <TEXT> Name of the project folder within a mkfastq or bcl2fastq-generated folder from which to pick FASTQs
+# --sample <PREFIX>...      Prefix of the filenames of FASTQs to select
+# --force-cells <NUM> Force pipeline to use this number of cells, bypassing cell calling algorithm. [MINIMUM: 10]
+# --expect-cells <NUM> Expected number of recovered cells, used as input to cell calling algorithm. [default: 3000]
+# --r1-length <NUM> Hard trim the input Read 1 to this length before analysis
+# --r2-length <NUM> Hard trim the input Read 2 to this length before analysis
+# --chemistry <CHEM>
+#            Assay configuration. NOTE: by default the assay configuration is
+#            detected automatically, which is the recommened mode. You usually
+#            will not need to specify a chemistry. Options are: 'auto' for
+#            autodetection, 'threeprime' for Single Cell 3', 'fiveprime' for
+#            Single Cell 5', 'SC3Pv1' or 'SC3Pv2' or 'SC3Pv3' for Single Cell
+#            3' v1/v2/v3, 'SC3Pv3LT' for Single Cell 3' v3 LT, 'SC3Pv3HT' for
+#            Single Cell 3' v3 HT, 'SC5P-PE' or 'SC5P-R2' for Single Cell 5',
+#            paired-end/R2-only, 'SC-FB' for Single Cell Antibody-only 3' v2 or
+#            5' [default: auto]
+
+cellranger count --id=xxx \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_fastq/C202SC19080754_2/raw_data/HTCMTDSXX/ \
+--project xxx \
+--sample=xxx \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--include-introns=TRUE
+ 
+cellranger count --id=xxx \
+--transcriptome=/media/jianie/DATA/refdata/refdata-gex-mm10-2020-A \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_fastq/C202SC19080754_2/raw_data/HTCMTDSXX/ \
+--project xxx \
+--sample=xxx \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+
+cellranger count --id=xxx \
+--transcriptome=/media/jianie/DATA/refdata/Cjacchus_012021 \
+--fastqs=/media/jianie/Seagate_SequencingFiles_1/20191121_NovaSeq_fastq/C202SC19080754_2/raw_data/HTCMTDSXX/ \
+--project xxx \
+--sample=xxx \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime
+```
+
+# SequencingFiles_9 -------------------------------------------------------------------------------------------------------------------
+```{bash}
+<!-- cd /home/jianie/yard/run_cellranger_count -->
+<!-- export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH -->
+<!-- cellranger count --id=BioAge0006_1st \ -->
+<!-- --fastqs=/media/jianie/SequencingFiles_9/20230601_L22_fastq/ \ -->
+<!-- --sample=BioAge0006 \ -->
+<!-- --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \ -->
+<!-- --include-introns=TRUE \ -->
+<!-- --expect-cells=10000 \ -->
+<!-- --r1-length 26 \ -->
+<!-- --r2-length 90 \ -->
+<!-- --chemistry threeprime \ -->
+<!-- --project BioAge0006 -->
+<!-- # Total time: 1 hr -->
+
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=BioAge0016_1st \
+--fastqs=/media/jianie/SequencingFiles_9/20230601_L22_fastq/ \
+--sample=BioAge0016 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--force-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project BioAge0016
+# Total time: 1 hr
+
+<!-- cd /home/jianie/yard/run_cellranger_count -->
+<!-- export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH -->
+<!-- cellranger count --id=BioAge0018_1st \ -->
+<!-- --fastqs=/media/jianie/SequencingFiles_9/20230601_L23_fastq/ \ -->
+<!-- --sample=BioAge0018 \ -->
+<!-- --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \ -->
+<!-- --include-introns=TRUE \ -->
+<!-- --expect-cells=10000 \ -->
+<!-- --r1-length 26 \ -->
+<!-- --r2-length 90 \ -->
+<!-- --chemistry threeprime \ -->
+<!-- --project BioAge0018 -->
+<!-- # Total time: 1 hr -->
+
+
+<!-- cd /home/jianie/yard/run_cellranger_count -->
+<!-- export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH -->
+<!-- cellranger count --id=BioAge0020_1st \ -->
+<!-- --fastqs=/media/jianie/SequencingFiles_9/20230601_L23_fastq/ \ -->
+<!-- --sample=BioAge0020 \ -->
+<!-- --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \ -->
+<!-- --include-introns=TRUE \ -->
+<!-- --expect-cells=10000 \ -->
+<!-- --r1-length 26 \ -->
+<!-- --r2-length 90 \ -->
+<!-- --chemistry threeprime \ -->
+<!-- --project BioAge0020 -->
+<!-- # Total time: 1 hr -->
+
+<!-- cd /home/jianie/yard/run_cellranger_count -->
+<!-- export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH -->
+<!-- cellranger count --id=BioAge0030_1st \ -->
+<!-- --fastqs=/media/jianie/SequencingFiles_9/20230601_L24_fastq/ \ -->
+<!-- --sample=BioAge0030 \ -->
+<!-- --transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \ -->
+<!-- --include-introns=TRUE \ -->
+<!-- --expect-cells=10000 \ -->
+<!-- --r1-length 26 \ -->
+<!-- --r2-length 90 \ -->
+<!-- --chemistry threeprime \ -->
+<!-- --project BioAge0030 -->
+<!-- # Total time: 1 hr -->
+
+```
+
+
+
