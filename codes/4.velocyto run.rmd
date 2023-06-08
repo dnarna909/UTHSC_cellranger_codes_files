@@ -1,0 +1,197 @@
+# https://www.10xgenomics.com/resources/analysis-guides/trajectory-analysis-using-10x-Genomics-single-cell-gene-expression-data
+
+
+# Step 3. Run velocyto -------------
+```{r, file}
+# file = "STARR.SGLT2.1_aggr_lowest_16.rds"
+ file = "STARR-SGLT2-2_aggr_lowest_17_32.rds"
+# might use new version of cellranger
+# export PATH=/home/jianie/cellranger-7.1.0:$PATH
+```
+
+
+```{r, import data}
+df <- readRDS(paste0("/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/", file))
+colnames(df)
+df$count.path <- paste0(df$root, df$Disk,"/",df$CountsFolder, "/", df$sample_id_ori)
+df$count.path[1]
+df$export.path <- paste0("/media/jianie/DATA/velocyto_output","/", stringr::str_split(file, ".rds")[[1]][1], "/", df$sample_id_ori)
+df$export.path[1]
+dir.create(file.path(paste0("/media/jianie/DATA/velocyto_output","/", stringr::str_split(file, ".rds")[[1]][1], "/")), showWarnings = FALSE)
+for (pp in df$sample_id_ori){
+  dir.create(file.path(paste0("/media/jianie/DATA/velocyto_output","/", stringr::str_split(file, ".rds")[[1]][1], "/" , pp , "/")), showWarnings = FALSE)
+}
+```
+
+```{r, set up ref gtf}
+mouse.path = "/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0/genes/genes.gtf"
+human.path = "/media/jianie/DATA/refdata/refdata-gex-mm10-2020-A/genes/genes.gtf"
+cj.path = "/media/jianie/DATA/refdata/Cjacchus_012021/genes/genes.gtf.gz" # ? need to check
+```
+
+```{bash, prepare env}
+conda deactivate
+tmux new -s velo
+tmux attach -t velo
+conda env create --file TutorialEnvironment.yml
+conda activate tutorial
+conda install -c bioconda samtools
+# conda uninstall -c bioconda samtools
+# conda install -c bioconda samtools=1.9 --force-reinstall
+# conda install -c bioconda samtools=1.9
+cd /home/jianie/anaconda3/envs/tutorial/lib
+ln -s libcrypto.so.1.1 libcrypto.so.1.0.0
+cd ~
+samtools
+velocyto run --help
+# run codes
+# ctrl + b then D
+# conda deactivate
+tmux attach -t velo
+```
+
+
+```{bash, enter env by web}
+conda deactivate
+tmux new -s velo
+tmux attach -t velo
+conda env create --file TutorialEnvironment.yml
+conda activate tutorial
+samtools
+velocyto run --help
+# run codes
+# ctrl + b then D
+# conda deactivate
+tmux attach -t velo
+```
+
+
+```{bash, enter env by default}
+conda deactivate
+tmux new -s vsession
+samtools
+velocyto run --help
+# run codes
+# ctrl + b then D
+# conda deactivate
+tmux attach -t vsession
+# ctrl + b then D
+
+```
+
+
+```{bash, velocyto template 0}
+# samtools sort -t CB -O BAM -o/mnt/DATA2/RAW_DATA/Re_Run_\ 2018_Data_with_updated_reference_genome/KUL-1-1000cells/outs/cellsorted_possorted_genome_bam.bam /mnt/DATA2/RAW_DATA/Re_Run_\ 2018_Data_with_updated_reference_genome/KUL-1-1000cells/outs/possorted_genome_bam.bam
+
+# velocyto run10x -m /mnt/DATA1/Velocyto/alltracks_mask.gtf /mnt/DATA2/RAW_DATA/Re_Run_\ 2018_Data_with_updated_reference_genome/KUL-1-1000cells /mnt/DATA1/Velocyto/refdata-cellranger-mm10-3.0.0/genes/genes.gtf
+
+samtools sort -t CB -O BAM -o/media/jianie/SequencingFiles_7/20221107_Counts/STARR_087_2_combine_force11078/outs/cellsorted_possorted_genome_bam.bam /media/jianie/SequencingFiles_7/20221107_Counts/STARR_087_2_combine_force11078/outs/possorted_genome_bam.bam
+
+# velocyto run10x -m /mnt/DATA1/Velocyto/alltracks_mask.gtf /mnt/DATA2/RAW_DATA/Re_Run_\ 2018_Data_with_updated_reference_genome/KUL-1-1000cells /media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0/genes/genes.gtf
+
+```
+
+
+```{bash, velocyto template 1}
+# velocyto run10x /path/to/cellranger-runs/sample_name /path/to/refdata-gex-GRCh38-2020-A/genes/genes.gtf
+velocyto run10x /media/jianie/SequencingFiles_7/20221107_Counts/STARR_087_2_combine_force11078 /media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0/genes/genes.gtf
+```
+
+```{r, create batch for all samples 1}
+paste0("velocyto run10x ", df$count.path, " /media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0/genes/genes.gtf")
+```
+
+
+```{bash, velocyto template 2_1}
+velocyto run \
+    --bcfile /velocyte/C2Routput/outs/filtered_feature_bc_matrix/barcodes.tsv.gz \  # filtered barcode file in gzipped format
+    --outputfolder /velocyte/C2Routput \  # location for the output to go
+    --samtools-threads 18 \  # optional, doesn't increase the speed much
+    --samtools-memory 8000 \  # optional, doesn't increase the speed much
+    -vvv \  # highest verbosity so I can debug if needed
+    /velocyte/C2Routput/outs/possorted_genome_bam.bam \  # BAM file path
+    /velocyte/mm10-transgene-premrna/genes/genes.gtf  # GTF file path - GTF file that was used for creating the cell ranger output
+```
+
+
+```{bash, velocyto template 2}
+velocyto run \
+--bcfile /media/jianie/SequencingFiles_7/20221107_Counts/STARR_087_2_combine_force11078/outs/filtered_feature_bc_matrix/barcodes.tsv.gz \
+--outputfolder /media/jianie/SequencingFiles_7/20221107_Counts/STARR_087_2_combine_force11078/ \
+--samtools-threads 18 \
+--samtools-memory 130000 \
+-vvv \
+/media/jianie/SequencingFiles_7/20221107_Counts/STARR_087_2_combine_force11078/outs/possorted_genome_bam.bam \
+/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0/genes/genes.gtf
+```
+
+```{r, create batch for all samples 2}
+cat(paste0("velocyto run \\", "\n",  
+           "--bcfile ", df$count.path, "/outs/filtered_feature_bc_matrix/barcodes.tsv.gz \\", "\n",  
+           "--outputfolder ", df$export.path, "/ \\","\n",  
+           "--samtools-threads 18 \\", "\n",  
+           "--samtools-memory 8000 \\","\n",  
+           "-vvv \\","\n",  
+           df$count.path, "/outs/possorted_genome_bam.bam \\", "\n", 
+           human.path, "\n\n\n"))
+```
+
+# Step 4. Run scVelo -------------------------------------------------
+#' Filtered feature-barcode matrix
+#' .loom file: spliced/unspliced counts from velocyto
+#' Neutrophil Clusters exported from Loupe Browser: Barcode, Neutrophils in csv
+#' Neutrophil UMAP exported from Loupe Browser: Barcode, X Coordinate, Y Coordinate in csv
+
+```{bash, template}
+mkdir input-files
+curl -o input-files/filtered_feature_bc_matrix.tar.gz https://cf.10xgenomics.com/supp/cell-exp/neutrophils/filtered_feature_bc_matrix.tar.gz
+curl -o input-files/WB_Lysis_3p_Introns_8kCells.loom https://cf.10xgenomics.com/supp/cell-exp/neutrophils/WB_Lysis_3p_Introns_8kCells.loom
+curl -o input-files/3p-Neutrophils-clusters.csv https://cf.10xgenomics.com/supp/cell-exp/neutrophils/3p-Neutrophils-clusters.csv
+curl -o input-files/3p-Neutrophils-UMAP-Projection.csv https://cf.10xgenomics.com/supp/cell-exp/neutrophils/3p-Neutrophils-UMAP-Projection.csv
+tar -xvzf input-files/filtered_feature_bc_matrix.tar.gz -C input-files/
+ls -lahR input-files
+```
+
+
+```{bash, template}
+python -m pip install --upgrade pip
+pip install numpy pandas matplotlib scanpy igraph scvelo loompy anndata
+
+```
+
+
+```{bash, template}
+jupyter notebook
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as pl
+import scanpy as sc
+import igraph
+import scvelo as scv
+import loompy as lmp
+import anndata
+
+import warnings
+warnings.filterwarnings('ignore')
+
+```
+
+
+```{r}
+pbmc.data <- Read10X(data.dir = "~/input-files/filtered_feature_bc_matrix/")
+# Initialize the Seurat object with the raw (non-normalized data).
+Neutro3p <- CreateSeuratObject(counts = pbmc.data, project = "Neutro3p", min.cells = 3, min.features = 200)
+Neutro3p
+
+## This step is done in R after Seurat processing
+library(Seurat)
+# remotes::install_github("mojaveazure/seurat-disk")
+library(SeuratDisk)
+Neutro3p.loom <- as.loom(Neutro3p, filename = "~/input-files/Neutro3pSeurat.loom", verbose = FALSE)
+Neutro3p.loom$close_all()
+
+
+Neutro3p <- scv.read_loom()
+```
+

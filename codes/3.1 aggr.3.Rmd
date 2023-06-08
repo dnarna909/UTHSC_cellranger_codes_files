@@ -1,0 +1,228 @@
+---
+title: "Untitled"
+author: "Jia Nie"
+date: "12/8/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{bash}
+# Overview of cellranger aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --help
+
+# Get Data
+mkdir /home/jianie/yard/run_cellranger_aggr
+```
+
+# All in each Project 
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Aggr_0929 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_0929.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Aggr_1005 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_1005.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Aggr_1010 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_1010.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Aggr_1011 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_1011.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Aggr_1013 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_1013.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Aggr_0111 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_0111.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Aggr_0114 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_0114.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Aggr_0115 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_0115.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Aggr_0124 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_0124.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Agg_Marmoset --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_Marmoset.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Agg_Marmoset0128 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_0128.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Agg_Marmoset0206 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Agg_0206.csv
+
+
+```
+
+
+# Final Project based 
+## STARR Final
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_aggr_Final --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.Final.agg.csv
+#' 2022-08-17 08:59:31 [runtime] (ready) 
+#' 2022-08-17 11:11:09 Shutting down.
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_aggr_Final_22 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.Final.agg.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_aggr_Final_18 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.Final.agg.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_aggr_Final_24 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.Final.agg.csv
+```
+
+
+## SGLT2 Final Project
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=10SGLT2_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.agg.csv
+# 1hr
+# 2022-06-30 09:38:42 [runtime] (ready) 
+# 2022-06-30 10:25:44 Shutting down.
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=SGLT2_Final_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/SGLT2.Final.agg.csv
+
+
+```
+
+## STARR & SGLT2-V5 project
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=19STARR_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR2.agg.csv
+# Wed 13 Apr 2022 05∶47∶38 PM CDT
+# Wed 13 Apr 2022 06∶53∶30 PM CDT
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_SGLT2_V5_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.V5.agg.csv
+```
+
+## STARR & SGLT2 project
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_SGLT2_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.agg.csv
+```
+
+STARR & SGLT2_lowest project
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_SGLT2_aggr_lowest --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.lowest.agg.csv
+
+```
+
+
+STARR & SGLT2_lowest project
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR-SGLT2-1_aggr_lowest_16 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.1_aggr_lowest_16.csv
+
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR-SGLT2-2_aggr_lowest_17_32 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR.SGLT2.2_aggr_lowest_17_32.csv
+
+```
+
+
+## STARR Barshop GCCRI compare
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_Bar_Compare --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR_Bar_Compare.agg.csv
+#' 2022-08-17 08:32:50 [runtime] (ready)
+#' 2022-08-17 08:41:19 Shutting down.
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_Bar_Compare10000 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR_Bar_Compare10000.agg.csv
+#' 
+```
+
+## Frozen sample test Project
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_FZ_aggr_new --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR_FZ_Test.agg.csv
+# 14 MIN
+# 2022-06-30 23:13:34 [runtime] (ready) 
+# 2022-06-30 23:27:25 Shutting down.
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_FZ_aggr_5 --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR_FZ_Test.agg.csv
+# 2022-07-06 08:11:01 [runtime] 
+# 2022-07-06 08:43:58 Shutting down.
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=STARR_FZ --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/STARR_FZ.csv
+
+
+```
+
+## Masternak Project
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=Masternak_aggr --csv=/media/jianie/DATA/UTHSC_cellranger_codes_files/AggrFiles/Masternak.agg.csv
+# 2022-04-14 17:48:27 [runtime] (ready)  
+# 2022-04-14 17:58:55 Shutting down.
+
+```
+
+
+# He sijia Project
+```{bash}
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=He_sijia_aggr --csv=/media/jianie/SijiaHe/Aggregation_24samples.csv
+
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=He_sijia_aggr_F --csv=/media/jianie/SijiaHe/Aggregation_F.csv
+
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=He_sijia_aggr_M --csv=/media/jianie/SijiaHe/Aggregation_M.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=He_sijia_aggr_F_M6 --csv=/media/jianie/SijiaHe/Aggregation_F_M6.csv
+
+cd /home/jianie/yard/run_cellranger_aggr
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger aggr --id=He_sijia_aggr_M_F1 --csv=/media/jianie/SijiaHe/Aggregation_M_F1.csv
+```
+

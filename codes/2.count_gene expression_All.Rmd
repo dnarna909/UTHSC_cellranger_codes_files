@@ -2458,3 +2458,125 @@ cellranger count --id=STARR_098_2nd \
 
 ```
 
+
+# SequencingFiles_9 -------------------------------------------------------------------------------------------------------------------
+## 20230601_L22_fastq
+```{bash}
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=BioAge0006_1st \
+--fastqs=/media/jianie/SequencingFiles_9/20230601_L22_fastq/ \
+--sample=BioAge0006 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project BioAge0006
+# Total time: 1 hr
+
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=BioAge0016_1st \
+--fastqs=/media/jianie/SequencingFiles_9/20230601_L22_fastq/ \
+--sample=BioAge0016 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project BioAge0016
+# Total time: 1 hr
+
+
+
+```
+
+
+## 20230601_L23_fastq
+```{bash}
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=BioAge0018_1st \
+--fastqs=/media/jianie/SequencingFiles_9/20230601_L23_fastq/ \
+--sample=BioAge0018 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project BioAge0018
+# Total time: 1 hr
+
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=BioAge0020_1st \
+--fastqs=/media/jianie/SequencingFiles_9/20230601_L23_fastq/ \
+--sample=BioAge0020 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project BioAge0020
+# Total time: 1 hr
+
+
+
+```
+
+
+## 20230601_L24_fastq
+```{bash}
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=BioAge0030_1st \
+--fastqs=/media/jianie/SequencingFiles_9/20230601_L24_fastq/ \
+--sample=BioAge0030 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project BioAge0030
+# Total time: 1 hr
+
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_084_2nd \
+--fastqs=/media/jianie/SequencingFiles_9/20230601_L24_fastq/ \
+--sample=STARR_084 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project STARR_084
+# Total time: 1 hr
+
+
+cd /home/jianie/yard/run_cellranger_count
+export PATH=/home/jianie/yard/apps/cellranger-6.1.1:$PATH
+cellranger count --id=STARR_096_2nd \
+--fastqs=/media/jianie/SequencingFiles_9/20230601_L24_fastq/ \
+--sample=STARR_096 \
+--transcriptome=/media/jianie/DATA/refdata/refdata-cellranger-GRCh38-3.0.0 \
+--include-introns=TRUE \
+--expect-cells=10000 \
+--r1-length 26 \
+--r2-length 90 \
+--chemistry threeprime \
+--project STARR_096
+# Total time: 1 hr
+
+
+```

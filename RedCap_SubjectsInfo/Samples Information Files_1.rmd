@@ -23,8 +23,8 @@ for (package in packageList) {
 # STARR
 ## add files -------------------
 ```{r}
-Disk1 <- c("/media/jianie/Extreme SSD1/") 
-# Disk <- c("D:/")
+Disk1 <- c("/media/jianie/Extreme SSD/") 
+# Disk1 <- c("D:/")
 file.folder1 <- c("08_STARR Patient from Redcap")# download from online
 basic.file1 <- "STARR-AllLabTest_DATA_2023-01-24_1405.csv"
 
@@ -33,10 +33,15 @@ Disk2 <- c("/media/jianie/DATA/")
 file.folder2 <- c("UTHSC_cellranger_codes_files/RedCap_SubjectsInfo") # personal record 
 basic.file2 <- "STARR-BaselineCharacterist_DATA_Final2.xlsx"
 
-Disk3 <- c("/media/jianie/DATA/") 
-# Disk3 <- c("C:/Users/niej/Documents/")
-file.folder3 <- c("UTHSC_cellranger_codes_files/ExperimentSummaryFiles") # generate from counts excel file
-basic.file3 <- "Form 3_cellranger_counts_summary.xlsx"
+Disk3 <- c("/media/jianie/Extreme SSD/") 
+# Disk3 <- c("D:/")
+file.folder3 <- c("08_STARR Patient from Redcap")# download from online
+basic.file3 <- "STARR-Diabetes_DATA_2023-05-17_1058_2.xlsx"
+
+# Disk3 <- c("/media/jianie/DATA/") 
+# # Disk3 <- c("C:/Users/niej/Documents/")
+# file.folder3 <- c("UTHSC_cellranger_codes_files/ExperimentSummaryFiles") # generate from counts excel file
+# basic.file3 <- "Form 3_cellranger_counts_summary.xlsx"
 
 # Disk4 <- c("/media/jianie/DATA/") 
 # # Disk4 <- c("C:/Users/niej/Documents/") 
@@ -44,7 +49,7 @@ basic.file3 <- "Form 3_cellranger_counts_summary.xlsx"
 # basic.file4 <- "STARR.sn.aggr.info.rds"
 
 
-Disk5 <- c("/media/jianie/Extreme SSD1/") 
+Disk5 <- c("/media/jianie/Extreme SSD/") 
 # Disk5 <- c("D:/")
 file.folder5 <- c("2022-08-15 SGLT2 STARR Plasma measurement")
 basic.file5 <- c("All Results.mean.csv")
@@ -77,7 +82,7 @@ STARR.samples.basic1 <- rio::import(paste0(Disk1, file.folder1, "/", basic.file1
                                 ifelse(BMI >= 18.5 & BMI <25, "Lean", 
                                        ifelse(BMI <18.5, "Underweight", "NA"))))
   ) %>%
-  mutate(Diabetes = ifelse(dbc4_diabetes == 2, "Yes", "No"),
+  mutate(Diabetes = ifelse( dbc4_diabetes == 2 | diabetes_doctor == 1, "Yes", "No"), # 
          Ethnicity = ifelse(ethnicity == 1, "Hispanic or Latino", "NOT Hispanic or Latino")
   ) %>% 
   rename(Blood.Pressure.Systolic = systolic,
@@ -115,7 +120,7 @@ sort(unique(STARR.samples.basic1$BMI))
 table(STARR.samples.basic1$Status)
 table(STARR.samples.basic1$Diabetes)
 
-table(STARR.samples.basic1$dbc4_diabetes)
+table(STARR.samples.basic1$dbc4_diabetes); unique(STARR.samples.basic1$dbc4_diabetes)
 # dbc4_diabetes
 # 0	I DON'T HAVE THIS CONDITION 0
 # 1	NOT AT ALL 1
@@ -123,6 +128,12 @@ table(STARR.samples.basic1$dbc4_diabetes)
 # 3	3
 # 4	4
 # 5	A LOT 5
+
+table(STARR.samples.basic1$diabetes_doctor); unique(STARR.samples.basic1$diabetes_doctor)
+# diabetes_doctor
+# 1-Yes
+# 2-No
+
 
 table(STARR.samples.basic1$dbc12_overwt)
 # dbc12_overwt
@@ -170,6 +181,46 @@ STARR.samples <- STARR.samples.basic1 %>%
   full_join(STARR.samples.basic2, 
             by = intersect(colnames(STARR.samples.basic1), colnames(STARR.samples.basic2))) %>% 
   dplyr::rename(sample_id = id) 
+colnames(STARR.samples)
+```
+
+## basic file from redcap 3: download from online --------------------------------------------------
+```{r}
+STARR.samples.basic3 <- rio::import(paste0(Disk3, file.folder3, "/", basic.file3)) %>% 
+  mutate(record_id = replace(record_id, record_id == "STRA00100", "STRA0100"),
+         record_id = replace(record_id, record_id == "STRA00101", "STRA0101"),
+         record_id = toupper(record_id)) %>% 
+  arrange(record_id) %>% 
+  as.data.frame() %>% 
+  rename_with(make.names) %>% 
+  rename(
+    Glucose = glucose, 
+    A1c_Value= hemoglobin_a1c)%>%  
+  mutate(
+         Medicine.Status = ifelse(medication_1_name %in% c("****NO MEDICATIONS*****", "***NO MEDICATIONS TO REPORT***",
+                                                           "no medication to report", NA), "NoHistory", "YesMedicine"),
+         diabetes_doctor = ifelse(diabetes_doctor == "No (SKIP TO CHOLESTEROL) (2)", 2, 
+                                  ifelse(diabetes_doctor == "Yes (1)", 1, NA)),
+         dbc4_diabetes = ifelse(dbc4_diabetes == "2 (2)", 2, 
+                                  ifelse(dbc4_diabetes == "NOT AT ALL 1 (1)", 1, 
+                                         ifelse(dbc4_diabetes == "I DON'T HAVE THIS CONDITION 0 (0)", 0, NA)))
+  ) %>% 
+  rename(
+         Creatinine = creatinine,                
+  )
+table(STARR.samples.basic1$Medicine.Status); unique(STARR.samples.basic3$Medicine.Status)
+table(STARR.samples.basic3$medication_1_name); unique(STARR.samples.basic3$medication_1_name)
+table(STARR.samples.basic3$diabetes_doctor); unique(STARR.samples.basic3$diabetes_doctor)
+table(STARR.samples.basic3$dbc4_diabetes); unique(STARR.samples.basic3$dbc4_diabetes)
+colnames(STARR.samples.basic3)
+
+intersect(colnames(STARR.samples), colnames(STARR.samples.basic3))
+
+
+# merge files
+STARR.samples <- STARR.samples %>% 
+  full_join(STARR.samples.basic3, 
+            by = intersect(colnames(STARR.samples), colnames(STARR.samples.basic3))) 
 colnames(STARR.samples)
 ```
 
@@ -221,6 +272,7 @@ colnames(STARR.samples)
 STARR.samples$BMI <- as.numeric(STARR.samples$BMI)
 STARR.samples$dbc12_overwt <- as.character(STARR.samples$dbc12_overwt)
 STARR.samples$dbc4_diabetes <- as.character(STARR.samples$dbc4_diabetes)
+STARR.samples$diabetes_doctor <- as.character(STARR.samples$diabetes_doctor)
 STARR.samples$Albumin <- as.numeric(STARR.samples$Albumin)
 STARR.samples$Group <- "Notreatment"
 STARR.samples$Pre_Post <- "Notreatment"
@@ -249,7 +301,7 @@ rm(df, samples.basic3, STARR.samples.basic1, STARR.samples.basic2)
 # SGLT2
 ## add files -------------
 ```{r}
-Disk1 <- c("/media/jianie/Extreme SSD1/") 
+Disk1 <- c("/media/jianie/Extreme SSD/") 
 # Disk1 <- c("D:/")
 file.folder1 <- c("07_SGLT2 from Redcap") # download from online
 basic.file1 <- "SGLT2iAndAging-AllLabTest_DATA_LABELS_2022-09-29_1706.csv"
@@ -258,14 +310,14 @@ basic.file1.1 <- "SGLT2iAndAging_DATA_LABELS_2023-02-24_0951.csv"
 
 Disk2 <- c("/media/jianie/DATA/") 
 # Disk2 <- c("C:/Users/niej/Documents/")
-file.folder2 <- c("UTHSC_cellranger_codes_files/RedCap_SubjectsInfo")  # download from online by Allison
+file.folder2 <- c("UTHSC_cellranger_codes_files/RedCap_SubjectsInfo")  # download from online by Allison # 76649_V1, Bilirubin..Total < 0.2, change to 76649_V6, Bilirubin..Total 0.4
 basic.file2 <- "SGLT2iAndAging-Test1Csh_DATA_LABELS_Final.csv"
 
 
-Disk3 <- c("/media/jianie/DATA/") 
-# Disk3 <- c("C:/Users/niej/Documents/")
-file.folder3 <- c("UTHSC_cellranger_codes_files/ExperimentSummaryFiles") # generate from counts excel file
-basic.file3 <- "Form 3_cellranger_counts_summary.xlsx"
+# Disk3 <- c("/media/jianie/DATA/") 
+# # Disk3 <- c("C:/Users/niej/Documents/")
+# file.folder3 <- c("UTHSC_cellranger_codes_files/ExperimentSummaryFiles") # generate from counts excel file
+# basic.file3 <- "Form 3_cellranger_counts_summary.xlsx"
 
 
 # Disk4 <- c("/media/jianie/DATA/") 
@@ -273,7 +325,7 @@ basic.file3 <- "Form 3_cellranger_counts_summary.xlsx"
 # file.folder4 <- c("UTHSC_cellranger_codes_files/AggrFiles") # aggregation
 # basic.file4 <- "STARR.sn.aggr.info.rds"
 
-Disk5 <- c("/media/jianie/Extreme SSD1/") 
+Disk5 <- c("/media/jianie/Extreme SSD/") 
 # Disk5 <- c("D:/")
 file.folder5 <- c("2022-08-15 SGLT2 STARR Plasma measurement") # other measurements
 basic.file5 <- c("All Results.mean.csv")
@@ -284,7 +336,7 @@ basic.file5 <- c("All Results.mean.csv")
 ```{r}
 library("tidyr")
 sglt2.samples.basic1 <- rio::import(paste0(Disk1, file.folder1, "/", basic.file1)) %>% 
-  select(!one_of(c("Complete?", "Date:"))) %>% 
+  dplyr::select(!one_of(c("Complete?", "Date:"))) %>% 
   rename(dbc4_diabetes = Diabetes, 
          # `Visit_Num` = `Visit #`,
          X.30.Glucose.1 = `-30 Glucose`,
@@ -306,11 +358,12 @@ sglt2.samples.basic1 <- rio::import(paste0(Disk1, file.folder1, "/", basic.file1
   mutate(sample_id =  paste0(patient_id, ifelse(Event_id == "", "","_") , Event_id) ) %>%
   left_join(
     rio::import(paste0(Disk1, file.folder1, "/", basic.file1.1)) %>% 
-      select(one_of(c("Record ID: 766-", "Event Name", "Ethnicity"))) %>%
+      dplyr::select(one_of(c("Record ID: 766-", "Event Name", "Ethnicity"))) %>%
       as.data.frame() %>% 
       rename_with(make.names) %>% 
       as.data.frame() , 
-    by = c("Record.ID..766.", "Event.Name"))
+    by = c("Record.ID..766.", "Event.Name")) %>%
+  mutate(diabetes_doctor = ifelse(dbc4_diabetes == "No", "2", "1"))
 
 colnames(sglt2.samples.basic1)
 table(sglt2.samples.basic1$dbc4_diabetes)
@@ -322,12 +375,19 @@ table(sglt2.samples.basic1$dbc4_diabetes)
 # yes no
 # 1	Yes
 # 0	No
+
+table(sglt2.samples.basic1$diabetes_doctor)
+# 1-Yes
+# 2-No
+
+sglt2.samples.basic1 %>% dplyr::filter(Record.ID..766. == "44") # NA value, need fix
+table(sglt2.samples.basic1$Record.ID..766., sglt2.samples.basic1$Event.Name)
 ```
 
 ## basic file from redcap 2 --------------------------------------------------
 ```{r}
 sglt2.samples.basic2 <- rio::import(paste0(Disk2, file.folder2, "/", basic.file2)) %>%
-  select(!one_of(c("Complete?", "Date:"))) %>%
+  dplyr::select(!one_of(c("Complete?", "Date:"))) %>%
   rename(dbc4_diabetes = Diabetes) %>%
   as.data.frame() %>%
   rename_with(make.names) %>% 
@@ -360,17 +420,22 @@ sglt2.samples.basic2 <- rio::import(paste0(Disk2, file.folder2, "/", basic.file2
     Status = ifelse(BMI >= 30, "Obese",
                     ifelse(BMI >= 25 & BMI <30, "Overweight",
                            ifelse(BMI >= 18.5 & BMI <25, "Lean", "NA")))
-  )
+  )%>%
+  mutate(diabetes_doctor = ifelse(dbc4_diabetes == "No", "2", "1"))
 
 intersect(colnames(sglt2.samples.basic1), colnames(sglt2.samples.basic2))
 
 
 merge.cols = c("Event.Name1", "Event.Name2" ,"Event.Name3","patient_id", "Event_id" , "sample_id" , "Record.ID..766.", "Event.Name")
 sglt2.samples <- sglt2.samples.basic1 %>%
-  select(-one_of(setdiff(intersect(colnames(sglt2.samples.basic1), colnames(sglt2.samples.basic2)) , merge.cols )) 
+  dplyr::select(-one_of(setdiff(intersect(colnames(sglt2.samples.basic1), colnames(sglt2.samples.basic2)) , merge.cols )) 
   )  %>% 
   full_join(sglt2.samples.basic2, 
             by = merge.cols)
+
+sglt2.samples.basic2 %>% dplyr::filter(patient_id == "76644") # NA value, need fix
+sglt2.samples.basic2 %>% dplyr::filter(Record.ID..766. == "44") # NA value, need fix
+table(sglt2.samples.basic2$Record.ID..766., sglt2.samples.basic2$Event.Name)
 ```
 
 ## combine basic file from redcap 1 and basic file from redcap 2 -----------------------------------
@@ -392,7 +457,12 @@ cols = c('id',  'Event.Name_Orig', 'Event.Name', 'Visit..',
 sglt2 <- list()
 for (ss in sample_ids) {
   # ss=sample_ids[1]
-  sglt2[[stringr::str_split(ss, "_")[[1]][1]]][[ifelse(is.na(stringr::str_split(ss, "_")[[1]][2]), "Others", stringr::str_split(ss, "_")[[1]][2])]] <- sglt2.samples %>% dplyr::filter(sample_id == ss) %>% mutate_all(~na_if(., '')) %>% select_if(function(x) !(all(is.na(x)) | all(x==""))) %>% select(!one_of(cols))
+  sglt2[[stringr::str_split(ss, "_")[[1]][1]]][[ifelse(is.na(stringr::str_split(ss, "_")[[1]][2]), "Others", stringr::str_split(ss, "_")[[1]][2])]] <- sglt2.samples %>% dplyr::filter(sample_id == ss) %>% 
+    mutate(
+    across( where(is.character), ~ na_if(.x, "0")),
+    across(where(is.numeric), ~ na_if(.x, 0)), # replace 0s contained in the columns with NA.
+) %>% 
+    dplyr::select_if(function(x) !(all(is.na(x)) | all(x==""))) %>% dplyr::select(!one_of(cols))
   # print(ss)
 }
 rm(cols, ss)
@@ -442,18 +512,27 @@ for (ss in names(sglt2.combine2)) {
 
 # combine all patients
 sglt2.combine4 <- bind_rows(sglt2.combine3, .id = "patient_id2")
+table(sglt2.combine4$Record.ID..766., sglt2.combine4$Pre_Post)
+table(sglt2.combine4$Record.ID..766., sglt2.combine4$Group.Assignment.)
 ```
 
 
 ```{r}
 # merge some basal information between pre and post
-colnames(sglt2.combine4 %>% dplyr::filter(Pre_Post == "Pre") %>% select_if(is.character))
-cols = c("patient_id" , "Gender" ,"Race", "dbc4_diabetes", "Ethnicity",
+unique(sglt2.combine4[["Group.Assignment."]])
+sglt2.combine4 <- sglt2.combine4 %>% dplyr::filter(!(patient_id == "76644")) # Remove NA group in "Group.Assignment.": 76644 is not assigned;
+unique(sglt2.combine4[["Group.Assignment."]])
+
+colnames(sglt2.combine4 %>% dplyr::filter(Pre_Post == "Pre") %>% dplyr::select_if(is.character))
+cols = c("patient_id" , "Gender" ,"Race", "dbc4_diabetes", "Ethnicity","diabetes_doctor",
          "Group.Assignment." , "Age_Group"  , "Status" ,"Prediabetes1", "Prediabetes2" # , "Diabetes"  , "Group"
 )   
-basal <- sglt2.combine4 %>% dplyr::filter(Pre_Post == "Pre") %>% select(one_of(cols))
-sglt2.combine4 <- sglt2.combine4 %>% select(!one_of(setdiff(cols, "patient_id"))) %>%
+basal <- sglt2.combine4 %>% dplyr::filter(Pre_Post == "Pre") %>% dplyr::select(one_of(cols))
+unique(basal[["Group.Assignment."]])
+# basal %>% dplyr::filter(patient_id == "76644") # NA value, need fix
+sglt2.combine4 <- sglt2.combine4 %>% dplyr::select(!one_of(setdiff(cols, "patient_id"))) %>%
   left_join(basal, by = "patient_id")
+unique(sglt2.combine4[["Group.Assignment."]])
 
 # adding more colums
 table(sglt2.combine4$dbc4_diabetes)
@@ -483,14 +562,14 @@ sglt2.combine4 <- sglt2.combine4 %>%
 #                    # "Age", "Age_Group",
 #                    #"Height (inches)" , "Weight (pounds)",  "BMI", "Status",
 #                    "Glucose" , "A1c_Value", "dbc4_diabetes")
-# sglt2.sn.V1 <- sglt2.samples %>% dplyr::filter(`Event.Name` == "Visit 1") %>% arrange(id) %>% select(all_of(sglt2.V1.cols)) %>% 
+# sglt2.sn.V1 <- sglt2.samples %>% dplyr::filter(`Event.Name` == "Visit 1") %>% arrange(id) %>% dplyr::select(all_of(sglt2.V1.cols)) %>% 
 #   rename( id.V1 = id, `Event.Name_V1` = `Event.Name`
 #   )
 # 
 # sglt2.V2.cols <- c("id", "Record.ID..766.", "patient_id", "Event.Name" ,
 #                    "Age", "Age_Group"
 # )
-# sglt2.sn.V2 <- sglt2.samples %>% dplyr::filter(`Event.Name` == "Visit 2") %>% arrange(id) %>% select(all_of(sglt2.V2.cols)) %>% 
+# sglt2.sn.V2 <- sglt2.samples %>% dplyr::filter(`Event.Name` == "Visit 2") %>% arrange(id) %>% dplyr::select(all_of(sglt2.V2.cols)) %>% 
 #   rename( id.V2 = id, `Event.Name_V2` = `Event.Name`
 #   )
 # 
@@ -498,7 +577,7 @@ sglt2.combine4 <- sglt2.combine4 %>%
 #                    "SingleNuclei", "Group.Assignment.", "Group",
 #                    "Height_inches" , "Weight_pounds",  "BMI", "Status"
 # )
-# sglt2.sn.V5 <- sglt2.samples %>% dplyr::filter(`Event.Name` == "Visit 5") %>% arrange(id) %>% select(all_of(sglt2.V5.cols)) # ,  SingleNuclei == "Yes"
+# sglt2.sn.V5 <- sglt2.samples %>% dplyr::filter(`Event.Name` == "Visit 5") %>% arrange(id) %>% dplyr::select(all_of(sglt2.V5.cols)) # ,  SingleNuclei == "Yes"
 # sglt2.sn.basal <- sglt2.sn.V5 %>% 
 #   left_join(sglt2.sn.V1, by = c("Record.ID..766.", "patient_id")) %>% 
 #   left_join(sglt2.sn.V2, by = c("Record.ID..766.", "patient_id"))
@@ -507,22 +586,22 @@ sglt2.combine4 <- sglt2.combine4 %>%
 #                     "SingleNuclei", 
 #                     "Height_inches" , "Weight_pounds",  "BMI", "Status",
 #                     "Glucose" , "A1c_Value")
-# sglt2.sn.V11 <- sglt2.samples %>% dplyr::filter(`Event.Name` == "Visit 11") %>% arrange(id) %>% select(all_of(sglt2.V11.cols)) # ,  SingleNuclei == "Yes"
+# sglt2.sn.V11 <- sglt2.samples %>% dplyr::filter(`Event.Name` == "Visit 11") %>% arrange(id) %>% dplyr::select(all_of(sglt2.V11.cols)) # ,  SingleNuclei == "Yes"
 # sglt2.sn.V11 <- sglt2.sn.V11 %>% 
-#   left_join(sglt2.sn.V1 %>% select(!all_of(c("Glucose" , "A1c_Value"))) , by = c("Record.ID..766.", "patient_id")) %>%
+#   left_join(sglt2.sn.V1 %>% dplyr::select(!all_of(c("Glucose" , "A1c_Value"))) , by = c("Record.ID..766.", "patient_id")) %>%
 #   left_join(sglt2.sn.V2, by = c("Record.ID..766.", "patient_id")) %>%
-#   left_join(sglt2.sn.V5 %>% select(all_of(c("patient_id" , "Group.Assignment.", "Group"))), by = c("patient_id"))
+#   left_join(sglt2.sn.V5 %>% dplyr::select(all_of(c("patient_id" , "Group.Assignment.", "Group"))), by = c("patient_id"))
 # 
 # # combine final
 # sglt2.sn.all <- sglt2.sn.V11 %>% 
 #   full_join(sglt2.sn.basal, by = intersect(colnames(sglt2.sn.V11),  colnames(sglt2.sn.basal)) ) %>% 
 #   arrange(patient_id) # %>%
-# # select(!one_of(c("Group.Assignment.")))
+# # dplyr::select(!one_of(c("Group.Assignment.")))
 # # sglt2.sn.all$BMI <- as.numeric(sglt2.sn.all$BMI)
 # # sglt2.sn.all$dbc4_diabetes <- as.character(sglt2.sn.all$dbc4_diabetes)
 # 
 # sglt2.samples <- sglt2.samples %>%
-#   select(-one_of(setdiff(intersect(colnames(sglt2.samples), colnames(sglt2.sn.V11)) , "id" ))) %>% 
+#   dplyr::select(-one_of(setdiff(intersect(colnames(sglt2.samples), colnames(sglt2.sn.V11)) , "id" ))) %>% 
 #   full_join(sglt2.sn.all, 
 #             by = c("id") ) %>% 
 #   arrange(patient_id)
@@ -538,7 +617,7 @@ table(sglt2.combine4$Status, sglt2.combine4$SingleNuclei)
 table(sglt2.combine4$dbc4_diabetes)
 table(sglt2.combine4$Diabetes, sglt2.combine4$SingleNuclei)
 table(sglt2.combine4$Group.Assignment.)
-
+table(sglt2.combine4$diabetes_doctor)
 # 90 [ethnicity] Ethnicity radio
 # 0 Hispanic or Latino
 # 1 NOT Hispanic or Latino
@@ -559,6 +638,9 @@ table(sglt2.combine4$Group.Assignment.)
 
 
 sglt2.samples.final <- sglt2.combine4 
+table(sglt2.samples.final[["Group"]], sglt2.samples.final[["Pre_Post"]])
+unique(sglt2.samples.final[["Group"]])
+sglt2.samples.final %>% filter( patient_id == "76644")
 ```
 
 ## compare sglt to STARR
@@ -604,7 +686,7 @@ sglt2.samples.final <- sglt2.combine4
 
 ```
 
-## basic file from sequencing: generate from counts excel file --------------------------------------------------
+## basic file 3 from sequencing: generate from counts excel file --------------------------------------------------
 ```{r}
 # samples.basic3 <- rio::import(paste0(Disk3, file.folder3, "/", basic.file3)) %>%
 #   dplyr::rename(Status.counts = Status)
@@ -619,11 +701,16 @@ sglt2.samples.final <- sglt2.combine4
 # colnames(STARR.samples)
 ```
 
-## basic file from lab: lab measurements --------------------------------------------------
+## basic file 5 from lab: lab measurements --------------------------------------------------
 ```{r}
 samples.basic5 <- rio::import(file = paste0(Disk5, file.folder5, "/", basic.file5)) # %>%
 # rename(sample_id = id)
 intersect(colnames(sglt2.samples.final), colnames(samples.basic5))
+samples.basic5 %>% dplyr::filter(sample_id == "76639_V5") # one sample measured in two plate(Plate 1: STARR; Plate 2: SGLT2i)
+table(samples.basic5$Plate)
+samples.basic5 <- samples.basic5 %>% dplyr::filter(!(sample_id == "76639_V5" & Plate == "Plate 1"))
+table(samples.basic5$Plate)
+samples.basic5 %>% dplyr::filter(sample_id == "76639_V5")
 
 # merge files
 sglt2.samples.final <- sglt2.samples.final %>%
